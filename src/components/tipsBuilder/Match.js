@@ -1,6 +1,12 @@
 import React from "react";
 
-const Match = ({ id, participants, startDate }) => {
+const Match = ({
+  id,
+  participants,
+  startDate,
+  setPredictions,
+  predictions,
+}) => {
   const getDate = (timestamp) => {
     let date = new Date(timestamp);
     return date.getDate() + ". " + getMonthName(date.getMonth() + 1);
@@ -41,6 +47,21 @@ const Match = ({ id, participants, startDate }) => {
     }
   };
 
+  const handlePrediction = (e, id) => {
+    e.preventDefault();
+    console.log(e.target.value);
+    console.log(id);
+
+    console.log(predictions.find((prediction) => prediction.id === id));
+
+    // let in
+
+    setPredictions((currentPredictions) => [
+      ...currentPredictions,
+      { id: id, prediction: e.target.value },
+    ]);
+  };
+
   return (
     <div key={id} className="bg-lightGreen mb-10 p-2 rounded-md">
       <h3 className="text-xl text-center">
@@ -75,6 +96,7 @@ const Match = ({ id, participants, startDate }) => {
             id={id + "_radio" + "_1"}
             className="hidden peer"
             value={"1"}
+            onInput={(e) => handlePrediction(e, id)}
           />
           <label
             htmlFor={id + "_radio" + "_1"}
@@ -90,6 +112,7 @@ const Match = ({ id, participants, startDate }) => {
             id={id + "_radio" + "_x"}
             className="hidden peer"
             value={"x"}
+            onInput={(e) => handlePrediction(e, id)}
           />
           <label
             htmlFor={id + "_radio" + "_x"}
@@ -105,6 +128,7 @@ const Match = ({ id, participants, startDate }) => {
             id={id + "_radio" + "_2"}
             className="hidden peer"
             value={"2"}
+            onInput={(e) => handlePrediction(e, id)}
           />
           <label
             htmlFor={id + "_radio" + "_2"}

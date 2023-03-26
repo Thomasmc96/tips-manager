@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import matchesJson from "../../assets/json/matchesDK.json";
 import Match from "./Match";
 
@@ -6,6 +6,10 @@ import Match from "./Match";
 /**https://appservicesport.tv2api.dk/tournaments/18308/events */ /**https://sport.tv2.dk/fodbold/em/kampprogram */
 
 const TipsBuilder = () => {
+  const [name, setName] = useState("");
+  const [mail, setMail] = useState("");
+  const [predictions, setPredictions] = useState([]);
+
   const matches = matchesJson.sort((a, b) => {
     if (a.startDate < b.startDate) {
       return -1;
@@ -17,10 +21,12 @@ const TipsBuilder = () => {
     return 0;
   });
 
-  console.log(matches);
+  const submitForm = (e) => {};
+
+  console.log(predictions);
 
   return (
-    <div className="container mx-auto mt-2">
+    <form className="container mx-auto mt-2" onSubmit={submitForm}>
       <h1 className="text-4xl text-center mb-9 mt-5">Udfyld din kupon</h1>
       <input
         type="text"
@@ -28,6 +34,9 @@ const TipsBuilder = () => {
         name="name"
         className="flex mx-auto my-2 w-80 h-9 rounded-md p-1 text-black"
         required
+        onChange={(e) => {
+          setName(e.target.value);
+        }}
       />
       <input
         type="email"
@@ -35,13 +44,25 @@ const TipsBuilder = () => {
         name="mail"
         className="flex mx-auto my-2 w-80 h-9 rounded-md p-1 text-black"
         required
+        onChange={(e) => {
+          setMail(e.target.value);
+        }}
       />
+      <input type="submit" value="Indsend" />
+
       <section className="mt-10">
         {matches.map(({ id, startDate, participants }) => (
-          <Match id={id} startDate={startDate} participants={participants} />
+          <Match
+            key={id}
+            id={id}
+            startDate={startDate}
+            participants={participants}
+            setPredictions={setPredictions}
+            predictions={predictions}
+          />
         ))}
       </section>
-    </div>
+    </form>
   );
 };
 
