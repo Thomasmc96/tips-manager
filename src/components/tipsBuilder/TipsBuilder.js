@@ -9,6 +9,7 @@ const TipsBuilder = () => {
   const [name, setName] = useState("");
   const [mail, setMail] = useState("");
   const [predictions, setPredictions] = useState([]);
+  const [error, setError] = useState(false);
 
   const matches = matchesJson.sort((a, b) => {
     if (a.startDate < b.startDate) {
@@ -21,7 +22,14 @@ const TipsBuilder = () => {
     return 0;
   });
 
-  const submitForm = (e) => {};
+  const submitForm = (e) => {
+    e.preventDefault();
+    let diff = matchesJson.length - predictions.length;
+
+    if(diff > 0) {
+      setError('Du mangler ' + diff  + (diff > 1 ? ' kampe' : ' kamp'))
+    }
+  };
 
   console.log(predictions);
 
@@ -49,7 +57,7 @@ const TipsBuilder = () => {
         }}
       />
       <input type="submit" value="Indsend" />
-
+      {error && <p className="text-red-500">{error}</p>}
       <section className="mt-10">
         {matches.map(({ id, startDate, participants }) => (
           <Match
@@ -59,6 +67,7 @@ const TipsBuilder = () => {
             participants={participants}
             setPredictions={setPredictions}
             predictions={predictions}
+            setError={setError}
           />
         ))}
       </section>

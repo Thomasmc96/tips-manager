@@ -6,6 +6,7 @@ const Match = ({
   startDate,
   setPredictions,
   predictions,
+  setError
 }) => {
   const getDate = (timestamp) => {
     let date = new Date(timestamp);
@@ -51,15 +52,20 @@ const Match = ({
     e.preventDefault();
     console.log(e.target.value);
     console.log(id);
+    setError(false);
 
-    console.log(predictions.find((prediction) => prediction.id === id));
 
-    // let in
+    let oPrediction = predictions.find((prediction) => prediction.id === id)
 
-    setPredictions((currentPredictions) => [
-      ...currentPredictions,
-      { id: id, prediction: e.target.value },
-    ]);
+    if(!oPrediction) {
+      setPredictions((currentPredictions) => [
+        ...currentPredictions,
+        { id: id, prediction: e.target.value },
+      ]);
+    } else {
+      oPrediction.prediction = e.target.value;
+    }
+
   };
 
   return (
