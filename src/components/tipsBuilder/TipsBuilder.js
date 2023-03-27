@@ -1,6 +1,9 @@
 import React, { useState } from "react";
-import matchesJson from "../../assets/json/matchesDK.json";
+import axios from "axios";
+// import matchesJson from "../../assets/json/matchesDK.json";
+import matchesJson from "../../assets/json/matchesTesting.json";
 import Match from "./Match";
+import environment from "../../environment";
 
 /**https://match.uefa.com/v5/matches?competitionId=3&seasonYear=2024&phase=QUALIFYING&fromDate=2023-03-01&toDate=2023-03-31&utcOffset=2&order=ASC&offset=0&limit=500 */
 /**https://appservicesport.tv2api.dk/tournaments/18308/events */ /**https://sport.tv2.dk/fodbold/em/kampprogram */
@@ -10,6 +13,7 @@ const TipsBuilder = () => {
   const [mail, setMail] = useState("");
   const [predictions, setPredictions] = useState([]);
   const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const matches = matchesJson.sort((a, b) => {
     if (a.startDate < b.startDate) {
@@ -28,7 +32,21 @@ const TipsBuilder = () => {
 
     if(diff > 0) {
       setError('Du mangler ' + diff  + (diff > 1 ? ' kampe' : ' kamp'))
+      return;
     }
+    
+    axios.post(`${environment[0]}/server/endpoints/save.php`, {
+      name: name,
+      mail: mail,
+      predictions: JSON.stringify(predictions)
+    }).then((response) => {
+      console.log(response)
+    }).catch((error) => {
+      console.log(error)
+    }).finally(()=> {
+      setLoading(false);
+    })
+
   };
 
   console.log(predictions);

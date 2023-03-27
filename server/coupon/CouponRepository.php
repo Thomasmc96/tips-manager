@@ -1,7 +1,6 @@
 <?php
 
 // Include files
-include_once '../config/Cors.php';
 include_once '../config/Database.php';
 
 class CouponRepository
@@ -27,28 +26,27 @@ class CouponRepository
         $datebaseService = new DatabaseService();
         $connection = $datebaseService->getConnection();
 
-        try {
-            $query = "
+
+        $query = "
                 INSERT INTO 
                     coupons
                 SET 
                     name = :name,
                     mail = :mail,
-                    preditions = :preditions
+                    preditions = " . json_encode($coupon->predictions) . "
             ";
 
-            $statement = $connection->prepare($query);
+        $statement = $connection->prepare($query);
 
-            // Bind data
-            $statement->bindParam(":name", $coupon->name);
-            $statement->bindParam(":mail", $coupon->mail);
-            $statement->bindParam(":preditions", $coupon->predictions);
+        // echo json_encode([
+        //     "json" => $coupon->predictions,
+        // ]);
 
-            if ($statement->execute()) {
-                return true;
-            }
-        } catch (\Exception $e) {
-            return false;
-        }
+        // Bind data
+        $statement->bindParam(":name", $coupon->name);
+        $statement->bindParam(":mail", $coupon->mail);
+        // $statement->bindParam(":preditions", $coupon->predictions);
+
+        return $statement->execute();
     }
 }
