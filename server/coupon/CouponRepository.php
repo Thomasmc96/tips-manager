@@ -1,8 +1,8 @@
 <?php
 
 // Include files
-include_once './config/Cors.php';
-include_once './config/Database.php';
+include_once '../config/Cors.php';
+include_once '../config/Database.php';
 
 class CouponRepository
 {
