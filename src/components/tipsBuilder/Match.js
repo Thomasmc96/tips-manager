@@ -50,8 +50,6 @@ const Match = ({
 
   const handlePrediction = (e, id) => {
     e.preventDefault();
-    console.log(e.target.value);
-    console.log(id);
     setError(false);
 
 

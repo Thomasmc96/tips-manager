@@ -49,8 +49,6 @@ const TipsBuilder = () => {
 
   };
 
-  console.log(predictions);
-
   return (
     <form className="container mx-auto mt-2" onSubmit={submitForm}>
       <h1 className="text-4xl text-center mb-9 mt-5">Udfyld din kupon</h1>

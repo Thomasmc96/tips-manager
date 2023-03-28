@@ -33,14 +33,10 @@ class CouponRepository
                 SET 
                     name = :name,
                     mail = :mail,
-                    preditions = " . json_encode($coupon->predictions) . "
+                    predictions = '" . json_encode($coupon->predictions) . "'
             ";
 
         $statement = $connection->prepare($query);
-
-        // echo json_encode([
-        //     "json" => $coupon->predictions,
-        // ]);
 
         // Bind data
         $statement->bindParam(":name", $coupon->name);
