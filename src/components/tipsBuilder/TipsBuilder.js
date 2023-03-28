@@ -57,7 +57,7 @@ const TipsBuilder = () => {
 
   return (
     <form className="container mx-auto mt-2" onSubmit={submitForm}>
-      <h1 className="text-4xl text-center mb-9 mt-5">Udfyld din kupon</h1>
+      <h1 className="text-3xl text-center mb-9 mt-5">Udfyld din kupon</h1>
       <input
         type="text"
         placeholder="Dit navn"
