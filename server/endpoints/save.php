@@ -22,13 +22,11 @@ $couponRepo = new CouponRepository();
 try {
     $couponRepo->save($coupon);
 
-    // Send error response
     echo json_encode([
         "message" => "Success",
         "code" => 200
     ]);
 } catch (\Exception $e) {
-    // Send error response
     echo json_encode([
         "message" => $e,
         "code" => 500

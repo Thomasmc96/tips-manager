@@ -6,7 +6,7 @@ include_once '../coupon/CouponRepository.php';
 $couponRepo = new CouponRepository();
 
 try {
-    $coupons = $couponRepo->getAccepted();
+    $coupons = $couponRepo->getAll();
 
     echo json_encode([
         "coupons" => $coupons,

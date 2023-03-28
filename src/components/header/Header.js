@@ -6,7 +6,7 @@ const Header = () => {
     <header className="bg-lightGreen p-3">
       <nav className="container mx-auto flex space-x-6">
         <Link to={"/"} className="hover:text-sandBeige">
-          Resultater
+          Tavle
         </Link>
         <Link to={"/tipskupon"} className="hover:text-sandBeige">
           Ny kupon
