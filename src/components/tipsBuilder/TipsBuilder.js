@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { FidgetSpinner } from "react-loader-spinner";
 // import matchesJson from "../../assets/json/matchesDK.json";
 import matchesJson from "../../assets/json/matchesTesting.json";
 import Match from "./Match";
@@ -35,18 +36,23 @@ const TipsBuilder = () => {
       return;
     }
     
+    setLoading(true);
     axios.post(`${environment[0]}/server/endpoints/save.php`, {
       name: name,
       mail: mail,
       predictions: JSON.stringify(predictions)
     }).then((response) => {
-      console.log(response)
+      if(response.data.code === 200) {
+        console.log(response)
+      } else {
+        setError("Der skete desværre en fejl. Prøv igen.")
+      }
     }).catch((error) => {
+      setError("Der skete desværre en fejl. Prøv igen.")
       console.log(error)
     }).finally(()=> {
       setLoading(false);
     })
-
   };
 
   return (
@@ -58,6 +64,7 @@ const TipsBuilder = () => {
         name="name"
         className="flex mx-auto my-2 w-80 h-9 rounded-md p-1 text-black"
         required
+        value={name}
         onChange={(e) => {
           setName(e.target.value);
         }}
@@ -68,12 +75,11 @@ const TipsBuilder = () => {
         name="mail"
         className="flex mx-auto my-2 w-80 h-9 rounded-md p-1 text-black"
         required
+        value={mail}
         onChange={(e) => {
           setMail(e.target.value);
         }}
       />
-      <input type="submit" value="Indsend" />
-      {error && <p className="text-red-500">{error}</p>}
       <section className="mt-10">
         {matches.map(({ id, startDate, participants }) => (
           <Match
@@ -87,6 +93,23 @@ const TipsBuilder = () => {
           />
         ))}
       </section>
+      {error && <p className="text-red-500 text-center mb-5">{error}</p>}
+
+      <button type="submit" className="bg-sandBeige rounded-md w-4/5 h-10 text-black text-lg hover:cursor-pointer hover:scale-110 duration-200 mb-7 mx-auto flex justify-center items-center">
+        {!loading ? <>Indsend</> : (
+        <FidgetSpinner
+          visible={true}
+          height="30"
+          width="30"
+          ariaLabel="dna-loading"
+          wrapperStyle={{}}
+          wrapperClass="dna-wrapper"
+          ballColors={['#ff0000', '#00ff00', '#0000ff']}
+          backgroundColor="#F4442E"
+        />
+        )
+        }
+      </button>
     </form>
   );
 };
