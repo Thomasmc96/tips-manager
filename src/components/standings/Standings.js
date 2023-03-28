@@ -3,6 +3,8 @@ import axios from "axios";
 import environment from "../../environment";
 import { FidgetSpinner } from "react-loader-spinner";
 import Countdown from "react-countdown";
+// import matchesJson from "../../assets/json/matchesDK.json";
+import matchesJson from "../../assets/json/matchesTesting.json";
 
 const Standings = () => {
   const [coupons, setCoupons] = useState([]);
@@ -53,8 +55,43 @@ const Standings = () => {
     minutes = ("0" + minutes).slice(-2);
     seconds = ("0" + seconds).slice(-2);
 
-    if (completed) {
-      return <>Done</>;
+    if (!completed) {
+      return (
+        <div className="container mx-auto flex flex-col mt-4">
+          <div className="overflow-x-auto sm:rounded-lg">
+            <table className="table-auto overflow-x-auto w-full">
+              <thead>
+                <tr className="bg-darkGreen">
+                  <th className="text-left px-2">Navn</th>
+                  {/* {coupons.map(({ name }) => (
+                  <th>{name}</th>
+                ))} */}
+                  {matchesJson.map(({ id, name }) => (
+                    <th>{name}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {/* {matchesJson.map(({id, name}) => (
+                <tr></tr>
+              ))} */}
+                {coupons.map(({ name, predictions }, i) => (
+                  <tr
+                    className={`p-6 ${
+                      i % 2 === 0 ? "bg-lightGreen" : "bg-transparent"
+                    }`}
+                  >
+                    <td className="p-2">{name}</td>
+                    {JSON.parse(predictions).map(({ id, prediction }) => (
+                      <td className="text-center">{prediction}</td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      );
     } else {
       return (
         <div className="container mx-auto flex flex-col mt-4">

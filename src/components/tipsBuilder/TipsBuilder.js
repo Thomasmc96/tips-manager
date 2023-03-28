@@ -45,7 +45,7 @@ const TipsBuilder = () => {
       })
       .then((response) => {
         if (response.data.code === 200) {
-          console.log(response);
+          window.location.replace("/kvittering");
         } else {
           console.log(response);
           setError("Der skete desværre en fejl. Prøv igen.");
