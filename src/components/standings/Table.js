@@ -18,14 +18,14 @@ const Table = ({ coupons }) => {
             </tr> */}
             <tr className="bg-darkGreen">
               <th>Kampe</th>
-              {coupons.map(({ name }) => (
-                <th>{name}</th>
+              {coupons.map(({ coupons_id, name }) => (
+                <th key={coupons_id}>{name}</th>
               ))}
             </tr>
           </thead>
           <tbody>
             {matchesJson.map(({ id, name, participants }, i) => (
-              <tr>
+              <tr key={id}>
                 <td
                   className={`p-6 text-center ${
                     i % 2 === 0 ? "bg-lightGreen" : "bg-transparent"
@@ -33,22 +33,23 @@ const Table = ({ coupons }) => {
                 >
                   {participants[0].name}-{participants[1].name}
                 </td>
-                {coupons.map(({ predictions }) => (
-                  <>
-                    {JSON.parse(predictions).map((prediction) => {
+                {coupons.map(({ coupons_id, predictions }, j) => (
+                  <td
+                    key={coupons_id}
+                    className={`p-6 text-center ${
+                      i % 2 === 0 ? "bg-lightGreen" : "bg-transparent"
+                    }`}
+                  >
+                    {JSON.parse(predictions).map((prediction, j) => {
                       if (prediction.id === id) {
                         return (
-                          <td
-                            className={`p-6 text-center ${
-                              i % 2 === 0 ? "bg-lightGreen" : "bg-transparent"
-                            }`}
-                          >
+                          <span key={prediction.id}>
                             {prediction.prediction}
-                          </td>
+                          </span>
                         );
                       }
                     })}
-                  </>
+                  </td>
                 ))}
               </tr>
             ))}
