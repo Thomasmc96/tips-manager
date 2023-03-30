@@ -4,10 +4,10 @@ import matchesJson from "../../assets/json/matchesTesting.json";
 
 const Table = ({ coupons }) => {
   return (
-    <div className="container mx-auto flex flex-col mt-4">
+    <div className="container mx-auto flex flex-col my-4 overflow-x-auto">
       <div className="overflow-x-auto sm:rounded-lg">
-        <table className="table-auto overflow-x-auto w-full">
-          <thead>
+        <table className="table-fixed overflow-x-auto min-w-full">
+          <thead className="">
             {/* <tr className="bg-darkGreen">
               <th className="text-left px-2">Navn</th>
               {matchesJson.map(({ id, name, participants }) => (
@@ -16,29 +16,30 @@ const Table = ({ coupons }) => {
                 </th>
               ))}
             </tr> */}
-            <tr className="bg-darkGreen">
-              <th>Kampe</th>
+            <tr className="bg-darkGreen border-2 border-black">
+              <th colSpan={2}>Kampe</th>
               {coupons.map(({ coupons_id, name }) => (
-                <th key={coupons_id}>{name}</th>
+                <th key={coupons_id} colSpan={1} className="border-2 border-black">{name}</th>
               ))}
             </tr>
           </thead>
           <tbody>
-            {matchesJson.map(({ id, name, participants }, i) => (
+            {matchesJson.map(({ id, name, participants, startDate }, i) => (
               <tr key={id}>
                 <td
-                  className={`p-6 text-center ${
-                    i % 2 === 0 ? "bg-lightGreen" : "bg-transparent"
-                  }`}
+                colSpan={2}
+                  className={`p-6 text-center border-2 border-black`}
                 >
-                  {participants[0].name}-{participants[1].name}
+                  <div className="flex flex-col">
+                    <span>{participants[0].name}-{participants[1].name}</span>
+                    <span>{startDate}</span>
+                  </div>
                 </td>
                 {coupons.map(({ coupons_id, predictions }, j) => (
                   <td
                     key={coupons_id}
-                    className={`p-6 text-center ${
-                      i % 2 === 0 ? "bg-lightGreen" : "bg-transparent"
-                    }`}
+                    colSpan={1}
+                    className={`p-6 text-center border-2 border-black `}
                   >
                     {JSON.parse(predictions).map((prediction, j) => {
                       if (prediction.id === id) {
