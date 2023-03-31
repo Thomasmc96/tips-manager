@@ -1,4 +1,5 @@
 import React from "react";
+import { getDateString } from "../Utils";
 
 const Match = ({
   id,
@@ -8,45 +9,7 @@ const Match = ({
   predictions,
   setError
 }) => {
-  const getDate = (timestamp) => {
-    let date = new Date(timestamp);
-    return date.getDate() + ". " + getMonthName(date.getMonth() + 1);
-  };
 
-  const getTime = (timestamp) => {
-    let date = new Date(timestamp);
-    let time = date.toLocaleTimeString();
-    return time.substring(0, time.length - 3);
-  };
-
-  const getMonthName = (monthNumber) => {
-    switch (monthNumber) {
-      case 1:
-        return "Januar";
-      case 2:
-        return "Februar";
-      case 3:
-        return "Marts";
-      case 4:
-        return "April";
-      case 5:
-        return "Maj";
-      case 6:
-        return "Juni";
-      case 7:
-        return "Juli";
-      case 8:
-        return "August";
-      case 9:
-        return "September";
-      case 10:
-        return "Oktober";
-      case 11:
-        return "November";
-      case 12:
-        return "December";
-    }
-  };
 
   const handlePrediction = (e, id) => {
     e.preventDefault();
@@ -90,7 +53,7 @@ const Match = ({
         </div>
       </h3>
       <p className="text-center">
-        {getDate(startDate)} {getTime(startDate)}
+        {getDateString(startDate)}
       </p>
       <div className="flex space-x-3 justify-center pt-5">
         <div>

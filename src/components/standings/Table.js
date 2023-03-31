@@ -1,6 +1,8 @@
 import React from "react";
 import matchesJson from "../../assets/json/matchesTesting.json";
 // import matchesJson from "../../assets/json/matchesDK.json";
+import { getDateString } from "../Utils";
+
 
 const Table = ({ coupons }) => {
   return (
@@ -32,7 +34,7 @@ const Table = ({ coupons }) => {
                 >
                   <div className="flex flex-col">
                     <span>{participants[0].name}-{participants[1].name}</span>
-                    <span>{startDate}</span>
+                    <span>{getDateString(startDate)}</span>
                   </div>
                 </td>
                 {coupons.map(({ coupons_id, predictions }, j) => (
