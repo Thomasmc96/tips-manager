@@ -5,14 +5,17 @@ import { getDateString } from "../Utils";
 
 const Table = ({ coupons }) => {
   return (
-    <div className="mx-auto flex flex-col my-4 overflow-x-auto">
-      <div className="sm:rounded-lg overflow-x">
-        <table className="table-auto overflow-x-auto ">
-          <thead className="">
-            <tr className="bg-darkGreen border-2 border-black">
-              <th className="w-50"></th>
+    <div className="container mx-auto flex flex-col my-4">
+      <div className="overflow-x-auto">
+        <table className="table-fixed relative">
+          <thead className="sticky top-0 z-50">
+            <tr className="bg-darkGreen border-[1px] border-black ">
+              <th className="min-w-[12rem]"></th>
               {coupons.map(({ coupons_id, name }) => (
-                <th key={coupons_id} className="border-2 border-black w-40">
+                <th
+                  key={coupons_id}
+                  className="border-[1px] border-black w-40 p-1"
+                >
                   {name}
                 </th>
               ))}
@@ -21,7 +24,7 @@ const Table = ({ coupons }) => {
           <tbody>
             {matchesJson.map(({ id, name, participants, startDate }, i) => (
               <tr key={id}>
-                <td className={`p-6 text-center border-2 border-black`}>
+                <td className={`p-2 text-center border-[1px] border-black`}>
                   <div className="flex flex-col">
                     <span>
                       {participants[0].name} - {participants[1].name}
@@ -32,7 +35,7 @@ const Table = ({ coupons }) => {
                 {coupons.map(({ coupons_id, predictions }, j) => (
                   <td
                     key={coupons_id}
-                    className={`p-6 text-center border-2 border-black `}
+                    className={`p-6 text-center border-[1px] border-black `}
                   >
                     {JSON.parse(predictions).map((prediction, j) => {
                       if (prediction.id === id) {
