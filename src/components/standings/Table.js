@@ -6,9 +6,9 @@ import { getDateString } from "../Utils";
 
 const Table = ({ coupons }) => {
   return (
-    <div className="container mx-auto flex flex-col my-4 overflow-x-auto">
-      <div className="overflow-x-auto sm:rounded-lg">
-        <table className="table-fixed overflow-x-auto min-w-full">
+    <div className="container mx-auto flex flex-col my-4">
+      <div className="overflow-x-scroll sm:rounded-lg">
+        <table className="table-auto overflow-x-scroll">
           <thead className="">
             {/* <tr className="bg-darkGreen">
               <th className="text-left px-2">Navn</th>
@@ -19,7 +19,7 @@ const Table = ({ coupons }) => {
               ))}
             </tr> */}
             <tr className="bg-darkGreen border-2 border-black">
-              <th colSpan={2}>Kampe</th>
+              <th colSpan={2}></th>
               {coupons.map(({ coupons_id, name }) => (
                 <th key={coupons_id} colSpan={1} className="border-2 border-black">{name}</th>
               ))}
@@ -33,7 +33,7 @@ const Table = ({ coupons }) => {
                   className={`p-6 text-center border-2 border-black`}
                 >
                   <div className="flex flex-col">
-                    <span>{participants[0].name}-{participants[1].name}</span>
+                    <span>{participants[0].name} - {participants[1].name}</span>
                     <span>{getDateString(startDate)}</span>
                   </div>
                 </td>
