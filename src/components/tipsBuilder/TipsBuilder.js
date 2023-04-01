@@ -11,7 +11,7 @@ import environment from "../../environment";
 
 const TipsBuilder = () => {
   const [name, setName] = useState("");
-  const [mail, setMail] = useState("null");
+  const [mail, setMail] = useState("");
   const [predictions, setPredictions] = useState([]);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -74,7 +74,7 @@ const TipsBuilder = () => {
           setName(e.target.value);
         }}
       />
-      {/* <input
+      <input
         type="email"
         placeholder="Din mail"
         name="mail"
@@ -84,7 +84,7 @@ const TipsBuilder = () => {
         onChange={(e) => {
           setMail(e.target.value);
         }}
-      /> */}
+      />
       <section className="mt-10">
         {matches.map(({ id, startDate, participants }) => (
           <Match
