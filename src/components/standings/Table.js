@@ -9,13 +9,20 @@ const Table = ({ coupons }) => {
   return (
     <div className="container mx-auto flex flex-col my-4">
       <section className="container mx-auto flex">
-        <button type="button" onClick={() => setZoom(zoom - 5)}>
+        <button
+          type="button"
+          className="bg-darkGreen w-10 rounded-sm mb-1 mr-1 text-lg"
+          onClick={() => setZoom(zoom - 5)}
+        >
           -
         </button>
-        <button type="button" onClick={() => setZoom(zoom + 5)}>
+        <button
+          type="button"
+          className="bg-darkGreen w-10 rounded-sm mb-1 mr-1 text-lg"
+          onClick={() => setZoom(zoom + 5)}
+        >
           +
         </button>
-        <p>{zoom}</p>
       </section>
       <div className="overflow-x-auto">
         <table className="table-fixed relative " style={{ zoom: zoom + "%" }}>
