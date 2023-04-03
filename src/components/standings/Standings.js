@@ -15,7 +15,7 @@ const Standings = () => {
     setLoading(true);
 
     axios
-      .get(`${environment[0]}/server/endpoints/all.php`)
+      .get(`${environment[0]}/server/endpoints/coupon/all.php`)
       .then((response) => {
         console.log(response);
         if (response.data.code === 200) {

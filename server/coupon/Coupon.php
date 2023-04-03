@@ -1,8 +1,6 @@
 <?php
-
-// Include files
-include_once '../config/Cors.php';
-include_once '../config/DatabaseService.php';
+include_once dirname(__DIR__) . '/config/Cors.php';
+include_once dirname(__DIR__) . '/config/DatabaseService.php';
 
 class Coupon
 {

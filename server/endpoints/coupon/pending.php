@@ -1,12 +1,12 @@
 <?php
-include_once '../config/Cors.php';
-include_once '../coupon/Coupon.php';
-include_once '../coupon/CouponRepository.php';
+include_once dirname(__DIR__, 2) . '/config/Cors.php';
+include_once dirname(__DIR__, 2) . '/Coupon/Coupon.php';
+include_once dirname(__DIR__, 2) . '/Coupon/CouponRepository.php';
 
 $couponRepo = new CouponRepository();
 
 try {
-    $coupons = $couponRepo->getAll();
+    $coupons = $couponRepo->getPending();
 
     echo json_encode([
         "coupons" => $coupons,

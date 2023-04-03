@@ -1,7 +1,7 @@
 <?php
-include_once '../config/Cors.php';
-include_once '../coupon/Coupon.php';
-include_once '../coupon/CouponRepository.php';
+include_once dirname(__DIR__, 2) . '/config/Cors.php';
+include_once dirname(__DIR__, 2) . '/Coupon/Coupon.php';
+include_once dirname(__DIR__, 2) . '/Coupon/CouponRepository.php';
 
 // Get incoming data
 $data = json_decode(file_get_contents("php://input"));

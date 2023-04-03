@@ -1,13 +1,9 @@
 <?php
-
-// Include files
-include_once '../config/DatabaseService.php';
+include_once dirname(__DIR__) . '/config/Cors.php';
+include_once dirname(__DIR__) . '/config/DatabaseService.php';
 
 class CouponRepository
 {
-
-    private $api = "https://appservicesport.tv2api.dk/tournaments/18308/events";
-
     public function getAll()
     {
         $datebaseService = new DatabaseService();
@@ -76,7 +72,6 @@ class CouponRepository
     {
         $datebaseService = new DatabaseService();
         $connection = $datebaseService->getConnection();
-
 
         $query = "
                 INSERT INTO 

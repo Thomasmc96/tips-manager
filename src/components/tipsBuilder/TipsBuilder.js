@@ -38,7 +38,7 @@ const TipsBuilder = () => {
 
     setLoading(true);
     axios
-      .post(`${environment[0]}/server/endpoints/save.php`, {
+      .post(`${environment[0]}/server/endpoints/coupon/save.php`, {
         name: name,
         mail: mail,
         predictions: JSON.stringify(predictions),
