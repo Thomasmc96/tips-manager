@@ -1,13 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { FidgetSpinner } from "react-loader-spinner";
 // import matchesJson from "../../assets/json/matchesDK.json";
-import matchesJson from "../../assets/json/matchesTesting.json";
+// import matchesJson from "../../assets/json/matchesTesting.json";
 import Match from "./Match";
 import environment from "../../environment";
-
-/**https://match.uefa.com/v5/matches?competitionId=3&seasonYear=2024&phase=QUALIFYING&fromDate=2023-03-01&toDate=2023-03-31&utcOffset=2&order=ASC&offset=0&limit=500 */
-/**https://appservicesport.tv2api.dk/tournaments/18308/events */ /**https://sport.tv2.dk/fodbold/em/kampprogram */
+import { sortByDate } from "../Utils";
 
 const TipsBuilder = () => {
   const [name, setName] = useState("");
@@ -15,28 +13,43 @@ const TipsBuilder = () => {
   const [predictions, setPredictions] = useState([]);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [loadingSubmit, setLoadingSubmit] = useState(false);
+  const [matches, setMatches] = useState([]);
 
-  const matches = matchesJson.sort((a, b) => {
-    if (a.startDate < b.startDate) {
-      return -1;
-    }
-    if (a.startDate > b.startDate) {
-      return 1;
-    }
+  // const matches = sortByDate(matchesJson);
 
-    return 0;
-  });
+  useEffect(() => {
+    setLoading(true);
+    axios
+      .get(`${environment[0]}/server/endpoints/matches/getMatches.php`)
+      .then((response) => {
+        if (response.data.code === 200) {
+          console.log(response);
+          setMatches(sortByDate(JSON.parse(response.data.matches.data)));
+        } else {
+          setError("Noget gik galt");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        setTimeout(() => {
+          setLoading(false);
+        }, 1000);
+      });
+  }, []);
 
   const submitForm = (e) => {
     e.preventDefault();
-    let diff = matchesJson.length - predictions.length;
+    let diff = matches.length - predictions.length;
 
     if (diff > 0) {
       setError("Du mangler " + diff + (diff > 1 ? " kampe" : " kamp"));
       return;
     }
 
-    setLoading(true);
+    setLoadingSubmit(true);
     axios
       .post(`${environment[0]}/server/endpoints/coupon/save.php`, {
         name: name,
@@ -56,9 +69,28 @@ const TipsBuilder = () => {
         console.log(error);
       })
       .finally(() => {
-        setLoading(false);
+        setTimeout(() => {
+          setLoading(false);
+        }, 500);
       });
   };
+
+  if (loading) {
+    return (
+      <div className="flex mx-auto justify-center h-40 items-center">
+        <FidgetSpinner
+          visible={true}
+          height="100"
+          width="100"
+          ariaLabel="dna-loading"
+          wrapperStyle={{}}
+          wrapperClass="dna-wrapper"
+          ballColors={["#003e21", "#067242", "#098b54"]}
+          backgroundColor="#f8d098"
+        />
+      </div>
+    );
+  }
 
   return (
     <form className="container mx-auto mt-2" onSubmit={submitForm}>
@@ -104,7 +136,7 @@ const TipsBuilder = () => {
         type="submit"
         className="bg-sandBeige rounded-md w-4/5 h-10 text-black text-lg hover:cursor-pointer hover:scale-110 duration-200 mb-7 mx-auto flex justify-center items-center"
       >
-        {!loading ? (
+        {!loadingSubmit ? (
           <>Indsend</>
         ) : (
           <FidgetSpinner

@@ -5,6 +5,7 @@ import { FidgetSpinner } from "react-loader-spinner";
 import Countdown from "react-countdown";
 import Table from "./Table";
 import CountdownInfo from "./CountdownInfo";
+import { sortByWins } from "../Utils";
 
 const Standings = () => {
   const [coupons, setCoupons] = useState([]);
@@ -15,18 +16,20 @@ const Standings = () => {
     setLoading(true);
 
     axios
-      .get(`${environment[0]}/server/endpoints/coupon/all.php`)
+      .get(`${environment[0]}/server/endpoints/coupon/getResults.php`)
       .then((response) => {
         console.log(response);
         if (response.data.code === 200) {
-          setCoupons(response.data.coupons);
+          setCoupons(sortByWins(response.data.coupons));
         }
       })
       .catch((error) => {
         console.log(error);
       })
       .finally(() => {
-        setLoading(false);
+        setTimeout(() => {
+          setLoading(false);
+        }, 1000);
       });
   }, []);
 

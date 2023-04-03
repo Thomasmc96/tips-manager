@@ -4,7 +4,7 @@ include_once dirname(__DIR__) . '/config/DatabaseService.php';
 
 class MatchesRepository
 {
-    public function getAll()
+    public function getLatest()
     {
         $datebaseService = new DatabaseService();
         $connection = $datebaseService->getConnection();
@@ -14,12 +14,15 @@ class MatchesRepository
                 *
             FROM
                 matches
+            ORDER BY
+                matches_id DESC
+            LIMIT 1
         ";
 
         $statement = $connection->prepare($query);
 
         $statement->execute();
-        return $statement->fetchAll();
+        return $statement->fetch();
     }
 
     public function save(Matches $matches) {
