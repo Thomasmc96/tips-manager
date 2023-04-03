@@ -117,7 +117,11 @@ const Table = ({ coupons }) => {
                           key={coupons_id}
                           className={
                             `p-6 text-center border-[1px] border-black ` +
-                            (prediction.won ? "bg-lightGreen" : "bg-red-500")
+                            (prediction.won && state === "FINISHED"
+                              ? "bg-lightGreen"
+                              : !prediction.won && state === "FINISHED"
+                              ? "bg-red-500"
+                              : "")
                           }
                         >
                           <span key={prediction.id}>

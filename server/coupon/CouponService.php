@@ -35,7 +35,7 @@ class CouponService {
                     $tipResult = "x";
                 }
 
-                if($prediction->prediction === $tipResult) {
+                if($prediction->prediction === $tipResult && $match->state === "FINISHED") {
                     $prediction->won = true;
                     $amountCorrect++;            
                 } else {
