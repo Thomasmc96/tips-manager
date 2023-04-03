@@ -50,4 +50,50 @@ class CouponService {
 
         return $coupons;
     }
+
+    public function getSortedByAmountCorrect() {
+        $couponsWithResult = $this->getCouponsWithResults();
+
+        usort($couponsWithResult, function($a, $b) {
+            if ($a['amountCorrect'] > $b['amountCorrect']) {
+                return -1;
+            } elseif ($a['amountCorrect'] < $b['amountCorrect']) {
+                return 1;
+            }
+            return 0;
+        });
+
+        return $couponsWithResult;
+    }
+
+    function sendEmail($to) {
+        $subject = 'Stilling';
+        $from_email = 'info@jcrl.dk';
+        $from_name = 'Tipskupon - EM 2024';
+        $reply_to_email = 'info@jcrl.dk';
+        $reply_to_name = 'Tipskupon - EM 2024';
+        $charset = 'UTF-8';
+        
+        $topThree = $this->getSortedByAmountCorrect();
+        echo json_encode($topThree);
+        $message = '';
+        
+        $headers = [];
+        $headers[] = "MIME-Version: 1.0";
+        $headers[] = "Content-type: text/html; charset={$charset}";
+        $headers[] = "From: {$from_name} <{$from_email}>";
+        $headers[] = "Reply-To: {$reply_to_name} <{$reply_to_email}>";
+        $headers[] = "X-Mailer: PHP/" . phpversion();
+        $headers[] = "X-Priority: 3";
+        $headers[] = "X-Assp-ID: " . md5(uniqid(time()));
+        
+        $headers_string = implode("\r\n", $headers);
+      
+        if (mail($to, $subject, $message, $headers_string)) {
+          echo 'Email sent successfully';
+        } else {
+          echo 'Email not sent';
+        }
+      }
+      
 }
