@@ -5,25 +5,29 @@ import { getDateString } from "../Utils";
 
 const Table = ({ coupons }) => {
   const [zoom, setZoom] = useState(100);
+  var isFirefox = navigator.userAgent.toLowerCase().indexOf("firefox") > -1;
 
   return (
     <div className="container mx-auto flex flex-col my-4">
-      <section className="container mx-auto flex">
-        <button
-          type="button"
-          className="bg-darkGreen w-10 rounded-sm mb-1 mr-1 text-lg"
-          onClick={() => setZoom(zoom - 5)}
-        >
-          -
-        </button>
-        <button
-          type="button"
-          className="bg-darkGreen w-10 rounded-sm mb-1 mr-1 text-lg"
-          onClick={() => setZoom(zoom + 5)}
-        >
-          +
-        </button>
-      </section>
+      {!isFirefox && (
+        <section className="container mx-auto flex">
+          <button
+            type="button"
+            className="bg-darkGreen w-10 rounded-sm mb-1 mr-1 text-lg"
+            onClick={() => setZoom(zoom - 5)}
+          >
+            -
+          </button>
+          <button
+            type="button"
+            className="bg-darkGreen w-10 rounded-sm mb-1 mr-1 text-lg"
+            onClick={() => setZoom(zoom + 5)}
+          >
+            +
+          </button>
+        </section>
+      )}
+
       <div className="overflow-x-auto">
         <table className="table-fixed relative " style={{ zoom: zoom + "%" }}>
           <thead className="sticky top-0 z-50">
