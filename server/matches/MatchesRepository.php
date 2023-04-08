@@ -4,8 +4,7 @@ include_once dirname(__DIR__) . '/config/DatabaseService.php';
 
 class MatchesRepository
 {
-    public function getLatest()
-    {
+    public function getLatest() {
         $datebaseService = new DatabaseService();
         $connection = $datebaseService->getConnection();
 

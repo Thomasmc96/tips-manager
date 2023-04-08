@@ -66,18 +66,41 @@ class CouponService {
         return $couponsWithResult;
     }
 
-    function sendEmail($to) {
+    private function getSortedMatchesByStartDate() {
+        $matchesRepo = new MatchesRepository();
+        $matches = json_decode($matchesRepo->getLatest()['data']);
+
+        usort($matches, function($a, $b) {
+            if ($a->startDate > $b->startDate) {
+                return 1;
+            } elseif ($a->startDate < $b->startDate) {
+                return -1;
+            }
+            return 0;
+        });
+
+        return $matches;
+    }
+
+    public function sendEmail($to_email, $to_name) {
         $subject = 'Stilling';
-        $from_email = 'info@jcrl.dk';
+        $from_email = 'tips-manager@jcrl.dk';
         $from_name = 'Tipskupon - EM 2024';
-        $reply_to_email = 'info@jcrl.dk';
+        $reply_to_email = 'tips-manager@jcrl.dk';
         $reply_to_name = 'Tipskupon - EM 2024';
         $charset = 'UTF-8';
         
-        $topThree = $this->getSortedByAmountCorrect();
-        echo json_encode($topThree);
-        $message = '';
+        $table = $this->generateTable();
         
+        $message = sprintf("<h2>Hej %s</h2>\n\n
+        <p>Her er nuværende stilling for EM 2024 tipskonkurrencen.</p>\n\n
+        <p>Du kan også se stillingen <a href='%s'>her</a>.</p> 
+        %s", 
+        $to_name,
+        $_SERVER['HTTP_HOST'] . '/', 
+        $table);
+        
+        echo $message;
         $headers = [];
         $headers[] = "MIME-Version: 1.0";
         $headers[] = "Content-type: text/html; charset={$charset}";
@@ -89,11 +112,99 @@ class CouponService {
         
         $headers_string = implode("\r\n", $headers);
       
-        if (mail($to, $subject, $message, $headers_string)) {
+        if (mail($to_email, $subject, $message, $headers_string)) {
           echo 'Email sent successfully';
         } else {
           echo 'Email not sent';
         }
       }
       
+    private function generateTable() {
+        $matches = $this->getSortedMatchesByStartDate();
+
+        $sortedStandings = $this->getSortedByAmountCorrect();
+
+        echo '
+        <style>
+            table {
+                border-collapse: collapse;
+                margin: 20px 0;
+                font-size: 14px;
+                font-family: Arial, sans-serif;
+            }
+            
+            th,
+            td {
+                padding: 8px 8px;
+                border: 1px solid #ddd;
+                text-align: center;
+            }
+            
+            th {
+                background-color: #f2f2f2;
+                font-weight: bold;
+            }
+            
+            td div {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                align-items: center;
+            }
+            
+            td span {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        </style>
+        ';
+
+        $table = '
+        <table>
+            <thead>
+                <tr>
+                    <th></th>';
+                        
+        foreach($sortedStandings as $sortedStanding) {
+            $table .= '
+                <th>
+                    <div>
+                        <span>'. $sortedStanding['name'] .'</span>
+                        <span>'. $sortedStanding['amountCorrect'] .' ✔</span>
+                    </div>
+                </th>';
+        }
+        $table .= '
+                </tr>
+            </thead>
+            <tbody>';
+        foreach($matches as $match) {
+            $table .= '
+                <tr>
+                    <td>
+                        <div>
+                            <span>'. $match->participants[0]->name . ' - ' . $match->participants[1]->name .'</span>
+                            <span>'. ($match->state === "FINISHED" ? $match->participants[0]->finalResult . " - " . $match->participants[1]->finalResult : "") .'</span>
+                        </div>
+                    </td>';
+        foreach($sortedStandings as $sortedStanding) {
+            foreach($sortedStanding['predictions'] as $prediction) {
+                if($prediction->id === $match->id) {
+                    $table .= '
+                    <td style="' . ($prediction->won && $match->state === "FINISHED" ? 'background-color:#098b54' : (!$prediction->won && $match->state === "FINISHED" ? 'background-color:red' : '')) .'">
+                        ' . $prediction->prediction .'
+                    </td>';
+                }
+            }
+        }
+    }
+
+        $table .='
+                </tr>
+            </tbody>
+        </table>';
+
+        return $table;
+    }
 }

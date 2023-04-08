@@ -94,4 +94,28 @@ class CouponRepository
 
         return $statement->execute();
     }
+
+    public function getEmailSubscribers() {
+        $datebaseService = new DatabaseService();
+        $connection = $datebaseService->getConnection();
+
+        $query = "
+            SELECT
+                *
+            FROM
+                coupons
+            WHERE
+                paid = :paid AND subscribeToMails = :subscribeToMails
+        ";
+
+        $statement = $connection->prepare($query);
+
+        $paid = 1;
+        $subscribeToMails = 1;
+        $statement->bindParam(":paid", $paid);
+        $statement->bindParam(":subscribeToMails", $subscribeToMails);
+
+        $statement->execute();
+        return $statement->fetchAll();
+    }
 }

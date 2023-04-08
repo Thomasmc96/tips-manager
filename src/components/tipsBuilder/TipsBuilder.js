@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { FidgetSpinner } from "react-loader-spinner";
-// import matchesJson from "../../assets/json/matchesDK.json";
-import matchesJson from "../../assets/json/matchesTesting.json";
+// import matchesJson from "../../assets/json/matchesTesting.json";
 import Match from "./Match";
 import environment from "../../environment";
 import { sortByDate } from "../Utils";
@@ -26,8 +25,8 @@ const TipsBuilder = () => {
       .then((response) => {
         if (response.data.code === 200) {
           console.log(response);
-          // setMatches(sortByDate(JSON.parse(response.data.matches.data)));
-          setMatches(matchesJson);
+          setMatches(sortByDate(JSON.parse(response.data.matches.data)));
+          // setMatches(matchesJson);
         } else {
           setError("Noget gik galt");
         }
@@ -132,8 +131,8 @@ const TipsBuilder = () => {
           className="w-8 h-8 rounded"
         />
         <label htmlFor="link-checkbox" className="ml-2 text-sm font-medium">
-          Ja, jeg vil gerne modtage mails omkring stillingen. Ellers kan
-          stillingen også ses her på siden.
+          Ja, jeg vil gerne modtage mails omkring stillingen. (Stillingen kan
+          også ses her på siden)
         </label>
       </div>
       <section className="mt-10">
