@@ -16,7 +16,7 @@ if (empty($data->name) || empty($data->mail) || empty($data->predictions)) {
     exit(0);
 }
 
-$coupon = new Coupon($data->name, $data->mail, false, json_decode($data->predictions));
+$coupon = new Coupon($data->name, $data->mail, false, json_decode($data->predictions), $data->subscribeToMails);
 
 $couponRepo = new CouponRepository();
 try {

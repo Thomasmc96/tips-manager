@@ -79,7 +79,8 @@ class CouponRepository
                 SET 
                     name = :name,
                     mail = :mail,
-                    predictions = :preditions
+                    predictions = :preditions,
+                    subscribeToMails = :subscribeToMails
             ";
 
         $statement = $connection->prepare($query);
@@ -89,6 +90,7 @@ class CouponRepository
         $statement->bindParam(":name", $coupon->name);
         $statement->bindParam(":mail", $coupon->mail);
         $statement->bindParam(":preditions", $predictions_encoded);
+        $statement->bindParam(":subscribeToMails", $coupon->subscribeToMails);
 
         return $statement->execute();
     }

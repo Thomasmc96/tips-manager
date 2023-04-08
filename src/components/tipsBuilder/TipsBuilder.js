@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { FidgetSpinner } from "react-loader-spinner";
 // import matchesJson from "../../assets/json/matchesDK.json";
-// import matchesJson from "../../assets/json/matchesTesting.json";
+import matchesJson from "../../assets/json/matchesTesting.json";
 import Match from "./Match";
 import environment from "../../environment";
 import { sortByDate } from "../Utils";
@@ -10,6 +10,7 @@ import { sortByDate } from "../Utils";
 const TipsBuilder = () => {
   const [name, setName] = useState("");
   const [mail, setMail] = useState("");
+  const [subscribeToMails, setSubscribeToMails] = useState(false);
   const [predictions, setPredictions] = useState([]);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -25,7 +26,8 @@ const TipsBuilder = () => {
       .then((response) => {
         if (response.data.code === 200) {
           console.log(response);
-          setMatches(sortByDate(JSON.parse(response.data.matches.data)));
+          // setMatches(sortByDate(JSON.parse(response.data.matches.data)));
+          setMatches(matchesJson);
         } else {
           setError("Noget gik galt");
         }
@@ -43,6 +45,7 @@ const TipsBuilder = () => {
   const submitForm = (e) => {
     e.preventDefault();
     let diff = matches.length - predictions.length;
+    console.log(subscribeToMails);
 
     if (diff > 0) {
       setError("Du mangler " + diff + (diff > 1 ? " kampe" : " kamp"));
@@ -55,6 +58,7 @@ const TipsBuilder = () => {
         name: name,
         mail: mail,
         predictions: JSON.stringify(predictions),
+        subscribeToMails: subscribeToMails,
       })
       .then((response) => {
         if (response.data.code === 200) {
@@ -117,6 +121,21 @@ const TipsBuilder = () => {
           setMail(e.target.value);
         }}
       />
+      <div className="flex items-center justify-center mx-auto mt-2 w-80">
+        <input
+          id="link-checkbox"
+          type="checkbox"
+          value={subscribeToMails}
+          onClick={() => {
+            setSubscribeToMails(!subscribeToMails);
+          }}
+          className="w-8 h-8 rounded"
+        />
+        <label htmlFor="link-checkbox" className="ml-2 text-sm font-medium">
+          Ja, jeg vil gerne modtage mails omkring stillingen. Ellers kan
+          stillingen også ses her på siden.
+        </label>
+      </div>
       <section className="mt-10">
         {matches.map(({ id, startDate, participants }) => (
           <Match
@@ -131,7 +150,6 @@ const TipsBuilder = () => {
         ))}
       </section>
       {error && <p className="text-red-500 text-center mb-5">{error}</p>}
-
       <button
         type="submit"
         className="bg-sandBeige rounded-md w-4/5 h-10 text-black text-lg hover:cursor-pointer hover:scale-110 duration-200 mb-7 mx-auto flex justify-center items-center"
