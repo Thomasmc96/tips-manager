@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { FidgetSpinner } from "react-loader-spinner";
-// import matchesJson from "../../assets/json/matchesTesting.json";
+import matchesJson from "../../assets/json/matchesTesting.json";
 import Match from "./Match";
 import environment from "../../environment";
 import { sortByDate } from "../Utils";
@@ -26,7 +26,7 @@ const TipsBuilder = () => {
         if (response.data.code === 200) {
           console.log(response);
           setMatches(sortByDate(JSON.parse(response.data.matches.data)));
-          // setMatches(matchesJson);
+          setMatches(matchesJson);
         } else {
           setError("Noget gik galt");
         }

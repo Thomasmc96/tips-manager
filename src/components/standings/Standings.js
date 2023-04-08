@@ -27,9 +27,9 @@ const Standings = () => {
         console.log(error);
       })
       .finally(() => {
-        setTimeout(() => {
-          setLoading(false);
-        }, 1000);
+        // setTimeout(() => {
+        setLoading(false);
+        // }, 1000);
       });
   }, []);
 
@@ -52,7 +52,7 @@ const Standings = () => {
 
   // Renderer callback with condition
   const renderer = ({ days, hours, minutes, seconds, completed }) => {
-    if (!completed) {
+    if (completed) {
       return <Table coupons={coupons} />;
     } else {
       return (

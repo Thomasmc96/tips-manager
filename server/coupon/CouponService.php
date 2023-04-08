@@ -7,7 +7,7 @@ class CouponService {
     public function getCouponsWithResults() {
         $couponRepo = new CouponRepository();
         $matchesRepo = new MatchesRepository();
-        $coupons = $couponRepo->getAll();  
+        $coupons = $couponRepo->getAccepted();  
         $matches = $matchesRepo->getLatest();
 
         foreach($coupons as $coupon_index => $coupon) {
@@ -97,7 +97,7 @@ class CouponService {
         <p>Du kan også se stillingen <a href='%s'>her</a>.</p> 
         %s", 
         $to_name,
-        $_SERVER['HTTP_HOST'] . '/', 
+        'https://jcrl.dk', 
         $table);
         
         echo $message;
@@ -121,7 +121,6 @@ class CouponService {
       
     private function generateTable() {
         $matches = $this->getSortedMatchesByStartDate();
-
         $sortedStandings = $this->getSortedByAmountCorrect();
 
         echo '
