@@ -35,9 +35,7 @@ const TipsBuilder = () => {
         console.log(error);
       })
       .finally(() => {
-        setTimeout(() => {
-          setLoading(false);
-        }, 1000);
+        setLoading(false);
       });
   }, []);
 

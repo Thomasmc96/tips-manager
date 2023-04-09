@@ -82,15 +82,15 @@ class CouponService {
         return $matches;
     }
 
-    public function sendEmail($to_email, $to_name) {
-        $subject = 'Stilling';
+    public function sendStandingsEmail($to_email, $to_name) {
+        $subject = 'Stilling - EM 2024 Tips';
         $from_email = 'tips-manager@jcrl.dk';
         $from_name = 'Tipskupon - EM 2024';
         $reply_to_email = 'tips-manager@jcrl.dk';
         $reply_to_name = 'Tipskupon - EM 2024';
         $charset = 'UTF-8';
         
-        $table = $this->generateTable();
+        $table = $this->generateStandingsTable();
         
         $message = sprintf("<h2>Hej %s</h2>\n\n
         <p>Her er nuværende stilling for EM 2024 tipskonkurrencen.</p>\n\n
@@ -100,7 +100,6 @@ class CouponService {
         'https://jcrl.dk', 
         $table);
         
-        echo $message;
         $headers = [];
         $headers[] = "MIME-Version: 1.0";
         $headers[] = "Content-type: text/html; charset={$charset}";
@@ -119,7 +118,7 @@ class CouponService {
         }
       }
       
-    private function generateTable() {
+    private function generateStandingsTable() {
         $matches = $this->getSortedMatchesByStartDate();
         $sortedStandings = $this->getSortedByAmountCorrect();
 
@@ -197,6 +196,115 @@ class CouponService {
                 }
             }
         }
+    }
+
+        $table .='
+                </tr>
+            </tbody>
+        </table>';
+
+        return $table;
+    }
+
+    public function sendConfirmationEmail(Coupon $coupon) {
+        $subject = 'Bekræftelse - EM 2024 Tips';
+        $from_email = 'tips-manager@jcrl.dk';
+        $from_name = 'Tipskupon - EM 2024';
+        $reply_to_email = 'tips-manager@jcrl.dk';
+        $reply_to_name = 'Tipskupon - EM 2024';
+        $charset = 'UTF-8';
+
+        $table = $this->generateTipsTable($coupon->predictions);
+                
+        $message = sprintf(
+            "Hej %s\n\n Fedt du vil være med! Husk at overføre 100 kr. til 30 32 12 12 så din kupon tæller med i konkurrencen.\n\n Her er dine tips:\n%s",
+            $coupon->name, $table);
+
+        $headers = [];
+        $headers[] = "MIME-Version: 1.0";
+        $headers[] = "Content-type: text/html; charset={$charset}";
+        $headers[] = "From: {$from_name} <{$from_email}>";
+        $headers[] = "Reply-To: {$reply_to_name} <{$reply_to_email}>";
+        $headers[] = "X-Mailer: PHP/" . phpversion();
+        $headers[] = "X-Priority: 3";
+        $headers[] = "X-Assp-ID: " . md5(uniqid(time()));
+        
+        $headers_string = implode("\r\n", $headers);
+      
+        if (mail($coupon->mail, $subject, $message, $headers_string)) {
+          echo 'Email sent successfully';
+        } else {
+          echo 'Email not sent';
+        }
+    }
+
+    private function generateTipsTable(array $predictions) {
+        $matches = $this->getSortedMatchesByStartDate();
+
+        echo '
+        <style>
+            table {
+                border-collapse: collapse;
+                margin: 20px 0;
+                font-size: 14px;
+                font-family: Arial, sans-serif;
+            }
+            
+            th,
+            td {
+                padding: 8px 8px;
+                border: 1px solid #ddd;
+                text-align: center;
+            }
+            
+            th {
+                background-color: #f2f2f2;
+                font-weight: bold;
+            }
+            
+            td div {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                align-items: center;
+            }
+            
+            td span {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        </style>
+        ';
+
+        $table = '
+        <table>
+            <thead>
+                <tr>
+                    <th>Kampe</th>
+                    <th>Tips</th>';
+                        
+        
+        $table .= '
+                </tr>
+            </thead>
+            <tbody>';
+        foreach($matches as $match) {
+            $table .= '
+                <tr>
+                    <td>
+                        <div>
+                            <span>'. $match->participants[0]->name . ' - ' . $match->participants[1]->name .'</span>
+                        </div>
+                    </td>';
+            foreach($predictions as $prediction) {
+                if($prediction->id === $match->id) {
+                    $table .= '
+                    <td>
+                        ' . $prediction->prediction .'
+                    </td>';
+                }
+            }
     }
 
         $table .='

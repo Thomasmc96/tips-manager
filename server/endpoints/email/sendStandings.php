@@ -9,6 +9,6 @@ $couponService = new CouponService();
 $coupons = $couponRepo->getEmailSubscribers();
 
 foreach($coupons as $coupon) {
-    $couponService->sendEmail($coupon['mail'], $coupon['name']);
+    $couponService->sendStandingsEmail($coupon['mail'], $coupon['name']);
 }
 

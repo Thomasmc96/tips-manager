@@ -27,9 +27,7 @@ const Standings = () => {
         console.log(error);
       })
       .finally(() => {
-        // setTimeout(() => {
         setLoading(false);
-        // }, 1000);
       });
   }, []);
 
