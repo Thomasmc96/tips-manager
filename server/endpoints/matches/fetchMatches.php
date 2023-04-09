@@ -6,6 +6,8 @@ include_once dirname(__DIR__, 2) . '/matches/MatchesRepository.php';
 /**https://match.uefa.com/v5/matches?competitionId=3&seasonYear=2024&phase=QUALIFYING&fromDate=2023-03-01&toDate=2023-03-31&utcOffset=2&order=ASC&offset=0&limit=500 */
 /**https://appservicesport.tv2api.dk/tournaments/18308/events */ /**https://sport.tv2.dk/fodbold/em/kampprogram */
 
+try {
+
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
@@ -27,3 +29,9 @@ $matches = new Matches($response);
 $matchesRepository = new MatchesRepository();
 
 $matchesRepository->save($matches);
+} catch(\Exception $e) {
+    echo json_encode([
+      "message" => $e,
+      "code" => 500
+  ]);
+}

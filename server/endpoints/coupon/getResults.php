@@ -1,12 +1,10 @@
 <?php
-include_once dirname(__DIR__, 2) . '/config/Cors.php';
-include_once dirname(__DIR__, 2) . '/Coupon/Coupon.php';
-include_once dirname(__DIR__, 2) . '/Coupon/CouponRepository.php';
-include_once dirname(__DIR__, 2) . '/Coupon/CouponService.php';
 
-$couponService = new CouponService();
+include_once dirname(__DIR__, 2) . '/config/Cors.php';
+include_once dirname(__DIR__, 2) . '/coupon/CouponService.php';
 
 try {
+    $couponService = new CouponService();
     $results = $couponService->getCouponsWithResults();
 
     echo json_encode([

@@ -33,6 +33,7 @@ const TipsBuilder = () => {
       })
       .catch((error) => {
         console.log(error);
+        setMatches(matchesJson);
       })
       .finally(() => {
         setLoading(false);
@@ -71,7 +72,7 @@ const TipsBuilder = () => {
       })
       .finally(() => {
         setTimeout(() => {
-          setLoading(false);
+          setLoadingSubmit(false);
         }, 500);
       });
   };

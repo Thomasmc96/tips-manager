@@ -4,11 +4,19 @@ include_once dirname(__DIR__) . '/matches/MatchesRepository.php';
 
 class CouponService {
 
-    public function getCouponsWithResults() {
+    public function __construct()
+    {
+    }
+
+    public function getCouponsWithResults(): array {
         $couponRepo = new CouponRepository();
         $matchesRepo = new MatchesRepository();
         $coupons = $couponRepo->getAccepted();  
         $matches = $matchesRepo->getLatest();
+
+        if(!$coupons) {
+            return [];
+        }
 
         foreach($coupons as $coupon_index => $coupon) {
             $predictions = json_decode($coupon['predictions']);
@@ -91,14 +99,23 @@ class CouponService {
         $charset = 'UTF-8';
         
         $table = $this->generateStandingsTable();
-        
-        $message = sprintf("<h2>Hej %s</h2>\n\n
-        <p>Her er nuværende stilling for EM 2024 tipskonkurrencen.</p>\n\n
-        <p>Du kan også se stillingen <a href='%s'>her</a>.</p> 
-        %s", 
-        $to_name,
-        'https://jcrl.dk', 
-        $table);
+        $tableStyles = $this->generateTableStyles();
+
+        $message = sprintf("
+            <html>
+                <head>%s</head>
+                <body>
+                    <h2>Hej %s</h2>
+                    <p>Her er nuværende stilling for EM 2024 tipskonkurrencen.</p>
+                    <p>Du kan også se stillingen <a href='%s'>her</a>.</p>
+                </body>
+            </html>
+            %s", 
+            $tableStyles,
+            $to_name,
+            'https://jcrl.dk', 
+            $table
+        );
         
         $headers = [];
         $headers[] = "MIME-Version: 1.0";
@@ -111,52 +128,15 @@ class CouponService {
         
         $headers_string = implode("\r\n", $headers);
       
-        if (mail($to_email, $subject, $message, $headers_string)) {
-          echo 'Email sent successfully';
-        } else {
-          echo 'Email not sent';
+        if (!mail($to_email, $subject, $message, $headers_string)) {
+            throw new Exception('Email not sent');
         }
       }
       
-    private function generateStandingsTable() {
+    
+      private function generateStandingsTable() {
         $matches = $this->getSortedMatchesByStartDate();
         $sortedStandings = $this->getSortedByAmountCorrect();
-
-        echo '
-        <style>
-            table {
-                border-collapse: collapse;
-                margin: 20px 0;
-                font-size: 14px;
-                font-family: Arial, sans-serif;
-            }
-            
-            th,
-            td {
-                padding: 8px 8px;
-                border: 1px solid #ddd;
-                text-align: center;
-            }
-            
-            th {
-                background-color: #f2f2f2;
-                font-weight: bold;
-            }
-            
-            td div {
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;
-                align-items: center;
-            }
-            
-            td span {
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
-        </style>
-        ';
 
         $table = '
         <table>
@@ -186,17 +166,17 @@ class CouponService {
                             <span>'. ($match->state === "FINISHED" ? $match->participants[0]->finalResult . " - " . $match->participants[1]->finalResult : "") .'</span>
                         </div>
                     </td>';
-        foreach($sortedStandings as $sortedStanding) {
-            foreach($sortedStanding['predictions'] as $prediction) {
-                if($prediction->id === $match->id) {
-                    $table .= '
-                    <td style="' . ($prediction->won && $match->state === "FINISHED" ? 'background-color:#098b54' : (!$prediction->won && $match->state === "FINISHED" ? 'background-color:red' : '')) .'">
-                        ' . $prediction->prediction .'
-                    </td>';
+            foreach($sortedStandings as $sortedStanding) {
+                foreach($sortedStanding['predictions'] as $prediction) {
+                    if($prediction->id === $match->id) {
+                        $table .= '
+                        <td style="' . ($prediction->won && $match->state === "FINISHED" ? 'background-color:#098b54' : (!$prediction->won && $match->state === "FINISHED" ? 'background-color:red' : '')) .'">
+                            ' . $prediction->prediction .'
+                        </td>';
+                    }
                 }
             }
         }
-    }
 
         $table .='
                 </tr>
@@ -215,10 +195,20 @@ class CouponService {
         $charset = 'UTF-8';
 
         $table = $this->generateTipsTable($coupon->predictions);
+        $tableStyles = $this->generateTableStyles();
                 
-        $message = sprintf(
-            "Hej %s\n\n Fedt du vil være med! Husk at overføre 100 kr. til 30 32 12 12 så din kupon tæller med i konkurrencen.\n\n Her er dine tips:\n%s",
-            $coupon->name, $table);
+        $message = sprintf("
+        <html>
+            <head>%s</head>
+                <body>
+                    <h2>Hej %s</h2> 
+                    <p>Fedt du vil være med! Husk at overføre 100 kr. til 30 32 12 12. Når du har gjort det, så aktiverer vi din kupon så den tæller med i konkurrencen.</p>
+                    <p>Her er dine tips:</p><br>%s
+                </body>
+        </html>",
+        $tableStyles,
+        $coupon->name, 
+        $table);
 
         $headers = [];
         $headers[] = "MIME-Version: 1.0";
@@ -231,51 +221,13 @@ class CouponService {
         
         $headers_string = implode("\r\n", $headers);
       
-        if (mail($coupon->mail, $subject, $message, $headers_string)) {
-          echo 'Email sent successfully';
-        } else {
-          echo 'Email not sent';
+        if (!mail($coupon->mail, $subject, $message, $headers_string)) {
+            throw new Exception('Email sent successfully');
         }
     }
 
     private function generateTipsTable(array $predictions) {
         $matches = $this->getSortedMatchesByStartDate();
-
-        echo '
-        <style>
-            table {
-                border-collapse: collapse;
-                margin: 20px 0;
-                font-size: 14px;
-                font-family: Arial, sans-serif;
-            }
-            
-            th,
-            td {
-                padding: 8px 8px;
-                border: 1px solid #ddd;
-                text-align: center;
-            }
-            
-            th {
-                background-color: #f2f2f2;
-                font-weight: bold;
-            }
-            
-            td div {
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;
-                align-items: center;
-            }
-            
-            td span {
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
-        </style>
-        ';
 
         $table = '
         <table>
@@ -305,7 +257,7 @@ class CouponService {
                     </td>';
                 }
             }
-    }
+        }
 
         $table .='
                 </tr>
@@ -313,5 +265,41 @@ class CouponService {
         </table>';
 
         return $table;
+    }
+
+    private function generateTableStyles() {
+        return '<style>
+        table {
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 14px;
+            font-family: Arial, sans-serif;
+        }
+        
+        th,
+        td {
+            padding: 8px 8px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        
+        td div {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        td span {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        </style>';
     }
 }
