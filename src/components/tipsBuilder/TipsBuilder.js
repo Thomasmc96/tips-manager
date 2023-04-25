@@ -12,14 +12,13 @@ const TipsBuilder = () => {
   const [subscribeToMails, setSubscribeToMails] = useState(false);
   const [predictions, setPredictions] = useState([]);
   const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [loadingSubmit, setLoadingSubmit] = useState(false);
   const [matches, setMatches] = useState([]);
 
   // const matches = sortByDate(matchesJson);
 
   useEffect(() => {
-    setLoading(true);
     axios
       .get(`${environment[0]}/server/endpoints/matches/getMatches.php`)
       .then((response) => {

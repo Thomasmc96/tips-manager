@@ -9,11 +9,11 @@ import { sortByWins } from "../Utils";
 
 const Standings = () => {
   const [coupons, setCoupons] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    setLoading(true);
+    // setLoading(true);
 
     axios
       .get(`${environment[0]}/server/endpoints/coupon/getResults.php`)
