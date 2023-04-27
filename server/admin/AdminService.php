@@ -1,18 +1,20 @@
 <?php
 include_once dirname(__DIR__) . '/config/Cors.php';
 include_once dirname(__DIR__) . '/config/DatabaseService.php';
+require_once dirname(__DIR__) . '/vendor/autoload.php';
 
 use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 
 
 class AdminService
 {
+    private $secret_key = "tips-manager-key";
+    private $algo = "HS256";
+
     public function login(Admin $admin, $passwordAttempt)
     {
-
-
         if (password_verify($passwordAttempt, $admin->password)) {
-            $secret_key = "todo-app-key";
             $issuer_claim = "THE_ISSUER"; // this can be the servername
             $audience_claim = "THE_AUDIENCE";
             $issuedat_claim = time(); // issued at
@@ -31,7 +33,7 @@ class AdminService
                 )
             );
 
-            $jwt = JWT::encode($token, $secret_key, 'HS256');
+            $jwt = JWT::encode($token, $this->secret_key, $this->algo);
             echo json_encode(
                 array(
                     "message" => "Successful login",
@@ -48,7 +50,21 @@ class AdminService
         }
     }
 
-    public function verify(Admin $admin)
+    public function verify($token)
     {
+        try {
+            $decoded = JWT::decode($token, new Key($this->secret_key, $this->algo));
+            echo json_encode(array(
+                "message" => "Access granted",
+                "code" => 200
+            ));
+        } catch (Exception $e) {
+            echo json_encode(array(
+                "message" => "Access denied.",
+                "code" => 403,
+                "error" => $e->getMessage(),
+                "token" => $token,
+            ));
+        }
     }
 }
