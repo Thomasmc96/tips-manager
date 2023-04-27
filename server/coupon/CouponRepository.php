@@ -19,7 +19,7 @@ class CouponRepository
         $statement = $connection->prepare($query);
 
         $statement->execute();
-        return $statement->fetchAll();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function getPending()
@@ -42,7 +42,7 @@ class CouponRepository
         $statement->bindParam(":paid", $paid);
 
         $statement->execute();
-        return $statement->fetchAll();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function getAccepted()
@@ -65,7 +65,7 @@ class CouponRepository
         $statement->bindParam(":paid", $paid);
 
         $statement->execute();
-        return $statement->fetchAll();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function save(Coupon $coupon)
@@ -95,7 +95,8 @@ class CouponRepository
         return $statement->execute();
     }
 
-    public function getEmailSubscribers() {
+    public function getEmailSubscribers()
+    {
         $datebaseService = new DatabaseService();
         $connection = $datebaseService->getConnection();
 
@@ -116,6 +117,6 @@ class CouponRepository
         $statement->bindParam(":subscribeToMails", $subscribeToMails);
 
         $statement->execute();
-        return $statement->fetchAll();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 }
