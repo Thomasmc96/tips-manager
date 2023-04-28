@@ -23,11 +23,20 @@ $adminService = new AdminService();
 
 try {
     $admin = $adminRepo->getByMail($data->mail);
+
+    if (empty($admin)) {
+        echo json_encode([
+            "code" => 400,
+            "message" => "Login mislykkedes"
+        ]);
+        exit();
+    }
+
     $oAdmin = new Admin($admin['name'], $admin['mail'], $admin['password']);
 
     $adminService->login($oAdmin, $data->password);
 } catch (\Exception $e) {
-    json_encode([
+    echo json_encode([
         "code" => 400,
         "message" => "Login mislykkedes"
     ]);
