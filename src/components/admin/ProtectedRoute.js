@@ -22,12 +22,13 @@ const ProtectedRoute = ({
                 'Authorization': jwt
                 }
             }).then((response) => {
-              console.log(response)
               if(response.data.code === 200) {
                setAuthorized(true);
                return authorized;
               } else {
                 setAuthorized(false)
+                localStorage.removeItem('jwt');
+                localStorage.removeItem('name');
               }
             }).catch((error)=> {
               console.log(error)
