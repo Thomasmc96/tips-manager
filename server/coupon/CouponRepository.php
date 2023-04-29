@@ -119,4 +119,25 @@ class CouponRepository
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function approve($coupons_id)
+    {
+        $datebaseService = new DatabaseService();
+        $connection = $datebaseService->getConnection();
+
+        $query = "
+                UPDATE 
+                    coupons
+                SET 
+                    paid = 1
+                WHERE
+                    coupons_id = :coupons_id
+            ";
+
+        $statement = $connection->prepare($query);
+
+        $statement->bindParam(":coupons_id", $coupons_id);
+
+        return $statement->execute();
+    }
 }

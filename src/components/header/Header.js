@@ -14,7 +14,7 @@ const Header = () => {
           </Link>
         </div>
         <div>
-          <Link to={"/login"} className="">
+          <Link to={"/overblik"} className="">
             🔒
           </Link>
         </div>

@@ -18,7 +18,7 @@ class AdminService
             $audience_claim = "THE_AUDIENCE";
             $issuedat_claim = time(); // issued at
             $notbefore_claim = $issuedat_claim; //not before in seconds
-            $expire_claim = $issuedat_claim + 3600; // expire time in seconds
+            $expire_claim = $issuedat_claim + 2592000; // expire time in seconds (259200 = 30 days)
             $token = array(
                 "iss" => $issuer_claim,
                 "aud" => $audience_claim,

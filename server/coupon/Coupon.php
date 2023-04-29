@@ -4,6 +4,7 @@ include_once dirname(__DIR__) . '/config/DatabaseService.php';
 
 class Coupon
 {
+    public $coupons_id;
     public $name;
     public $mail;
     public $paid;
@@ -17,5 +18,9 @@ class Coupon
         $this->paid = $paid;
         $this->predictions = $predictions;
         $this->subscribeToMails = $subscribeToMails;
+    }
+
+    public function setId($id) {
+        $this->coupons_id = $id;
     }
 }
