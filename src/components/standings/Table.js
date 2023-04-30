@@ -21,7 +21,8 @@ const Table = ({ coupons }) => {
       .then((response) => {
         if (response.data.code === 200) {
           console.log(response);
-          setMatches(sortByDate(JSON.parse(response.data.matches.data)));
+          // setMatches(sortByDate(JSON.parse(response.data.matches.data)));
+          setMatches(matchesJson);
         } else {
           setError("Noget gik galt");
         }
