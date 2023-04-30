@@ -86,11 +86,12 @@ class CouponRepository
         $statement = $connection->prepare($query);
 
         $predictions_encoded = json_encode($coupon->predictions);
+        $subscribe = $coupon->subscribeToMails ? 1 : 0;
 
         $statement->bindParam(":name", $coupon->name);
         $statement->bindParam(":mail", $coupon->mail);
         $statement->bindParam(":preditions", $predictions_encoded);
-        $statement->bindParam(":subscribeToMails", $coupon->subscribeToMails);
+        $statement->bindParam(":subscribeToMails", $subscribe);
 
         return $statement->execute();
     }
