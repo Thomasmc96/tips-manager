@@ -11,6 +11,7 @@ const Standings = () => {
   const [coupons, setCoupons] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [showTable, setShowTable] = useState(false);
 
   useEffect(() => {
     // setLoading(true);
@@ -50,7 +51,7 @@ const Standings = () => {
 
   // Renderer callback with condition
   const renderer = ({ days, hours, minutes, seconds, completed }) => {
-    if (completed) {
+    if (completed || showTable) {
       return <Table coupons={coupons} />;
     } else {
       return (
@@ -66,7 +67,17 @@ const Standings = () => {
   };
 
   return (
-    <Countdown date={new Date("Jun 14, 2024 00:00:00")} renderer={renderer} />
+    <>
+      <Countdown date={new Date("Jun 14, 2024 00:00:00")} renderer={renderer} />
+      <button
+        className="mt-20 mx-auto flex bg-sandBeige p-2 rounded text-black font-semibold"
+        onClick={(e) => {
+          setShowTable(true);
+        }}
+      >
+        Vis tips
+      </button>
+    </>
   );
 };
 

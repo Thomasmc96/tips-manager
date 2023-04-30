@@ -1,43 +1,47 @@
-import React, {useState, useEffect} from "react";
-import { Navigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { Navigate } from "react-router-dom";
 import axios from "axios";
 import environment from "../../environment";
 
-const ProtectedRoute = ({
-    children,
-  }) => {
+const ProtectedRoute = ({ children }) => {
+  const [authorized, setAuthorized] = useState();
 
-    const [authorized, setAuthorized] = useState()
-
-    useEffect(() =>{
-    const jwt = localStorage.getItem('jwt');
+  useEffect(() => {
+    const jwt = localStorage.getItem("jwt");
     if (!jwt) {
-        return setAuthorized(false);
-      }
-        axios.post(
-            `${environment[0]}/server/endpoints/admin/verify.php`, {},
-            {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': jwt
-                }
-            }).then((response) => {
-              if(response.data.code === 200) {
-               setAuthorized(true);
-               return authorized;
-              } else {
-                setAuthorized(false)
-                localStorage.removeItem('jwt');
-                localStorage.removeItem('name');
-              }
-            }).catch((error)=> {
-              console.log(error)
-            })
-    }, []);
+      return setAuthorized(false);
+    }
+    axios
+      .post(
+        `${environment[0]}/server/endpoints/admin/verify.php`,
+        {},
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: jwt,
+          },
+        }
+      )
+      .then((response) => {
+        if (response.data.code === 200) {
+          console.log(response);
+          setAuthorized(true);
+          return authorized;
+        } else {
+          console.log(response);
+          setAuthorized(false);
+          localStorage.removeItem("jwt");
+          localStorage.removeItem("name");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
-    if (authorized === undefined) return null;
+  if (authorized === undefined) return null;
 
-    return authorized ? children : <Navigate to="/login" replace/>;
-  };
+  return authorized ? children : <Navigate to="/login" replace />;
+};
 
-  export default ProtectedRoute;
+export default ProtectedRoute;

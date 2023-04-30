@@ -8,6 +8,7 @@ include_once dirname(__DIR__, 2) . '/admin/AdminService.php';
 $data = json_decode(file_get_contents("php://input"));
 
 $token = $_SERVER['HTTP_AUTHORIZATION'];
+$headers = apache_request_headers();
 
 if (!$token) {
     echo json_encode(array(
