@@ -6,16 +6,16 @@ import Countdown from "react-countdown";
 import Table from "./Table";
 import CountdownInfo from "./CountdownInfo";
 import { sortByWins } from "../Utils";
+import { verify } from "../Utils";
 
 const Standings = () => {
   const [coupons, setCoupons] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [showTable, setShowTable] = useState(false);
+  const [authorized, setAuthorized] = useState();
 
   useEffect(() => {
-    // setLoading(true);
-
     axios
       .get(`${environment[0]}/server/endpoints/coupon/getResults.php`)
       .then((response) => {
@@ -30,6 +30,8 @@ const Standings = () => {
       .finally(() => {
         setLoading(false);
       });
+
+    verify().then((response) => setAuthorized(response));
   }, []);
 
   if (loading) {
@@ -69,14 +71,16 @@ const Standings = () => {
   return (
     <>
       <Countdown date={new Date("Jun 14, 2024 00:00:00")} renderer={renderer} />
-      <button
-        className="mt-20 mx-auto flex bg-sandBeige p-2 rounded text-black font-semibold"
-        onClick={(e) => {
-          setShowTable(true);
-        }}
-      >
-        Vis tips
-      </button>
+      {authorized && (
+        <button
+          className="mt-20 mx-auto flex bg-sandBeige p-2 rounded text-black font-semibold"
+          onClick={(e) => {
+            setShowTable(true);
+          }}
+        >
+          Vis tips
+        </button>
+      )}
     </>
   );
 };

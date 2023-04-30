@@ -1,42 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
-import axios from "axios";
-import environment from "../../environment";
+import { verify } from "../Utils";
 
 const ProtectedRoute = ({ children }) => {
   const [authorized, setAuthorized] = useState();
 
   useEffect(() => {
-    const jwt = localStorage.getItem("jwt");
-    if (!jwt) {
-      return setAuthorized(false);
-    }
-    axios
-      .post(
-        `${environment[0]}/server/endpoints/admin/verify.php`,
-        {},
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: jwt,
-          },
-        }
-      )
-      .then((response) => {
-        if (response.data.code === 200) {
-          console.log(response);
-          setAuthorized(true);
-          return authorized;
-        } else {
-          console.log(response);
-          setAuthorized(false);
-          localStorage.removeItem("jwt");
-          localStorage.removeItem("name");
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    verify().then((response) => setAuthorized(response));
   }, []);
 
   if (authorized === undefined) return null;

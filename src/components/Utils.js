@@ -1,3 +1,6 @@
+import axios from "axios";
+import environment from "../environment";
+
 const getDate = (timestamp) => {
   let date = new Date(timestamp);
   return date.getDate() + ". " + getMonthName(date.getMonth() + 1);
@@ -68,4 +71,41 @@ export const sortByWins = (coupons) => {
     return 0;
   });
   return couponsSorted;
+};
+
+export const verify = async () => {
+  let verified = false;
+
+  const jwt = localStorage.getItem("jwt");
+  if (!jwt) {
+    return false;
+  }
+  await axios
+    .post(
+      `${environment[0]}/server/endpoints/admin/verify.php`,
+      {},
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: jwt,
+        },
+      }
+    )
+    .then((response) => {
+      if (response.data.code === 200) {
+        console.log(response);
+        verified = true;
+      } else {
+        console.log(response);
+        localStorage.removeItem("jwt");
+        localStorage.removeItem("name");
+        verified = false;
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      verified = false;
+    });
+
+  return verified;
 };
