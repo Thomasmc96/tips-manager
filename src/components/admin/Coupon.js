@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import environment from "../../environment";
 import { FidgetSpinner } from "react-loader-spinner";
+import TipsModal from "./TipsModal";
 
 const Coupon = ({ coupon }) => {
   const { coupons_id, name, mail, paid, subscribeToMails } = coupon;
@@ -45,33 +46,41 @@ const Coupon = ({ coupon }) => {
 
       <h2 className="text-lg font-medium mb-2 text-white">{name}</h2>
       <p className="text-white text-sm mb-4">{mail}</p>
-      {!approved ? (
-        <button
-          className="bg-sandBeige hover:bg-green-700 text-black py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-          type="button"
-          onClick={(e) => approve(e, coupons_id)}
-        >
-          {loadingSubmit ? (
-            <div className="flex mx-auto justify-center items-center">
-              <FidgetSpinner
-                visible={true}
-                height="20"
-                width="20"
-                ariaLabel="dna-loading"
-                wrapperStyle={{}}
-                wrapperClass="dna-wrapper"
-                ballColors={["#003e21", "#067242", "#098b54"]}
-              />
-            </div>
-          ) : (
-            <>Godkend</>
-          )}
-        </button>
-      ) : (
-        <p className="text-lightGreen py-2 pr-8 rounded focus:outline-none focus:shadow-outline">
-          Godkendt
-        </p>
-      )}
+      <div className="flex flex-row gap-5 items-center">
+        {!approved ? (
+          <button
+            className="bg-sandBeige hover:bg-green-700 text-black py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            type="button"
+            onClick={(e) => approve(e, coupons_id)}
+          >
+            {loadingSubmit ? (
+              <div className="flex mx-auto justify-center items-center w-16">
+                <FidgetSpinner
+                  visible={true}
+                  height="20"
+                  width="20"
+                  ariaLabel="dna-loading"
+                  wrapperStyle={{}}
+                  wrapperClass="dna-wrapper"
+                  ballColors={["#003e21", "#067242", "#098b54"]}
+                />
+              </div>
+            ) : (
+              <>Godkend</>
+            )}
+          </button>
+        ) : (
+          <p className="text-lightGreen  rounded focus:outline-none focus:shadow-outline">
+            Godkendt
+          </p>
+        )}
+        <button className="bg-transparent border-2 border-lightGreen hover:bg-green-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">Se tips</button>
+          <TipsModal data={[
+  { label: "Name", value: "John Smith" },
+  { label: "Age", value: "30" },
+  { label: "Location", value: "New York" },
+]}/>
+      </div>
       </div>
 
     </div>

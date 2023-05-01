@@ -62,6 +62,7 @@ const Login = () => {
           id="mail"
           className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline text-black"
           value={mail}
+          required
           onChange={handleMail}
         />
       </div>
@@ -74,6 +75,7 @@ const Login = () => {
           id="password"
           className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline text-black"
           value={password}
+          required
           onChange={handlePassword}
         />
       </div>
