@@ -13,7 +13,7 @@ const Summary = () => {
       </p>
 
       <p className="text-center mt-5">
-        Du har også modtaget en mail med dine tips ✉
+        Du har også modtaget en mail med dine tips 📧
       </p>
     </div>
   );

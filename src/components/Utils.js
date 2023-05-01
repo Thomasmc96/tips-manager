@@ -80,6 +80,7 @@ export const verify = async () => {
   if (!jwt) {
     return false;
   }
+  
   await axios
     .post(
       `${environment[0]}/server/endpoints/admin/verify.php`,

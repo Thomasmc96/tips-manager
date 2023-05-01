@@ -4,9 +4,9 @@ import environment from "../../environment";
 import { FidgetSpinner } from "react-loader-spinner";
 
 const Coupon = ({ coupon }) => {
-  const { coupons_id, name, mail, paid } = coupon;
-
-  const [approved, setApproved] = useState(paid === "1");
+  const { coupons_id, name, mail, paid, subscribeToMails } = coupon;
+  
+  const [approved, setApproved] = useState(paid == "1");
   const [loadingSubmit, setLoadingSubmit] = useState(false);
 
   const approve = (e, coupons_id) => {
@@ -31,10 +31,18 @@ const Coupon = ({ coupon }) => {
   return (
     <div
       className={
-        "rounded-lg shadow-md p-6 border-2 inline-block m-2 " +
+        "rounded-lg shadow-md  border-2 inline-flex flex-col m-2 " +
         (approved ? "border-lightGreen" : "border-red-500")
       }
     >
+      {subscribeToMails == "1" ? 
+        <div className="ml-auto mr-1">
+          <span title="Modtager mails">📧</span>
+        </div>
+        : <div className="invisible">📧</div>
+      }
+      <div className="px-6 pb-6">
+
       <h2 className="text-lg font-medium mb-2 text-white">{name}</h2>
       <p className="text-white text-sm mb-4">{mail}</p>
       {!approved ? (
@@ -64,6 +72,8 @@ const Coupon = ({ coupon }) => {
           Godkendt
         </p>
       )}
+      </div>
+
     </div>
   );
 };

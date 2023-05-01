@@ -71,7 +71,7 @@ const Standings = () => {
   return (
     <>
       <Countdown date={new Date("Jun 14, 2024 00:00:00")} renderer={renderer} />
-      {authorized && (
+      {authorized && !showTable && (
         <button
           className="mt-20 mx-auto flex bg-sandBeige p-2 rounded text-black font-semibold"
           onClick={(e) => {
