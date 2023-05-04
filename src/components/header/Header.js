@@ -12,6 +12,9 @@ const Header = () => {
           <Link to={"/tipskupon"} className="hover:text-sandBeige">
             Ny kupon
           </Link>
+          <Link to={"/praemie"} className="hover:text-sandBeige">
+            Præmie
+          </Link>
         </div>
         <div>
           <Link to={"/overblik"} className="">

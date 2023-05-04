@@ -46,7 +46,7 @@ const Coupon = ({ coupon }) => {
 
       <h2 className="text-lg font-medium mb-2 text-white">{name}</h2>
       <p className="text-white text-sm mb-4">{mail}</p>
-      <div className="flex flex-row gap-5 items-center">
+      <div className="flex flex-row gap-5 items-center h-10">
         {!approved ? (
           <button
             className="bg-sandBeige hover:bg-green-700 text-black py-2 px-4 rounded focus:outline-none focus:shadow-outline"
@@ -74,12 +74,12 @@ const Coupon = ({ coupon }) => {
             Godkendt
           </p>
         )}
-        <button className="bg-transparent border-2 border-lightGreen hover:bg-green-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">Se tips</button>
-          <TipsModal data={[
+        {/* <button className="bg-transparent border-2 border-lightGreen hover:bg-green-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">Se tips</button> */}
+          {/* <TipsModal data={[
   { label: "Name", value: "John Smith" },
   { label: "Age", value: "30" },
   { label: "Location", value: "New York" },
-]}/>
+]}/> */}
       </div>
       </div>
 

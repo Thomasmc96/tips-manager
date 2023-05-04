@@ -9,13 +9,12 @@ import { sortByDate } from "../Utils";
 const Table = ({ coupons }) => {
   const [zoom, setZoom] = useState(100);
   const [matches, setMatches] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
   var isFirefox = navigator.userAgent.toLowerCase().indexOf("firefox") > -1;
 
   useEffect(() => {
-    setLoading(true);
     axios
       .get(`${environment[0]}/server/endpoints/matches/getMatches.php`)
       .then((response) => {
