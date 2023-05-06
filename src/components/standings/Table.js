@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import matchesJson from "../../assets/json/matchesTesting.json";
 import environment from "../../environment";
 import { FidgetSpinner } from "react-loader-spinner";
 import { getDateString } from "../Utils";
@@ -16,12 +15,14 @@ const Table = ({ coupons }) => {
 
   useEffect(() => {
     axios
-      .get(`${environment[0]}/server/endpoints/matches/getMatches.php`)
+      // .get(`${environment[0]}/server/endpoints/matches/getMatches.php`)
+      .get(
+        `${environment[0]}/server/endpoints/matches/getLimitedMatches.php?limit=7`
+      )
       .then((response) => {
         if (response.data.code === 200) {
           console.log(response);
-          // setMatches(sortByDate(JSON.parse(response.data.matches.data)));
-          setMatches(matchesJson);
+          setMatches(sortByDate(JSON.parse(response.data.matches.data)));
         } else {
           setError("Noget gik galt");
         }

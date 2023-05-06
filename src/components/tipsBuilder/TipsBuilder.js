@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { FidgetSpinner } from "react-loader-spinner";
-import matchesJson from "../../assets/json/matchesTesting.json";
 import Match from "./Match";
 import environment from "../../environment";
 import { sortByDate } from "../Utils";
@@ -16,23 +15,22 @@ const TipsBuilder = () => {
   const [loadingSubmit, setLoadingSubmit] = useState(false);
   const [matches, setMatches] = useState([]);
 
-  // const matches = sortByDate(matchesJson);
-
   useEffect(() => {
     axios
-      .get(`${environment[0]}/server/endpoints/matches/getMatches.php`)
+      // .get(`${environment[0]}/server/endpoints/matches/getMatches.php`)
+      .get(
+        `${environment[0]}/server/endpoints/matches/getLimitedMatches.php?limit=7`
+      )
       .then((response) => {
         if (response.data.code === 200) {
           console.log(response);
           setMatches(sortByDate(JSON.parse(response.data.matches.data)));
-          setMatches(matchesJson);
         } else {
           setError("Noget gik galt");
         }
       })
       .catch((error) => {
         console.log(error);
-        setMatches(matchesJson);
       })
       .finally(() => {
         setLoading(false);

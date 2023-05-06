@@ -21,7 +21,7 @@ class MatchesRepository
         $statement = $connection->prepare($query);
 
         $statement->execute();
-        return $statement->fetch();
+        return $statement->fetch(PDO::FETCH_ASSOC);
     }
 
     public function save(Matches $matches) {
