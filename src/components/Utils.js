@@ -80,7 +80,7 @@ export const verify = async () => {
   if (!jwt) {
     return false;
   }
-  
+
   await axios
     .post(
       `${environment[0]}/server/endpoints/admin/verify.php`,
@@ -110,3 +110,51 @@ export const verify = async () => {
 
   return verified;
 };
+
+export const getPodium = (coupons) => {
+  let podium = {
+    first: { names: [], totalPrize: 0, sharePrize: 0 },
+    second: { names: [], totalPrize: 0, sharePrize: 0 },
+    third: { names: [], totalPrize: 0, sharePrize: 0 },
+  };
+  let sortedCoupons = sortByWins(coupons);
+  let lastAmountCorrect = 9999;
+
+  for (let i = 0; i < sortedCoupons.length; i++) {
+    if (
+      podium.first.names.length +
+        podium.second.names.length +
+        podium.third.names.length >
+        2 &&
+      sortedCoupons[i].amountCorrect !== lastAmountCorrect
+    ) {
+      break;
+    }
+
+    if (sortedCoupons[i].amountCorrect < lastAmountCorrect) {
+      if (podium.first.names.length === 0) {
+        podium.first.names.push(sortedCoupons[i].name);
+      } else if (podium.second.names.length === 0) {
+        podium.second.names.push(sortedCoupons[i].name);
+      } else if (podium.third.names.length === 0) {
+        podium.third.names.push(sortedCoupons[i].name);
+      }
+    }
+
+    if (sortedCoupons[i].amountCorrect === lastAmountCorrect) {
+      if (podium.third.names.length > 0) {
+        podium.third.names.push(sortedCoupons[i].name);
+      } else if (podium.second.names.length > 0) {
+        podium.second.names.push(sortedCoupons[i].name);
+      } else if (podium.first.names.length > 0) {
+        podium.first.names.push(sortedCoupons[i].name);
+      }
+    }
+
+    lastAmountCorrect = sortedCoupons[i].amountCorrect;
+  }
+
+  return podium;
+};
+
+const getPodiumNames = () => {};
