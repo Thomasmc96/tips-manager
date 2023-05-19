@@ -113,9 +113,9 @@ export const verify = async () => {
 
 export const getPodium = (coupons) => {
   let podium = {
-    first: { names: [], totalPrize: 0, sharePrize: 0 },
-    second: { names: [], totalPrize: 0, sharePrize: 0 },
-    third: { names: [], totalPrize: 0, sharePrize: 0 },
+    first: { names: [], totalPrize: 0, sharedPrize: 0 },
+    second: { names: [], totalPrize: 0, sharedPrize: 0 },
+    third: { names: [], totalPrize: 0, sharedPrize: 0 },
   };
   let sortedCoupons = sortByWins(coupons);
   let lastAmountCorrect = 9999;
@@ -134,7 +134,7 @@ export const getPodium = (coupons) => {
     if (sortedCoupons[i].amountCorrect < lastAmountCorrect) {
       if (podium.first.names.length === 0) {
         podium.first.names.push(sortedCoupons[i].name);
-      } else if (podium.second.names.length === 0) {
+      } else if (podium.second.names.length === 0 && podium.first.names.length === 1) {
         podium.second.names.push(sortedCoupons[i].name);
       } else if (podium.third.names.length === 0) {
         podium.third.names.push(sortedCoupons[i].name);
@@ -154,7 +154,50 @@ export const getPodium = (coupons) => {
     lastAmountCorrect = sortedCoupons[i].amountCorrect;
   }
 
+  let prizes = getPodiumPrizes(podium);
+  podium.first.totalPrize = prizes.first.totalPrize;
+  podium.second.totalPrize = prizes.second.totalPrize;
+  podium.third.totalPrize = prizes.third.totalPrize;
+
+
   return podium;
 };
 
 const getPodiumNames = () => {};
+const getPodiumPrizes = (podium) => {
+  let totalPlayersOnPodium = podium.first.names.length + podium.second.names.length + podium.third.names.length;
+
+  let firstTotalPrize = totalPlayersOnPodium * 100 * 0.7;
+  let secondTotalPrize = totalPlayersOnPodium * 100 * 0.2;
+  let thirdTotalPrize = totalPlayersOnPodium * 100 * 0.1;
+
+  if (podium.third.names.length === 0) {
+    secondTotalPrize = secondTotalPrize + thirdTotalPrize;
+    thirdTotalPrize = 0;
+  }
+
+  if (podium.second.names.length === 0) {
+    firstTotalPrize = firstTotalPrize + secondTotalPrize;
+    secondTotalPrize = 0;
+  }
+
+  let firstSharedPrize = firstTotalPrize / podium.first.names.length;
+  let secondSharedPrize = secondTotalPrize / podium.second.names.length;
+  let thirdSharedPrize = thirdTotalPrize / podium.third.names.length;
+
+  return {
+    first: {
+      totalPrize: firstTotalPrize, 
+      sharedPrize: firstSharedPrize
+    },
+    second: {
+      totalPrize: secondTotalPrize, 
+      sharedPrize: secondSharedPrize
+    },
+    third: {
+      totalPrize: thirdTotalPrize, 
+      sharedPrize: thirdSharedPrize
+    }
+  }
+
+}
