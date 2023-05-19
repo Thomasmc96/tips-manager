@@ -8,6 +8,9 @@ module.exports = {
         normalGreen: "#067242",
         lightGreen: "#098b54",
         sandBeige: "#f8d098",
+        gold: "#FFD700",
+        silver: "#C0C0C0",
+        bronze: "#CD7F32"
       },
     },
   },

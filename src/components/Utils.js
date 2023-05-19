@@ -154,22 +154,25 @@ export const getPodium = (coupons) => {
     lastAmountCorrect = sortedCoupons[i].amountCorrect;
   }
 
-  let prizes = getPodiumPrizes(podium);
+  let prizes = getPodiumPrizes(podium, sortedCoupons.length);
   podium.first.totalPrize = prizes.first.totalPrize;
   podium.second.totalPrize = prizes.second.totalPrize;
   podium.third.totalPrize = prizes.third.totalPrize;
+  podium.first.sharedPrize = prizes.first.sharedPrize;
+  podium.second.sharedPrize = prizes.second.sharedPrize;
+  podium.third.sharedPrize = prizes.third.sharedPrize;
 
 
   return podium;
 };
 
 const getPodiumNames = () => {};
-const getPodiumPrizes = (podium) => {
+const getPodiumPrizes = (podium, totalCoupons) => {
   let totalPlayersOnPodium = podium.first.names.length + podium.second.names.length + podium.third.names.length;
 
-  let firstTotalPrize = totalPlayersOnPodium * 100 * 0.7;
-  let secondTotalPrize = totalPlayersOnPodium * 100 * 0.2;
-  let thirdTotalPrize = totalPlayersOnPodium * 100 * 0.1;
+  let firstTotalPrize = totalCoupons * 100 * 0.7;
+  let secondTotalPrize = totalCoupons * 100 * 0.2;
+  let thirdTotalPrize = totalCoupons * 100 * 0.1;
 
   if (podium.third.names.length === 0) {
     secondTotalPrize = secondTotalPrize + thirdTotalPrize;
