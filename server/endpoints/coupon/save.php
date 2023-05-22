@@ -25,6 +25,7 @@ try {
 
     $couponRepo->save($coupon);
     $couponService->sendConfirmationEmail($coupon);
+    $couponService->sendNewParticipantEmail($coupon);
 
     echo json_encode([
         "message" => "Success",

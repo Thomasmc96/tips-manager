@@ -2,55 +2,58 @@
 include_once __DIR__ . '/CouponRepository.php';
 include_once dirname(__DIR__) . '/matches/MatchesRepository.php';
 
-class CouponService {
+class CouponService
+{
+
+    private $from_email = "tips-manager@jcrl.dk";
 
     public function __construct()
     {
     }
 
-    public function getCouponsWithResults(): array {
+    public function getCouponsWithResults(): array
+    {
         $couponRepo = new CouponRepository();
         $matchesRepo = new MatchesRepository();
-        $coupons = $couponRepo->getAccepted();  
+        $coupons = $couponRepo->getAccepted();
         $matches = $matchesRepo->getLatest();
 
-        if(!$coupons) {
+        if (!$coupons) {
             return [];
         }
 
-        foreach($coupons as $coupon_index => $coupon) {
+        foreach ($coupons as $coupon_index => $coupon) {
             $predictions = json_decode($coupon['predictions']);
 
             $amountCorrect = 0;
 
-            foreach($predictions as $prediction_index => $prediction) {
-                $match = array_values(array_filter(json_decode($matches['data']), fn($match) => $match->id === $prediction->id));
+            foreach ($predictions as $prediction_index => $prediction) {
+                $match = array_values(array_filter(json_decode($matches['data']), fn ($match) => $match->id === $prediction->id));
 
-                if(empty($match)) {
+                if (empty($match)) {
                     continue;
                 }
                 $match = $match[0];
-                
+
                 $homeTeamScore = $match->participants[0]->finalResult;
                 $awayTeamScore = $match->participants[1]->finalResult;
 
                 $tipResult = "";
-                if($homeTeamScore > $awayTeamScore) {
+                if ($homeTeamScore > $awayTeamScore) {
                     $tipResult = "1";
-                } else if($homeTeamScore < $awayTeamScore) {
+                } else if ($homeTeamScore < $awayTeamScore) {
                     $tipResult = "2";
-                } else if($homeTeamScore === $awayTeamScore){
+                } else if ($homeTeamScore === $awayTeamScore) {
                     $tipResult = "x";
                 }
 
-                if($prediction->prediction === $tipResult && $match->state === "FINISHED") {
+                if ($prediction->prediction === $tipResult && $match->state === "FINISHED") {
                     $prediction->won = true;
-                    $amountCorrect++;            
+                    $amountCorrect++;
                 } else {
                     $prediction->won = false;
                 }
                 $predictions[$prediction_index] = $prediction;
-
             }
             $coupons[$coupon_index]['predictions'] = $predictions;
             $coupons[$coupon_index]['amountCorrect'] = $amountCorrect;
@@ -59,10 +62,11 @@ class CouponService {
         return $coupons;
     }
 
-    public function getSortedByAmountCorrect() {
+    public function getSortedByAmountCorrect()
+    {
         $couponsWithResult = $this->getCouponsWithResults();
 
-        usort($couponsWithResult, function($a, $b) {
+        usort($couponsWithResult, function ($a, $b) {
             if ($a['amountCorrect'] > $b['amountCorrect']) {
                 return -1;
             } elseif ($a['amountCorrect'] < $b['amountCorrect']) {
@@ -74,11 +78,12 @@ class CouponService {
         return $couponsWithResult;
     }
 
-    private function getSortedMatchesByStartDate() {
+    private function getSortedMatchesByStartDate()
+    {
         $matchesRepo = new MatchesRepository();
         $matches = json_decode($matchesRepo->getLatest()['data']);
 
-        usort($matches, function($a, $b) {
+        usort($matches, function ($a, $b) {
             if ($a->startDate > $b->startDate) {
                 return 1;
             } elseif ($a->startDate < $b->startDate) {
@@ -90,18 +95,20 @@ class CouponService {
         return $matches;
     }
 
-    public function sendStandingsEmail($to_email, $to_name) {
+    public function sendStandingsEmail($to_email, $to_name)
+    {
         $subject = 'Stilling - EM 2024 Tips';
-        $from_email = 'tips-manager@jcrl.dk';
+        $from_email = $this->from_email;
         $from_name = 'Tipskupon - EM 2024';
-        $reply_to_email = 'tips-manager@jcrl.dk';
+        $reply_to_email = $this->from_email;
         $reply_to_name = 'Tipskupon - EM 2024';
         $charset = 'UTF-8';
-        
+
         $table = $this->generateStandingsTable();
         $tableStyles = $this->generateTableStyles();
 
-        $message = sprintf("
+        $message = sprintf(
+            "
             <html>
                 <head>%s</head>
                 <body>
@@ -110,13 +117,13 @@ class CouponService {
                     <p>Du kan også se stillingen <a href='%s'>her</a>.</p>
                 </body>
             </html>
-            %s", 
+            %s",
             $tableStyles,
             $to_name,
-            'https://jcrl.dk', 
+            'https://jcrl.dk',
             $table
         );
-        
+
         $headers = [];
         $headers[] = "MIME-Version: 1.0";
         $headers[] = "Content-type: text/html; charset={$charset}";
@@ -125,16 +132,17 @@ class CouponService {
         $headers[] = "X-Mailer: PHP/" . phpversion();
         $headers[] = "X-Priority: 3";
         $headers[] = "X-Assp-ID: " . md5(uniqid(time()));
-        
+
         $headers_string = implode("\r\n", $headers);
-      
+
         if (!mail($to_email, $subject, $message, $headers_string)) {
             throw new Exception('Email not sent');
         }
-      }
-      
-    
-      private function generateStandingsTable() {
+    }
+
+
+    private function generateStandingsTable()
+    {
         $matches = $this->getSortedMatchesByStartDate();
         $sortedStandings = $this->getSortedByAmountCorrect();
 
@@ -143,13 +151,13 @@ class CouponService {
             <thead>
                 <tr>
                     <th></th>';
-                        
-        foreach($sortedStandings as $sortedStanding) {
+
+        foreach ($sortedStandings as $sortedStanding) {
             $table .= '
                 <th>
                     <div>
-                        <span>'. $sortedStanding['name'] .'</span>
-                        <span>'. $sortedStanding['amountCorrect'] .' ✔</span>
+                        <span>' . $sortedStanding['name'] . '</span>
+                        <span>' . $sortedStanding['amountCorrect'] . ' ✔</span>
                     </div>
                 </th>';
         }
@@ -157,28 +165,28 @@ class CouponService {
                 </tr>
             </thead>
             <tbody>';
-        foreach($matches as $match) {
+        foreach ($matches as $match) {
             $table .= '
                 <tr>
                     <td>
                         <div>
-                            <span>'. $match->participants[0]->name . ' - ' . $match->participants[1]->name .'</span>
-                            <span>'. ($match->state === "FINISHED" ? $match->participants[0]->finalResult . " - " . $match->participants[1]->finalResult : "") .'</span>
+                            <span>' . $match->participants[0]->name . ' - ' . $match->participants[1]->name . '</span>
+                            <span>' . ($match->state === "FINISHED" ? $match->participants[0]->finalResult . " - " . $match->participants[1]->finalResult : "") . '</span>
                         </div>
                     </td>';
-            foreach($sortedStandings as $sortedStanding) {
-                foreach($sortedStanding['predictions'] as $prediction) {
-                    if($prediction->id === $match->id) {
+            foreach ($sortedStandings as $sortedStanding) {
+                foreach ($sortedStanding['predictions'] as $prediction) {
+                    if ($prediction->id === $match->id) {
                         $table .= '
-                        <td style="' . ($prediction->won && $match->state === "FINISHED" ? 'background-color:#098b54' : (!$prediction->won && $match->state === "FINISHED" ? 'background-color:red' : '')) .'">
-                            ' . $prediction->prediction .'
+                        <td style="' . ($prediction->won && $match->state === "FINISHED" ? 'background-color:#098b54' : (!$prediction->won && $match->state === "FINISHED" ? 'background-color:red' : '')) . '">
+                            ' . $prediction->prediction . '
                         </td>';
                     }
                 }
             }
         }
 
-        $table .='
+        $table .= '
                 </tr>
             </tbody>
         </table>';
@@ -186,18 +194,20 @@ class CouponService {
         return $table;
     }
 
-    public function sendConfirmationEmail(Coupon $coupon) {
+    public function sendConfirmationEmail(Coupon $coupon)
+    {
         $subject = 'Bekræftelse - EM 2024 Tips';
-        $from_email = 'tips-manager@jcrl.dk';
+        $from_email = $this->from_email;
         $from_name = 'Tipskupon - EM 2024';
-        $reply_to_email = 'tips-manager@jcrl.dk';
+        $reply_to_email = $this->from_email;
         $reply_to_name = 'Tipskupon - EM 2024';
         $charset = 'UTF-8';
 
         $table = $this->generateTipsTable($coupon->predictions);
         $tableStyles = $this->generateTableStyles();
-                
-        $message = sprintf("
+
+        $message = sprintf(
+            "
         <html>
             <head>%s</head>
                 <body>
@@ -206,9 +216,10 @@ class CouponService {
                     <p>Her er dine tips:</p><br>%s
                 </body>
         </html>",
-        $tableStyles,
-        $coupon->name, 
-        $table);
+            $tableStyles,
+            $coupon->name,
+            $table
+        );
 
         $headers = [];
         $headers[] = "MIME-Version: 1.0";
@@ -218,15 +229,76 @@ class CouponService {
         $headers[] = "X-Mailer: PHP/" . phpversion();
         $headers[] = "X-Priority: 3";
         $headers[] = "X-Assp-ID: " . md5(uniqid(time()));
-        
+
         $headers_string = implode("\r\n", $headers);
-      
+
         if (!mail($coupon->mail, $subject, $message, $headers_string)) {
             throw new Exception('Email sent successfully');
         }
     }
 
-    private function generateTipsTable(array $predictions) {
+    public function sendNewParticipantEmail(Coupon $coupon)
+    {
+        // TODO: Change this mail
+        $to = "thomas96mc@gmail.com";
+        $subject = 'Ny kupon - EM 2024 Tips';
+        $from_email = $this->from_email;
+        $from_name = 'Tipskupon - EM 2024';
+        $reply_to_email = $this->from_email;
+        $reply_to_name = 'Tipskupon - EM 2024';
+        $charset = 'UTF-8';
+
+        $style = "
+            a {
+                margin-top: 20px;
+                margin-left: auto;
+                margin-right: auto;
+                display: flex;
+                background-color: sandybrown;
+                padding: 8px;
+                border-radius: 4px;
+                color: black;
+                font-weight: 600;
+                text-decoration: none;
+            }
+          ";
+
+        $message = sprintf(
+            "
+            <html>
+                <head>%s</head>
+                    <body>
+                        <h2>Hej René</h2> 
+                        <p>En ny kupon er lige blevet udfyldt af:</p><br>
+                        <p>Navn: %s</p>
+                        <p>Email: %s</p><br>
+                        <a href='%s'>Gå til tips-manageren</a>
+                    </body>
+            </html>",
+            $style,
+            $coupon->name,
+            $coupon->mail,
+            $_SERVER['HTTP_HOST'] + "/overblik"
+        );
+
+        $headers = [];
+        $headers[] = "MIME-Version: 1.0";
+        $headers[] = "Content-type: text/html; charset={$charset}";
+        $headers[] = "From: {$from_name} <{$from_email}>";
+        $headers[] = "Reply-To: {$reply_to_name} <{$reply_to_email}>";
+        $headers[] = "X-Mailer: PHP/" . phpversion();
+        $headers[] = "X-Priority: 3";
+        $headers[] = "X-Assp-ID: " . md5(uniqid(time()));
+
+        $headers_string = implode("\r\n", $headers);
+
+        if (!mail($to, $subject, $message, $headers_string)) {
+            throw new Exception('Email sent successfully');
+        }
+    }
+
+    private function generateTipsTable(array $predictions)
+    {
         $matches = $this->getSortedMatchesByStartDate();
 
         $table = '
@@ -235,31 +307,30 @@ class CouponService {
                 <tr>
                     <th>Kampe</th>
                     <th>Tips</th>';
-                        
-        
+
         $table .= '
                 </tr>
             </thead>
             <tbody>';
-        foreach($matches as $match) {
+        foreach ($matches as $match) {
             $table .= '
                 <tr>
                     <td>
                         <div>
-                            <span>'. $match->participants[0]->name . ' - ' . $match->participants[1]->name .'</span>
+                            <span>' . $match->participants[0]->name . ' - ' . $match->participants[1]->name . '</span>
                         </div>
                     </td>';
-            foreach($predictions as $prediction) {
-                if($prediction->id === $match->id) {
+            foreach ($predictions as $prediction) {
+                if ($prediction->id === $match->id) {
                     $table .= '
                     <td>
-                        ' . $prediction->prediction .'
+                        ' . $prediction->prediction . '
                     </td>';
                 }
             }
         }
 
-        $table .='
+        $table .= '
                 </tr>
             </tbody>
         </table>';
@@ -267,7 +338,8 @@ class CouponService {
         return $table;
     }
 
-    private function generateTableStyles() {
+    private function generateTableStyles()
+    {
         return '<style>
         table {
             border-collapse: collapse;
