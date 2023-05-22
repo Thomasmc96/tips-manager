@@ -19,7 +19,7 @@ const TipsBuilder = () => {
     axios
       // .get(`${environment[0]}/server/endpoints/matches/getMatches.php`)
       .get(
-        `${environment[0]}/server/endpoints/matches/getLimitedMatches.php?limit=7`
+        `${environment[0]}/server/endpoints/matches/getLimitedMatches.php?limit=6`
       )
       .then((response) => {
         if (response.data.code === 200) {
