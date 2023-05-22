@@ -51,7 +51,6 @@ const Standings = () => {
     );
   }
 
-  // Renderer callback with condition
   const renderer = ({ days, hours, minutes, seconds, completed }) => {
     if (completed || showTable) {
       return <Table coupons={coupons} />;
