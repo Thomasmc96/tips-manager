@@ -56,25 +56,29 @@ const Prize = () => {
       return (
         <div className="container mx-auto mt-5 sm:mt-20 flex flex-col items-center justify-between min-h-[80vh]">
           <div className="flex flex-col justify-around flex-wrap sm:flex-row w-full mx-auto gap-14 sm:gap-0">
-            <PodiumPart placement={podium.first} number={"1st"}/>
+            <PodiumPart placement={podium.first} number={"1st"} />
             {podium.second.names.length > 0 && (
-              <PodiumPart placement={podium.second} number={"2nd"}/>
+              <PodiumPart placement={podium.second} number={"2nd"} />
             )}
             {podium.third.names.length > 0 && (
-              <PodiumPart placement={podium.third} number={"3rd"}/>
+              <PodiumPart placement={podium.third} number={"3rd"} />
             )}
           </div>
           <div className="my-20 sm:my-6">
             <p className="text-center">
-              Puljen består af {podium.first.totalPrize + podium.second.totalPrize + podium.third.totalPrize} kr.
+              Puljen består af{" "}
+              {podium.first.totalPrize +
+                podium.second.totalPrize +
+                podium.third.totalPrize}{" "}
+              kr.
             </p>
             <p className="text-center">
               Førstepladsen tager 70 %, andenpladsen tager 20 % og tredjepladsen
               tager 10 %.
             </p>
             <p className="text-center">
-              Er der to personer på førstepladsen, så deler de to både første- og
-              andenpræmien.
+              Er der to personer på førstepladsen, så deler de to både første-
+              og andenpræmien.
             </p>
             <p className="text-center">
               Er der tre personer på førstepladsen, så deler de hele puljen.
@@ -84,12 +88,16 @@ const Prize = () => {
       );
     } else {
       return (
-        <h3 className="text-xl text-center mt-10">Se præmiepuljen og podium her når konkurrence går i gang 💰</h3>
+        <h3 className="text-xl text-center mt-10">
+          Se præmiepuljen og podium her når konkurrence går i gang 💰
+        </h3>
       );
     }
   };
 
-  return <Countdown date={new Date("Jun 14, 2024 00:00:00")} renderer={renderer} />
-}
+  return (
+    <Countdown date={new Date("Jun 14, 2024 00:00:00")} renderer={renderer} />
+  );
+};
 
 export default Prize;

@@ -249,6 +249,7 @@ class CouponService
         $charset = 'UTF-8';
 
         $style = "
+        <style>
             a {
                 margin-top: 20px;
                 margin-left: auto;
@@ -261,6 +262,7 @@ class CouponService
                 font-weight: 600;
                 text-decoration: none;
             }
+        </style>
           ";
 
         $message = sprintf(

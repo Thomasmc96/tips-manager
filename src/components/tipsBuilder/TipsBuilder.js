@@ -40,7 +40,6 @@ const TipsBuilder = () => {
   const submitForm = (e) => {
     e.preventDefault();
     let diff = matches.length - predictions.length;
-    console.log(subscribeToMails);
 
     if (diff > 0) {
       setError("Du mangler " + diff + (diff > 1 ? " kampe" : " kamp"));

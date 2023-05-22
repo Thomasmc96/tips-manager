@@ -119,7 +119,7 @@ export const getPodium = (coupons) => {
   };
   let sortedCoupons = sortByWins(coupons);
 
-  podium = getPodiumNames(podium, sortedCoupons)
+  podium = getPodiumNames(podium, sortedCoupons);
 
   let prizes = getPodiumPrizes(podium, sortedCoupons.length);
   podium.first.totalPrize = prizes.first.totalPrize;
@@ -128,7 +128,6 @@ export const getPodium = (coupons) => {
   podium.first.sharedPrize = prizes.first.sharedPrize;
   podium.second.sharedPrize = prizes.second.sharedPrize;
   podium.third.sharedPrize = prizes.third.sharedPrize;
-
 
   return podium;
 };
@@ -150,7 +149,10 @@ const getPodiumNames = (podium, sortedCoupons) => {
     if (sortedCoupons[i].amountCorrect < lastAmountCorrect) {
       if (podium.first.names.length === 0) {
         podium.first.names.push(sortedCoupons[i].name);
-      } else if (podium.second.names.length === 0 && podium.first.names.length === 1) {
+      } else if (
+        podium.second.names.length === 0 &&
+        podium.first.names.length === 1
+      ) {
         podium.second.names.push(sortedCoupons[i].name);
       } else if (podium.third.names.length === 0) {
         podium.third.names.push(sortedCoupons[i].name);
@@ -170,7 +172,6 @@ const getPodiumNames = (podium, sortedCoupons) => {
     lastAmountCorrect = sortedCoupons[i].amountCorrect;
   }
   return podium;
-
 };
 const getPodiumPrizes = (podium, totalCoupons) => {
   let firstTotalPrize = totalCoupons * 100 * 0.7;
@@ -193,17 +194,16 @@ const getPodiumPrizes = (podium, totalCoupons) => {
 
   return {
     first: {
-      totalPrize: firstTotalPrize, 
-      sharedPrize: firstSharedPrize
+      totalPrize: firstTotalPrize,
+      sharedPrize: firstSharedPrize,
     },
     second: {
-      totalPrize: secondTotalPrize, 
-      sharedPrize: secondSharedPrize
+      totalPrize: secondTotalPrize,
+      sharedPrize: secondSharedPrize,
     },
     third: {
-      totalPrize: thirdTotalPrize, 
-      sharedPrize: thirdSharedPrize
-    }
-  }
-
-}
+      totalPrize: thirdTotalPrize,
+      sharedPrize: thirdSharedPrize,
+    },
+  };
+};
