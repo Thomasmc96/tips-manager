@@ -2,12 +2,11 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import environment from "../../environment";
 import { FidgetSpinner } from "react-loader-spinner";
-import { sortByWins, getPodium } from "../Utils";
+import { getPodium } from "../Utils";
 import PodiumPart from "./PodiumPart";
 
 const Prize = () => {
-  const [loading, setLoading] = useState(false);
-  const [coupons, setCoupons] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [podium, setPodium] = useState({
     first: { names: [], totalPrize: 0, sharedPrize: 0 },
     second: { names: [], totalPrize: 0, sharedPrize: 0 },
@@ -15,15 +14,11 @@ const Prize = () => {
   });
 
   useEffect(() => {
-    setLoading(true);
-
     axios
       .get(`${environment[0]}/server/endpoints/coupon/getResults.php`)
       .then((response) => {
         console.log(response);
         if (response.data.code === 200) {
-          setCoupons(sortByWins(response.data.coupons));
-          console.log(getPodium(response.data.coupons));
           setPodium(getPodium(response.data.coupons));
         }
       })
@@ -35,42 +30,35 @@ const Prize = () => {
       });
   }, []);
 
+  if (loading) {
+    return (
+      <div className="flex mx-auto justify-center h-40 items-center">
+        <FidgetSpinner
+          visible={true}
+          height="100"
+          width="100"
+          ariaLabel="dna-loading"
+          wrapperStyle={{}}
+          wrapperClass="dna-wrapper"
+          ballColors={["#003e21", "#067242", "#098b54"]}
+          backgroundColor="#f8d098"
+        />
+      </div>
+    );
+  }
+
   return (
-    <div className="container mx-auto mt-20 flex flex-col items-center justify-between min-h-[80vh]">
-      {/* <h1 className="text-3xl mb-9">Præmie</h1> */}
-      <div className="flex flex-col justify-around flex-wrap sm:flex-row w-full mx-auto">
+    <div className="container mx-auto mt-5 sm:mt-20 flex flex-col items-center justify-between min-h-[80vh]">
+      <div className="flex flex-col justify-around flex-wrap sm:flex-row w-full mx-auto gap-14 sm:gap-0">
         <PodiumPart placement={podium.first} number={"1st"}/>
         {podium.second.names.length > 0 && (
           <PodiumPart placement={podium.second} number={"2nd"}/>
-          // <section className="flex flex-col justify-center items-center gap-4 my-2">
-          //   <p className="font-bold">2nd: ({podium.second.totalPrize} kr.)</p>
-          //   <p>
-          //     {podium.second.names.map((second, i) => {
-          //       return podium.second.names.length === i + 1 ? (
-          //         <span key={i}>{second}</span>
-          //       ) : (
-          //         <span key={i}>{second}, </span>
-          //       );
-          //     })}
-          //   </p>
-          // </section>
         )}
         {podium.third.names.length > 0 && (
-          <section className="flex flex-col justify-center items-center gap-4 my-2">
-            <p className="font-bold">3rd: ({podium.third.totalPrize} kr.)</p>
-            <p>
-              {podium.third.names.map((third, i) => {
-                return podium.third.names.length === i + 1 ? (
-                  <span key={i}>{third}</span>
-                ) : (
-                  <span key={i}>{third}, </span>
-                );
-              })}
-            </p>
-          </section>
+          <PodiumPart placement={podium.third} number={"3rd"}/>
         )}
       </div>
-      <div className="my-6">
+      <div className="my-20 sm:my-6">
         <p className="text-center">
           Puljen består af {podium.first.totalPrize + podium.second.totalPrize + podium.third.totalPrize} kr.
         </p>
