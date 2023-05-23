@@ -1,14 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import axios from "axios";
 import environment from "../../environment";
 import { FidgetSpinner } from "react-loader-spinner";
-import TipsModal from "./TipsModal";
 
 const Coupon = ({ coupon }) => {
   const { coupons_id, name, mail, paid, subscribeToMails } = coupon;
   
   const [approved, setApproved] = useState(paid == "1");
   const [loadingSubmit, setLoadingSubmit] = useState(false);
+  const [newName, setNewName] = useState(name);
+  const [showingNameInput, setShowingNameInput] = useState(false);
+  const [inputWidth, setInputWidth] = useState(0);
+
+  const hideInput = (event) => {
+      if(
+        event.target.id !== "nameInput" + coupons_id && 
+        event.target.id !== "name" + coupons_id
+      ) {
+        setShowingNameInput(false);
+      };
+    }
+    
+  useEffect(() => {
+    window.addEventListener("click", hideInput);
+
+    return () => {
+      window.removeEventListener("click", hideInput);
+    };
+  }, [hideInput]);
 
   const approve = (e, coupons_id) => {
     e.preventDefault();
@@ -29,6 +48,11 @@ const Coupon = ({ coupon }) => {
       });
   };
 
+  const onNameClick = (e) => {
+    setInputWidth(e.target.offsetWidth);
+    setShowingNameInput(!showingNameInput);
+  }
+
   return (
     <div
       className={
@@ -43,8 +67,25 @@ const Coupon = ({ coupon }) => {
         : <div className="invisible">📧</div>
       }
       <div className="px-6 pb-6">
-
-      <h2 className="text-lg font-medium mb-2 text-white">{name}</h2>
+      
+      {!showingNameInput ? 
+      <h2
+      id={"name" + coupons_id}
+        className="text-lg font-medium mb-2 text-white" 
+        onClick={onNameClick}
+        >
+          {name}
+        </h2>
+        :
+      <input
+        id={"nameInput" + coupons_id}
+        type="text" 
+        value={newName} 
+        className="bg-transparent border-solid border-2 rounded-md p-1 box-border"
+        style={{width: inputWidth + "px"}}
+        onInput={(e) => {setNewName(e.target.value)}}
+        />
+      }
       <p className="text-white text-sm mb-4">{mail}</p>
       <div className="flex flex-row gap-5 items-center h-10">
         {!approved ? (
