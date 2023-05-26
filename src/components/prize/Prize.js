@@ -63,23 +63,26 @@ const Prize = () => {
               <PodiumPart placement={podium.third} number={"3rd"} />
             )}
           </div>
-          <div className="my-20 sm:my-6">
-            <p className="text-center">
+          <div className="mt-20 sm:my-6 p-2">
+            <h4 className="text-lg font-bold sm:text-center mb-1">
+              Hvordan udregnes præmien?
+            </h4>
+            <p className="text-left sm:text-center">
               Puljen består af{" "}
               {podium.first.totalPrize +
                 podium.second.totalPrize +
                 podium.third.totalPrize}{" "}
               kr.
             </p>
-            <p className="text-center">
+            <p className="text-left sm:text-center">
               Førstepladsen tager 70 %, andenpladsen tager 20 % og tredjepladsen
               tager 10 %.
             </p>
-            <p className="text-center">
+            <p className="text-left sm:text-center">
               Er der to personer på førstepladsen, så deler de to både første-
               og andenpræmien.
             </p>
-            <p className="text-center">
+            <p className="text-left sm:text-center">
               Er der tre personer på førstepladsen, så deler de hele puljen.
             </p>
           </div>
