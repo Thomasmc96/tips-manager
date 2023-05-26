@@ -16,10 +16,11 @@ const Coupon = ({ coupon }) => {
   const inputNewNameRef = useRef(null);
 
 
-  const hideInput = (event) => {
+  const hideInput = (event, enter=false) => {
       if(
-        event.target.id !== "nameInput" + coupons_id && 
-        event.target.id !== "name" + coupons_id
+       (event.target.id !== "nameInput" + coupons_id && 
+        event.target.id !== "name" + coupons_id) || 
+        enter
       ) {
         setShowingNameInput(false);
         if(newSavedName !== newName && newName !== "") {
@@ -28,6 +29,12 @@ const Coupon = ({ coupon }) => {
           setNewName(newSavedName);
         }
       };
+    }
+
+    const enter = (event) => {
+      if (event.key === 'Enter') {
+        hideInput(event, true);
+      }
     }
     
   useEffect(() => {
@@ -112,6 +119,7 @@ const Coupon = ({ coupon }) => {
         className="bg-transparent border-solid border-2 rounded-md p-1 box-border"
         style={{width: inputWidth + "px"}}
         onInput={(e) => {setNewName(e.target.value)}}
+        onKeyDown={enter}
         />
       }
       <p className="text-white text-sm mb-4">{mail}</p>
