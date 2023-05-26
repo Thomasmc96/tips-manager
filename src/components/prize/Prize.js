@@ -20,7 +20,6 @@ const Prize = () => {
     axios
       .get(`${environment[0]}/server/endpoints/coupon/getResults.php`)
       .then((response) => {
-        console.log(response);
         if (response.data.code === 200) {
           setPodium(getPodium(response.data.coupons));
         }

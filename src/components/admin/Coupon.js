@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import environment from "../../environment";
 import { FidgetSpinner } from "react-loader-spinner";
@@ -9,8 +9,12 @@ const Coupon = ({ coupon }) => {
   const [approved, setApproved] = useState(paid == "1");
   const [loadingSubmit, setLoadingSubmit] = useState(false);
   const [newName, setNewName] = useState(name);
+  const [newSavedName, setNewSavedName] = useState(name);
   const [showingNameInput, setShowingNameInput] = useState(false);
   const [inputWidth, setInputWidth] = useState(0);
+
+  const inputNewNameRef = useRef(null);
+
 
   const hideInput = (event) => {
       if(
@@ -18,6 +22,11 @@ const Coupon = ({ coupon }) => {
         event.target.id !== "name" + coupons_id
       ) {
         setShowingNameInput(false);
+        if(newSavedName !== newName && newName !== "") {
+          saveNewName()
+        } else if(newName === "") {
+          setNewName(newSavedName);
+        }
       };
     }
     
@@ -53,6 +62,24 @@ const Coupon = ({ coupon }) => {
     setShowingNameInput(!showingNameInput);
   }
 
+  const saveNewName = () => {
+    axios
+    .post(`${environment[0]}/server/endpoints/coupon/update.php`, {
+      coupons_id: coupons_id,
+      name: newName
+    })
+    .then((response) => {
+      console.log(response);
+      if (response.data.code === 200) {
+        setNewSavedName(newName);
+      }
+    })
+    .catch((error) => {
+      console.log (error)
+    })
+
+  }
+
   return (
     <div
       className={
@@ -74,13 +101,14 @@ const Coupon = ({ coupon }) => {
         className="text-lg font-medium mb-2 text-white" 
         onClick={onNameClick}
         >
-          {name}
+          {newName}
         </h2>
         :
       <input
         id={"nameInput" + coupons_id}
         type="text" 
         value={newName} 
+        ref={inputNewNameRef}
         className="bg-transparent border-solid border-2 rounded-md p-1 box-border"
         style={{width: inputWidth + "px"}}
         onInput={(e) => {setNewName(e.target.value)}}

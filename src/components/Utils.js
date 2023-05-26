@@ -194,16 +194,20 @@ const getPodiumPrizes = (podium, totalCoupons) => {
 
   return {
     first: {
-      totalPrize: firstTotalPrize,
-      sharedPrize: firstSharedPrize,
+      totalPrize: toFixedIfNecessary(firstTotalPrize, 2),
+      sharedPrize: toFixedIfNecessary(firstSharedPrize, 2),
     },
     second: {
-      totalPrize: secondTotalPrize,
-      sharedPrize: secondSharedPrize,
+      totalPrize: toFixedIfNecessary(secondTotalPrize, 2),
+      sharedPrize: toFixedIfNecessary(secondSharedPrize, 2),
     },
     third: {
-      totalPrize: thirdTotalPrize,
-      sharedPrize: thirdSharedPrize,
+      totalPrize: toFixedIfNecessary(thirdTotalPrize, 2),
+      sharedPrize: toFixedIfNecessary(thirdSharedPrize, 2),
     },
   };
 };
+
+const toFixedIfNecessary =( value, dp ) => {
+  return +parseFloat(value).toFixed( dp );
+}

@@ -1,14 +1,12 @@
 import React from "react";
 
 const PodiumPart = ({ placement, number }) => {
-  console.log(placement);
   const textColor =
     number === "1st"
       ? "text-gold"
       : number === "2nd"
       ? "text-silver"
       : "text-bronze";
-  console.log(textColor);
   return (
     <section className="flex flex-col justify-center items-center my-2 sm:max-w-[30%] max-w-full mx-auto">
       <h1 className={"font-bold text-6xl sm:text-5xl mb-1 " + textColor}>
