@@ -62,6 +62,7 @@ const Login = () => {
           id="mail"
           className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline text-black"
           value={mail}
+          placeholder="Din mail"
           required
           onChange={handleMail}
         />
@@ -75,6 +76,7 @@ const Login = () => {
           id="password"
           className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline text-black"
           value={password}
+          placeholder="Dit password"
           required
           onChange={handlePassword}
         />
