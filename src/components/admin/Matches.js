@@ -133,7 +133,7 @@ const CreateMatch = ({addNewMatch}) => {
       .post(`${environment[0]}/server/endpoints/matches2/save.php`, {
         homeTeam: homeTeam,
         awayTeam: awayTeam,
-        kickOff: new Date(kickOff).toISOString().slice(0, 19).replace('T', ' '),
+        kickOff: new Date(kickOff).addHours(1).toISOString().slice(0, 19).replace('T', ' '),
         homeTeamGoals: 0,
         awayTeamGoals: 0
       })

@@ -57,26 +57,28 @@ const Match = () => {
     }
     const deleteMatch = (e) => {
         e.preventDefault();
-        setLoading(true)
-        axios
-        .get(
-          `${environment[0]}/server/endpoints/matches2/delete.php?id=${id}`
-        )
-        .then((response) => {
-          if (response.data.code === 200) {
-            navigate('/kampe')
-        } else {
-            console.log(response)
-            alert("Noget gik galt");
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        })
-        .finally(() => {
-          setTimeout(() => {
-          }, 1000);
-        });
+        if (window.confirm("Er du sikker på, at du vil slette kampen mellen " + countryName(match.home_team) + " og " + countryName(match.away_team) + "?")) {
+            setLoading(true)
+            axios
+                .get(
+                `${environment[0]}/server/endpoints/matches2/delete.php?id=${id}`
+                )
+                .then((response) => {
+                if (response.data.code === 200) {
+                    navigate('/kampe')
+                } else {
+                    console.log(response)
+                    alert("Noget gik galt");
+                }
+                })
+                .catch((error) => {
+                console.log(error);
+                })
+                .finally(() => {
+                setTimeout(() => {
+                }, 1000);
+            });
+        }
     }
 
     if (match === '') {

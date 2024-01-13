@@ -1,6 +1,11 @@
 import axios from "axios";
 import environment from "../environment";
 
+Date.prototype.addHours = function(h) {
+  this.setTime(this.getTime() + (h*60*60*1000));
+  return this;
+}
+
 const getDate = (timestamp) => {
   let date = new Date(timestamp);
   return date.getDate() + ". " + getMonthName(date.getMonth() + 1);
