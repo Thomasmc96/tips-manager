@@ -27,12 +27,13 @@ $matches2Repo = new Matches2Repository();
 
 try {
 
-    $matches2Repo->save($match2);
+    $id = $matches2Repo->save($match2);
 
     echo json_encode([
         "message" => "Success",
         "code" => 200,
         'data' => $data,
+        'id' => $id,
 
     ]);
 } catch (\Exception $e) {

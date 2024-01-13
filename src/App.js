@@ -12,7 +12,7 @@ import NotFound from "./components/notFound/NotFound";
 
 // Admin routes
 import Overview from "./components/admin/Overview";
-import HandleMatches from "./components/admin/HandleMatches";
+import Matches from "./components/admin/Matches";
 
 function App() {
   return (
@@ -26,7 +26,7 @@ function App() {
       } />
       <Route path="/kampe" element={
        <ProtectedRoute>
-          <HandleMatches />
+          <Matches />
        </ProtectedRoute> 
       } />
         <Route path="/" element={<Standings />} />

@@ -4,7 +4,7 @@ include_once dirname(__DIR__) . '/config/DatabaseService.php';
 
 class Matches2Repository
 {
-    public function getLatest() {
+    public function getAll() {
         $datebaseService = new DatabaseService();
         $connection = $datebaseService->getConnection();
 
@@ -14,14 +14,13 @@ class Matches2Repository
             FROM
                 matches2
             ORDER BY
-                kickoff DESC
-            LIMIT 1
+                kickoff_dtm
         ";
 
         $statement = $connection->prepare($query);
 
         $statement->execute();
-        return $statement->fetch(PDO::FETCH_ASSOC);
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function save(Matches2 $matches2) {
@@ -47,6 +46,7 @@ class Matches2Repository
         $statement->bindParam(":homeTeamGoals", $matches2->homeTeamGoals);
         $statement->bindParam(":awayTeamGoals", $matches2->awayTeamGoals);
 
-        return $statement->execute();
+        $statement->execute();
+        return $connection->lastInsertId();
     }
 }

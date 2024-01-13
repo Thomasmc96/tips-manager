@@ -3,12 +3,35 @@ import axios from "axios";
 import { FidgetSpinner } from "react-loader-spinner";
 import environment from "../../environment";
 import AdminMenu from "./AdminMenu";
-import { countries } from "../Utils";
+import { countries, countryName, sortByKickOff } from "../Utils";
 
-const HandleMatches = () => {
-  const [loading, setLoading] = useState(true);
+const Matches = () => {
   const [matches2, setMatches2] = useState([]);
 
+  useEffect(() => {
+    axios
+    .get(
+      `${environment[0]}/server/endpoints/matches2/getAll.php`
+    )
+    .then((response) => {
+      if (response.data.code === 200) {
+        setMatches2(response.data.matches2);
+      } else {
+        alert("Noget gik galt");
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+    .finally(() => {
+      setTimeout(() => {
+      }, 1000);
+    });
+  }, [])
+
+  const addNewMatch = (match) => {
+      setMatches2(current => [...current, match]);
+  }
 
   return (
     <div className="container mx-auto flex flex-col my-2 px-2 flex-wrap">
@@ -17,24 +40,87 @@ const HandleMatches = () => {
           Hej {localStorage.getItem("name")}
         </h1>
         <AdminMenu />
-        <CreateMatch />
+        <CreateMatch addNewMatch={addNewMatch}/>
+        <ShowMatches matches2={matches2}/>
       </div>
     </div>
   )
 
 }
 
+const ShowMatches = ({matches2}) => {
+  if (matches2.length === 0) {
+    return (
+      <div className="flex mx-auto justify-center h-40 items-center">
+        <FidgetSpinner
+          visible={true}
+          height="100"
+          width="100"
+          ariaLabel="dna-loading"
+          wrapperStyle={{}}
+          wrapperClass="dna-wrapper"
+          ballColors={["#003e21", "#067242", "#098b54"]}
+          backgroundColor="#f8d098"
+        />
+      </div>
+    );
+  }
+
+  return (
+    <div className="container flex flex-col my-2 px-2 flex-wrap">
+       <h2 className="text-2xl mb-3 mt-5">Kampe</h2>    
+       <table className="min-w-full border border-gray-300 shadow-md">
+        <thead>
+          <tr>
+            <th className="py-2 px-4 border-b border-gray-300 text-center">Hjemmebanehold</th>
+            <th className="py-2 px-4 border-b border-gray-300 text-center">Udebanehold</th>
+            <th className="py-2 px-4 border-b border-gray-300 text-center">Mål (1)</th>
+            <th className="py-2 px-4 border-b border-gray-300 text-center">Mål (2)</th>
+            <th className="py-2 px-4 border-b border-gray-300 text-center">Kickoff</th>
+          </tr>
+        </thead>
+        <tbody>
+          {matches2.length > 0 &&
+            sortByKickOff(matches2).map((match) => (
+              <tr key={match.matches2_id}>
+              <td className="py-2 px-4 border-b border-gray-300 text-center">
+                <span>{countryName(match.home_team)}</span>
+                <img
+                  src={`https://flags.tv2a.dk/tv2football/${match.home_team}.svg`}
+                  alt={match.home_team}
+                  className="w-8 ml-2 inline"
+                />
+               </td>
+
+               <td className="py-2 px-4 border-b border-gray-300 text-center">
+                <span>{countryName(match.away_team)}</span>
+                <img
+                  src={`https://flags.tv2a.dk/tv2football/${match.away_team}.svg`}
+                  alt={match.away_team}
+                  className="w-8 ml-2 inline"
+                />
+               </td>
+                <td className="py-2 px-4 border-b border-gray-300 text-center">{match.home_team_goals}</td>
+                <td className="py-2 px-4 border-b border-gray-300 text-center">{match.away_team_goals}</td>
+                <td className="py-2 px-4 border-b border-gray-300 text-center">{match.kickoff_dtm}</td>
+              </tr>
+            ))}
+        </tbody>
+      </table>
+    </div>
+  )
+}
 
 
-const CreateMatch = () => {
+const CreateMatch = ({addNewMatch}) => {
   const [homeTeam, setHomeTeam] = useState('');
   const [awayTeam, setAwayTeam] = useState('');
   const [kickOff, setKickOff] = useState('');
-  const [loadingSubmit, setLoadingSubmit] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const saveMatch = (e) => {
     e.preventDefault()
-    setLoadingSubmit(true);
+    setLoading(true);
     axios
       .post(`${environment[0]}/server/endpoints/matches2/save.php`, {
         homeTeam: homeTeam,
@@ -49,6 +135,17 @@ const CreateMatch = () => {
           setHomeTeam('')
           setAwayTeam('')
           setKickOff('')
+
+          const newMatch = response.data.data;
+
+          addNewMatch({
+            matches2_id: Number(response.id),
+            home_team: newMatch.homeTeam,
+            away_team: newMatch.awayTeam,
+            home_team_goals: newMatch.homeTeamGoals,
+            away_team_goals: newMatch.awayTeamGoals,
+            kickoff_dtm: newMatch.kickOff
+          })
         } else {
           console.log(response);
           alert("Der skete desværre en fejl. Prøv igen.");
@@ -59,11 +156,12 @@ const CreateMatch = () => {
         console.log(error);
       })
       .finally(() => {
-        setLoadingSubmit(false);
+        setLoading(false);
       });
   }
   return(
     <div className="container mx-auto flex flex-col my-2 px-2 flex-wrap w-80">
+       <h2 className="text-2xl mb-3 mt-5">Tilføj en kamp</h2>
         <form className="container mx-auto mt-2" onSubmit={saveMatch}>
           <label className="flex mx-auto w-80 rounded-md text-white">Hjemmebanehold</label>
           <select 
@@ -125,7 +223,7 @@ const CreateMatch = () => {
             type="submit"
             className="bg-sandBeige rounded-md w-80 h-10 text-black text-lg hover:cursor-pointer hover:scale-110 duration-200 mb-7 mx-auto flex justify-center items-center"
           >     
-          {!loadingSubmit ? (
+          {!loading ? (
             <>Opret kamp</>
           ) : (
             <FidgetSpinner
@@ -145,4 +243,4 @@ const CreateMatch = () => {
   )
 }
 
-export default HandleMatches;
+export default Matches;

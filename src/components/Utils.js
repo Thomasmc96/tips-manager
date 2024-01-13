@@ -59,6 +59,20 @@ export const sortByDate = (matches) => {
   return matchesSorted;
 };
 
+export const sortByKickOff = (matches) => {
+  const matchesSorted = matches.sort((a, b) => {
+    if (a.kickoff_dtm < b.kickoff_dtm) {
+      return -1;
+    }
+    if (a.kickoff_dtm > b.kickoff_dtm) {
+      return 1;
+    }
+
+    return 0;
+  });
+  return matchesSorted;
+};
+
 export const sortByWins = (coupons) => {
   const couponsSorted = coupons.sort((a, b) => {
     if (a.amountCorrect < b.amountCorrect) {
@@ -95,7 +109,6 @@ export const verify = async () => {
     )
     .then((response) => {
       if (response.data.code === 200) {
-        console.log(response);
         verified = true;
       } else {
         console.log(response);
@@ -211,6 +224,10 @@ const getPodiumPrizes = (podium, totalCoupons) => {
 
 const toFixedIfNecessary =( value, dp ) => {
   return +parseFloat(value).toFixed( dp );
+}
+
+export const countryName = (code) => {
+  return countries.find((country) => country.code === code).name
 }
 
 export const countries = [
