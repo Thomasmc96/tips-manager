@@ -4,6 +4,7 @@ import { FidgetSpinner } from "react-loader-spinner";
 import environment from "../../environment";
 import AdminMenu from "./AdminMenu";
 import { countries, countryName, sortByKickOff } from "../Utils";
+import { useNavigate } from "react-router-dom";
 
 const Matches = () => {
   const [matches2, setMatches2] = useState([]);
@@ -49,6 +50,12 @@ const Matches = () => {
 }
 
 const ShowMatches = ({matches2}) => {
+  const navigate = useNavigate();
+
+  const seeMatch = (id) => {
+      navigate("/kampe/" + id);
+  }
+
   if (matches2.length === 0) {
     return (
       <div className="flex mx-auto justify-center h-40 items-center">
@@ -74,35 +81,36 @@ const ShowMatches = ({matches2}) => {
           <tr>
             <th className="py-2 px-4 border-b border-gray-300 text-center">Hjemmebanehold</th>
             <th className="py-2 px-4 border-b border-gray-300 text-center">Udebanehold</th>
-            <th className="py-2 px-4 border-b border-gray-300 text-center">Mål (1)</th>
-            <th className="py-2 px-4 border-b border-gray-300 text-center">Mål (2)</th>
-            <th className="py-2 px-4 border-b border-gray-300 text-center">Kickoff</th>
+            <th className="py-2 px-4 border-b border-gray-300 text-center hidden sm:table-cell">Mål (1)</th>
+            <th className="py-2 px-4 border-b border-gray-300 text-center hidden sm:table-cell">Mål (2)</th>
+            <th className="py-2 px-4 border-b border-gray-300 text-center hidden sm:table-cell">Kickoff</th>
           </tr>
         </thead>
         <tbody>
           {matches2.length > 0 &&
             sortByKickOff(matches2).map((match) => (
-              <tr key={match.matches2_id}>
-              <td className="py-2 px-4 border-b border-gray-300 text-center">
-                <span>{countryName(match.home_team)}</span>
-                <img
-                  src={`https://flags.tv2a.dk/tv2football/${match.home_team}.svg`}
-                  alt={match.home_team}
-                  className="w-8 ml-2 inline"
-                />
-               </td>
+              <tr key={match.matches2_id} onClick={() => seeMatch(match.matches2_id)} className="cursor-pointer">
+                <td className="py-2 px-4 border-b border-gray-300 text-center">
+                  <span>{countryName(match.home_team)}</span>
+                  <img
+                    src={`https://flags.tv2a.dk/tv2football/${match.home_team}.svg`}
+                    alt={match.home_team}
+                    className="w-8 ml-2 inline"
+                  />
+                </td>
 
-               <td className="py-2 px-4 border-b border-gray-300 text-center">
-                <span>{countryName(match.away_team)}</span>
-                <img
-                  src={`https://flags.tv2a.dk/tv2football/${match.away_team}.svg`}
-                  alt={match.away_team}
-                  className="w-8 ml-2 inline"
-                />
-               </td>
-                <td className="py-2 px-4 border-b border-gray-300 text-center">{match.home_team_goals}</td>
-                <td className="py-2 px-4 border-b border-gray-300 text-center">{match.away_team_goals}</td>
-                <td className="py-2 px-4 border-b border-gray-300 text-center">{match.kickoff_dtm}</td>
+                <td className="py-2 px-4 border-b border-gray-300 text-center">
+                  <span>{countryName(match.away_team)}</span>
+                  <img
+                    src={`https://flags.tv2a.dk/tv2football/${match.away_team}.svg`}
+                    alt={match.away_team}
+                    className="w-8 ml-2 inline"
+                  />
+                </td>
+                
+                <td className="py-2 px-4 border-b border-gray-300 text-center hidden sm:table-cell">{match.home_team_goals}</td>
+                <td className="py-2 px-4 border-b border-gray-300 text-center hidden sm:table-cell">{match.away_team_goals}</td>
+                <td className="py-2 px-4 border-b border-gray-300 text-center hidden sm:table-cell">{match.kickoff_dtm}</td>
               </tr>
             ))}
         </tbody>
@@ -139,7 +147,7 @@ const CreateMatch = ({addNewMatch}) => {
           const newMatch = response.data.data;
 
           addNewMatch({
-            matches2_id: Number(response.id),
+            matches2_id: Number(response.data.id),
             home_team: newMatch.homeTeam,
             away_team: newMatch.awayTeam,
             home_team_goals: newMatch.homeTeamGoals,

@@ -49,4 +49,25 @@ class Matches2Repository
         $statement->execute();
         return $connection->lastInsertId();
     }
+
+    public function getById($id) {
+        $datebaseService = new DatabaseService();
+        $connection = $datebaseService->getConnection();
+
+        $query = "
+            SELECT
+                *
+            FROM
+                matches2
+            WHERE
+                matches2_id = :id
+        ";
+
+        $statement = $connection->prepare($query);
+
+        $statement->bindParam(":id", $id);
+
+        $statement->execute();
+        return $statement->fetch(PDO::FETCH_ASSOC);
+    }
 }
