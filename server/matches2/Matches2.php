@@ -10,6 +10,7 @@ class Matches2
     public $kickoff;
     public $homeTeamGoals;
     public $awayTeamGoals;
+    public $updatedDtm;
 
     public function __construct(
         string $homeTeam, 
@@ -17,6 +18,7 @@ class Matches2
         string $kickoff,
         int $homeTeamGoals,
         int $awayTeamGoals,
+        string $updatedDtm = null,
         )
     {
         $this->homeTeam = $homeTeam;
@@ -24,6 +26,7 @@ class Matches2
         $this->kickoff = $kickoff;
         $this->homeTeamGoals = $homeTeamGoals;
         $this->awayTeamGoals = $awayTeamGoals;
+        $this->updatedDtm = $updatedDtm;
     }
 
     public function setId($id) {

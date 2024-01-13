@@ -101,7 +101,8 @@ class Matches2Repository
                 away_team = :awayTeam,
                 kickoff_dtm = :kickoff,
                 home_team_goals = :homeTeamGoals,
-                away_team_goals = :awayTeamGoals
+                away_team_goals = :awayTeamGoals,
+                updated_dtm = :updatedDtm
             WHERE
                 matches2_id = :matches2_id
         ";
@@ -113,6 +114,7 @@ class Matches2Repository
         $statement->bindParam(":kickoff", $matches2->kickoff);
         $statement->bindParam(":homeTeamGoals", $matches2->homeTeamGoals);
         $statement->bindParam(":awayTeamGoals", $matches2->awayTeamGoals);
+        $statement->bindParam(":updatedDtm", $matches2->updatedDtm);
         $statement->bindParam(":matches2_id", $id);
 
         return $statement->execute();

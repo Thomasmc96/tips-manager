@@ -62,7 +62,8 @@ const Match = () => {
           awayTeam: match.away_team,
           kickOff: new Date(match.kickoff_dtm).addHours(1).toISOString().slice(0, 19).replace('T', ' '),
           homeTeamGoals: Number(match.home_team_goals),
-          awayTeamGoals: Number(match.away_team_goals)
+          awayTeamGoals: Number(match.away_team_goals),
+          updatedDtm: new Date().addHours(1).toISOString().slice(0, 19).replace('T', ' ')
         })
         .then((response) => {
           if (response.data.code === 200) {

@@ -6,7 +6,7 @@ include_once dirname(__DIR__, 2) . '/matches2/Matches2Repository.php';
 // Get incoming data
 $data = json_decode(file_get_contents("php://input"));
 
-if (empty($data->matches2_id) ||empty($data->homeTeam) || empty($data->awayTeam) || empty($data->kickOff) || empty($data->homeTeamGoals) || empty($data->awayTeamGoals)) {
+if (empty($data->matches2_id) ||empty($data->homeTeam) || empty($data->awayTeam) || empty($data->kickOff)) {
 
     // Send error response
     echo json_encode([
@@ -20,7 +20,8 @@ $match2 = new Matches2(
     $data->awayTeam, 
     $data->kickOff,
     $data->homeTeamGoals,
-    $data->awayTeamGoals
+    $data->awayTeamGoals,
+    $data->updatedDtm
 );
 
 $matches2Repo = new Matches2Repository();
