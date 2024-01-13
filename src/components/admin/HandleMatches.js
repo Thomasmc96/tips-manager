@@ -3,6 +3,7 @@ import axios from "axios";
 import { FidgetSpinner } from "react-loader-spinner";
 import environment from "../../environment";
 import Coupon from "./Coupon";
+import AdminMenu from "./AdminMenu";
 
 const HandleMatches = () => {
   const [loading, setLoading] = useState(true);
@@ -17,19 +18,27 @@ const HandleMatches = () => {
 
   return (
     <div className="container mx-auto flex flex-col my-2 px-2 flex-wrap">
-        <form className="container mx-auto mt-2" onSubmit={saveMatch}>
-            <input
-            type="text"
-            placeholder="Hjemmebanehold"
-            name="homeTeam"
-            className="flex mx-auto my-2 w-80 h-9 rounded-md p-1 text-black"
-            required
-            value={newMatch.homeTeam}
-            onChange={(e) => {
-                setNewMatch(e.target.value);
-            }}
-            />
-        </form>
+      <div>
+        <h1 className="text-3xl mb-3 mt-5 mx-2">
+          Hej {localStorage.getItem("name")}
+        </h1>
+        <AdminMenu />
+        <div className="container mx-auto flex flex-col my-2 px-2 flex-wrap">
+          <form className="container mx-auto mt-2" onSubmit={saveMatch}>
+              <input
+              type="text"
+              placeholder="Hjemmebanehold"
+              name="homeTeam"
+              className="flex mx-auto my-2 w-80 h-9 rounded-md p-1 text-black"
+              required
+              value={newMatch.homeTeam}
+              onChange={(e) => {
+                  setNewMatch(e.target.value);
+              }}
+              />
+          </form>
+        </div>
+      </div>
     </div>
   )
 }

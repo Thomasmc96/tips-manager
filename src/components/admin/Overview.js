@@ -3,6 +3,7 @@ import axios from "axios";
 import { FidgetSpinner } from "react-loader-spinner";
 import environment from "../../environment";
 import Coupon from "./Coupon";
+import AdminMenu from "./AdminMenu";
 
 const Overview = () => {
   const [coupons, setCoupons] = useState([]);
@@ -48,6 +49,7 @@ const Overview = () => {
         <h1 className="text-3xl mb-3 mt-5 mx-2">
           Hej {localStorage.getItem("name")}
         </h1>
+        <AdminMenu />
         {coupons.map((coupon) => {
           return <Coupon key={coupon.coupons_id} coupon={coupon} />;
         })}

@@ -1,0 +1,24 @@
+import React from "react";
+import { Link } from "react-router-dom";
+
+const AdminMenu = () => {
+
+    const LinkButton = ({ to, children }) => (
+        <Link
+          to={to}
+          className="rounded-lg shadow-md border bg-lightGreen border-lightGreen border-2 inline-flex flex-col m-2 p-2"
+        >
+          {children}
+        </Link>
+      );
+
+    return (
+        <div >
+            <LinkButton to="/overblik">Overblik</LinkButton>
+            <LinkButton to="/kampe">Kampe</LinkButton>
+        </div>
+    )
+
+}
+
+export default AdminMenu;
