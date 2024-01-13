@@ -17,7 +17,7 @@ const Header = () => {
           </Link>
         </div>
         <div>
-          <Link to={"/overblik"} className="">
+          <Link to={"/tilmeldinger"} className="">
             🔒
           </Link>
         </div>

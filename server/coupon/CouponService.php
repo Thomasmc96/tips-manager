@@ -278,7 +278,7 @@ class CouponService
         $style,
         $coupon->name,
         $coupon->mail,
-        "http://" . $_SERVER['HTTP_HOST'] . "/overblik" 
+        "http://" . $_SERVER['HTTP_HOST'] . "/tilmeldinger" 
     );
 
     $headers = [];

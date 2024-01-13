@@ -19,7 +19,7 @@ function App() {
     <Router>
       <Header />
       <Routes>
-      <Route path="/overblik" element={
+      <Route path="/tilmeldinger" element={
        <ProtectedRoute>
           <Overview />
        </ProtectedRoute> 

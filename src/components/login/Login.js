@@ -26,7 +26,7 @@ const Login = () => {
         if(response.data.code === 200) {
           localStorage.setItem("jwt", response.data.jwt);
           localStorage.setItem("name", response.data.name);
-          navigate('/overblik');
+          navigate('/tilmeldinger');
         } else {
           setError("Forkert login")
         }

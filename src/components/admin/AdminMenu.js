@@ -14,7 +14,7 @@ const AdminMenu = () => {
 
     return (
         <div >
-            <LinkButton to="/overblik">Overblik</LinkButton>
+            <LinkButton to="/tilmeldinger">Tilmeldinger</LinkButton>
             <LinkButton to="/kampe">Kampe</LinkButton>
         </div>
     )

@@ -73,6 +73,7 @@ export const sortByWins = (coupons) => {
   return couponsSorted;
 };
 
+
 export const verify = async () => {
   let verified = false;
 
@@ -211,3 +212,102 @@ const getPodiumPrizes = (podium, totalCoupons) => {
 const toFixedIfNecessary =( value, dp ) => {
   return +parseFloat(value).toFixed( dp );
 }
+
+export const countries = [
+  {
+    'code': 'ger',
+    'name': 'Tyskland'
+  },
+  {
+    'code': 'bel',
+    'name': 'Belgien',
+  },
+  {
+    'code': 'fra',
+    'name': 'Frankring'
+  },
+  {
+    'code': 'por',
+    'name': 'Portugal'
+  },
+  {
+    'code': 'esp',
+    'name': 'Spanien'
+  },
+  {
+    'code': 'sco',
+    'name': 'Skotland'
+  },
+  {
+    'code': 'tur',
+    'name': 'Tyrkiet'
+  },
+  {
+    'code': 'aut',
+    'name': 'Østrig'
+  },
+  {
+    'code': 'eng',
+    'name': 'England'
+  },
+  {
+    'code': 'hun',
+    'name': 'Ungarn'
+  },
+  {
+    'code': 'svk',
+    'name': 'Slovakiet'
+  },
+  {
+    'code': 'alb',
+    'name': 'Albanien'
+  },
+  {
+    'code': 'den',
+    'name': 'Danmark'
+  },
+  {
+    'code': 'ned',
+    'name': 'Holland'
+  },
+  {
+    'code': 'rom',
+    'name': 'Rumænien'
+  },
+  {
+    'code': 'sch',
+    'name': 'Schweiz'
+  },
+  {
+    'code': 'srb',
+    'name': 'Serbien'
+  },
+  {
+    'code': 'slo',
+    'name': 'Slovenien'
+  },
+  {
+    'code': 'ita',
+    'name': 'Italien'
+  },
+  {
+    'code': 'cze',
+    'name': 'Tjekkiet'
+  },
+  {
+    'code': 'cro',
+    'name': 'Kroatien'
+  },
+  {
+    'code': 'plvinderA',
+    'name': 'Play off vinder A'
+  },
+  {
+    'code': 'plvinderB',
+    'name': 'Play off vinder B'
+  },
+  {
+    'code': 'plvinderC',
+    'name': 'Play off vinder C'
+  },
+]
