@@ -54,7 +54,34 @@ const Match = () => {
     const updateMatch = (e) => {
         e.preventDefault()
         console.log(match)
+        setLoading(true)
+        axios
+        .post(`${environment[0]}/server/endpoints/matches2/update.php`, {
+          matches2_id: match.matches2_id,
+          homeTeam: match.home_team,
+          awayTeam: match.away_team,
+          kickOff: new Date(match.kickoff_dtm).addHours(1).toISOString().slice(0, 19).replace('T', ' '),
+          homeTeamGoals: Number(match.home_team_goals),
+          awayTeamGoals: Number(match.away_team_goals)
+        })
+        .then((response) => {
+          if (response.data.code === 200) {
+            console.log(response)
+            navigate('/kampe')
+          } else {
+            console.log(response);
+            alert("Der skete desværre en fejl. Prøv igen.");
+          }
+        })
+        .catch((error) => {
+          alert("Der skete desværre en fejl. Prøv igen.");
+          console.log(error);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
     }
+
     const deleteMatch = (e) => {
         e.preventDefault();
         if (window.confirm("Er du sikker på, at du vil slette kampen mellen " + countryName(match.home_team) + " og " + countryName(match.away_team) + "?")) {
@@ -170,6 +197,32 @@ const Match = () => {
                 let copy = Object.assign({}, prev)
                 copy.kickoff_dtm = e.target.value;
                 return copy
+            })}
+          />
+          <label className="flex mx-auto w-80 rounded-md text-white">Hjemmebaneholds mål</label>
+          <input
+            type="number"
+            placeholder="Mål"
+            name="homeTeamGoals"
+            className="flex mx-auto my-2 w-80 h-9 rounded-md p-1 text-black mb-4"
+            value={match.home_team_goals}
+            onChange={e => setMatch(prev => {
+              let copy = Object.assign({}, prev)
+              copy.home_team_goals = e.target.value;
+              return copy
+            })}
+          />
+          <label className="flex mx-auto w-80 rounded-md text-white">Udebaneholds mål</label>
+          <input
+            type="number"
+            placeholder="Mål"
+            name="awayTeamGoals"
+            className="flex mx-auto my-2 w-80 h-9 rounded-md p-1 text-black mb-4"
+            value={match.away_team_goals}
+            onChange={e => setMatch(prev => {
+              let copy = Object.assign({}, prev)
+              copy.away_team_goals = e.target.value;
+              return copy
             })}
           />
           <button

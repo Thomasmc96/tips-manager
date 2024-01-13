@@ -88,4 +88,33 @@ class Matches2Repository
 
         return $statement->execute();
     }
+
+    public function update($id, Matches2 $matches2) {
+        $datebaseService = new DatabaseService();
+        $connection = $datebaseService->getConnection();
+
+        $query = "
+            UPDATE
+                matches2
+            SET 
+                home_team = :homeTeam,
+                away_team = :awayTeam,
+                kickoff_dtm = :kickoff,
+                home_team_goals = :homeTeamGoals,
+                away_team_goals = :awayTeamGoals
+            WHERE
+                matches2_id = :matches2_id
+        ";
+
+        $statement = $connection->prepare($query);
+
+        $statement->bindParam(":homeTeam", $matches2->homeTeam);
+        $statement->bindParam(":awayTeam", $matches2->awayTeam);
+        $statement->bindParam(":kickoff", $matches2->kickoff);
+        $statement->bindParam(":homeTeamGoals", $matches2->homeTeamGoals);
+        $statement->bindParam(":awayTeamGoals", $matches2->awayTeamGoals);
+        $statement->bindParam(":matches2_id", $id);
+
+        return $statement->execute();
+    }
 }
