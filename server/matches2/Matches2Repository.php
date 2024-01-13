@@ -70,4 +70,22 @@ class Matches2Repository
         $statement->execute();
         return $statement->fetch(PDO::FETCH_ASSOC);
     }
+
+    public function delete($id) {
+        $datebaseService = new DatabaseService();
+        $connection = $datebaseService->getConnection();
+
+        $query = "
+            DELETE FROM
+                matches2
+            WHERE
+                matches2_id = :id
+        ";
+
+        $statement = $connection->prepare($query);
+
+        $statement->bindParam(":id", $id);
+
+        return $statement->execute();
+    }
 }

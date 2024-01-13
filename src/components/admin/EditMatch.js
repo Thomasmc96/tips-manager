@@ -4,7 +4,8 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { FidgetSpinner } from "react-loader-spinner";
 import environment from "../../environment";
-import { countryName } from "../Utils";
+import { countryName, countries } from "../Utils";
+import { useNavigate } from "react-router-dom";
 
 const EditMatch = () => {
     return (
@@ -21,9 +22,12 @@ const EditMatch = () => {
 }
 
 const Match = () => {
+    const navigate = useNavigate();
+
     const {id} = useParams();
 
     const [match, setMatch] = useState('');
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         axios
@@ -47,6 +51,33 @@ const Match = () => {
         });
     }, [])
 
+    const updateMatch = (e) => {
+        e.preventDefault()
+        console.log(match)
+    }
+    const deleteMatch = (e) => {
+        e.preventDefault();
+        setLoading(true)
+        axios
+        .get(
+          `${environment[0]}/server/endpoints/matches2/delete.php?id=${id}`
+        )
+        .then((response) => {
+          if (response.data.code === 200) {
+            navigate('/kampe')
+        } else {
+            console.log(response)
+            alert("Noget gik galt");
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(() => {
+          setTimeout(() => {
+          }, 1000);
+        });
+    }
 
     if (match === '') {
         return (
@@ -66,21 +97,119 @@ const Match = () => {
       }
 
     return(
-        <div className="container mx-auto flex flex-col my-2 px-2 flex-wrap">
+        <div className="container mx-auto flex flex-col my-2 px-2 flex-wrap w-80">
         <h2 className="text-3xl mb-5 mt-5 mx-auto">Opdater kamp #{id}</h2>
-            <div className="flex row mx-auto">
-                <img
-                    src={`https://flags.tv2a.dk/tv2football/${match.home_team}.svg`}
-                    alt={match.home_team}
-                    className="w-8 ml-2 inline mr-2"
-                />
-                <p>{countryName(match.home_team)} vs. {countryName(match.away_team)}</p>
-                <img
-                    src={`https://flags.tv2a.dk/tv2football/${match.away_team}.svg`}
-                    alt={match.home_team}
-                    className="w-8 ml-2 inline"
-                />
-            </div>
+        <form className="container mx-auto mt-2" onSubmit={updateMatch}>
+          <label className="flex mx-auto w-80 rounded-md text-white">Hjemmebanehold</label>
+          <select 
+            className="flex mx-auto my-2 w-80 h-9 rounded-md p-1 text-black mb-4"
+            onChange={e => setMatch(prev => {
+                let copy = Object.assign({}, prev)
+                copy.home_team = e.target.value;
+                return copy
+            })}
+            required
+            name="homeTeam"
+            value={match.home_team}
+            >
+            <option key={'-1'} value={''}>Vælg hold</option>s
+              {countries.sort((a,b) =>{
+                if(a.name < b.name) { return -1; }
+                if(a.name > b.name) { return 1; }
+                return 0;
+              }).map((country) => {
+                return <option key={country.code} value={country.code}>{country.name}</option>
+              })}
+          </select>
+          {match.home_team !== '' && (
+          <img
+            src={`https://flags.tv2a.dk/tv2football/${match.home_team}.svg`}
+            alt={match.home_team}
+            className="w-12 mb-5"
+          />)}
+
+          <label className="flex mx-auto w-80 rounded-md text-white">Udebanehold</label>
+          <select 
+            className="flex mx-auto my-2 w-80 h-9 rounded-md p-1 text-black mb-4"
+            onChange={e => setMatch(prev => {
+                let copy = Object.assign({}, prev)
+                copy.home_away = e.target.value;
+                return copy
+            })}
+            required
+            name="awayTeam"
+            value={match.away_team}
+            >
+            <option key={'-1'} value={''}>Vælg hold</option>
+              {countries.sort((a,b) =>{
+                if(a.name < b.name) { return -1; }
+                if(a.name > b.name) { return 1; }
+                return 0;
+              }).map((country) => {
+                return <option key={country.code} value={country.code}>{country.name}</option>
+              })}
+          </select>
+          {match.away_team !== '' && (
+          <img
+            src={`https://flags.tv2a.dk/tv2football/${match.away_team}.svg`}
+            alt={match.away_team}
+            className="w-12 mb-5"
+          />)}
+
+          <label className="flex mx-auto w-80 rounded-md text-white">Kickoff</label>
+          <input
+            type="datetime-local"
+            placeholder="Kick off"
+            name="kickOff"
+            className="flex mx-auto my-2 w-80 h-9 rounded-md p-1 text-black mb-4"
+            required
+            value={match.kickoff_dtm}
+            onChange={e => setMatch(prev => {
+                let copy = Object.assign({}, prev)
+                copy.kickoff_dtm = e.target.value;
+                return copy
+            })}
+          />
+          <button
+            type="submit"
+            className="bg-sandBeige rounded-md w-80 h-10 text-black text-lg hover:cursor-pointer hover:scale-110 duration-200 mb-3 mx-auto flex justify-center items-center"
+          >     
+          {!loading ? (
+            <>Gem</>
+          ) : (
+            <FidgetSpinner
+              visible={true}
+              height="30"
+              width="30"
+              ariaLabel="dna-loading"
+              wrapperStyle={{}}
+              wrapperClass="dna-wrapper"
+              ballColors={["#003e21", "#067242", "#098b54"]}
+              backgroundColor="#f8d098"
+            />
+          )}
+          </button>
+          <button
+            type="button"
+            className="border border-red-500 rounded-md w-80 h-10 text-white text-lg hover:cursor-pointer hover:scale-110 duration-200 mb-7 mx-auto flex justify-center items-center"
+            onClick={deleteMatch}
+            >     
+          {!loading ? (
+            <>Slet kamp</>
+          ) : (
+            <FidgetSpinner
+              visible={true}
+              height="30"
+              width="30"
+              ariaLabel="dna-loading"
+              wrapperStyle={{}}
+              wrapperClass="dna-wrapper"
+              ballColors={["#003e21", "#067242", "#098b54"]}
+              backgroundColor="#f8d098"
+            />
+          )}
+          </button>
+        </form>
         </div>
     )
 }

@@ -79,8 +79,8 @@ const ShowMatches = ({matches2}) => {
        <table className="min-w-full border border-gray-300 shadow-md">
         <thead>
           <tr>
-            <th className="py-2 px-4 border-b border-gray-300 text-center">Hjemmebanehold</th>
-            <th className="py-2 px-4 border-b border-gray-300 text-center">Udebanehold</th>
+            <th className="py-2 px-4 border-b border-gray-300 text-center">Hjemmebane</th>
+            <th className="py-2 px-4 border-b border-gray-300 text-center">Udebane</th>
             <th className="py-2 px-4 border-b border-gray-300 text-center hidden sm:table-cell">Mål (1)</th>
             <th className="py-2 px-4 border-b border-gray-300 text-center hidden sm:table-cell">Mål (2)</th>
             <th className="py-2 px-4 border-b border-gray-300 text-center hidden sm:table-cell">Kickoff</th>
