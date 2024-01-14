@@ -18,7 +18,7 @@ const Match = ({
 
     let oPrediction = predictions.find((prediction) => prediction.id === id)
 
-    if(!oPrediction) {
+    if (!oPrediction) {
       setPredictions((currentPredictions) => [
         ...currentPredictions,
         { id: id, prediction: e.target.value },

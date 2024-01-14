@@ -8,8 +8,8 @@ const TipsModal = ({ data }) => {
   };
 
   return (
-   <>
-                
+    <>
+
     </>
   );
 };

@@ -20,21 +20,21 @@ function App() {
     <Router>
       <Header />
       <Routes>
-      <Route path="/tilmeldinger" element={
-       <ProtectedRoute>
-          <Overview />
-       </ProtectedRoute> 
-      } />
-      <Route path="/kampe" element={
-       <ProtectedRoute>
-          <Matches />
-       </ProtectedRoute> 
-      } />
-      <Route path="/kampe/:id" element={
-       <ProtectedRoute>
-          <EditMatch />
-       </ProtectedRoute> 
-      } />
+        <Route path="/tilmeldinger" element={
+          <ProtectedRoute>
+            <Overview />
+          </ProtectedRoute>
+        } />
+        <Route path="/kampe" element={
+          <ProtectedRoute>
+            <Matches />
+          </ProtectedRoute>
+        } />
+        <Route path="/kampe/:id" element={
+          <ProtectedRoute>
+            <EditMatch />
+          </ProtectedRoute>
+        } />
         <Route path="/" element={<Standings />} />
         <Route path="/tipskupon" element={<TipsBuilder />} />
         <Route path="/praemie" element={<Prize />} />

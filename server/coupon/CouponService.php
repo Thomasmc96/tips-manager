@@ -230,7 +230,9 @@ class CouponService
             <head>%s</head>
                 <body>
                     <h2>Hej %s</h2> 
-                    <p>Fedt du vil være med! Husk at overføre 100 kr. til 30 32 12 12. Når du har gjort det, så aktiverer vi din kupon så den tæller med i konkurrencen.</p>
+                    <p>Fedt du vil være med! Husk at overføre 100 kr. til 30 32 12 12. Når du har gjort det, så aktiverer vi din kupon så den tæller med i konkurrencen.
+                    Held og lykke!
+                    </p>
                     <p>Her er dine tips:</p><br>%s
                 </body>
         </html>",
@@ -266,16 +268,15 @@ class CouponService
 
     $style = "
     <style>
-        a {
+        .actionBtn {
             margin-top: 20px;
             margin-left: auto;
             margin-right: auto;
-            display: flex;
+            display: inline-flex;
             background-color: sandybrown;
             padding: 8px;
             border-radius: 4px;
-            color: black;
-            font-weight: 600;
+            color: black !important;
             text-decoration: none;
         }
     </style>
@@ -287,15 +288,12 @@ class CouponService
             <head>%s</head>
             <body>
                 <h2>Hej René</h2>
-                <p>En ny kupon er lige blevet udfyldt af:</p><br>
-                <p>Navn: %s</p>
-                <p>Email: %s</p><br>
-                <a href='%s'>Gå til tips-manageren</a>
+                <p>En ny kupon er lige blevet udfyldt af %s. Husk at bekræfte tilmeldelsen når der bliver overført 100 kr.</p>
+                <a href='%s' class='actionBtn'>Se dashboard</a>
             </body>
         </html>",
         $style,
         $coupon->name,
-        $coupon->mail,
         "http://" . $_SERVER['HTTP_HOST'] . "/tilmeldinger" 
     );
 
@@ -334,11 +332,11 @@ class CouponService
                 <tr>
                     <td>
                         <div>
-                            <span>' . $match->home_team . ' - ' . $match->away_team . '</span>
+                            <span>' . $match['home_team'] . ' - ' . $match['away_team'] . '</span>
                         </div>
                     </td>';
             foreach ($predictions as $prediction) {
-                if ($prediction->id === $match->matches2_id) {
+                if ($prediction->id === $match['matches2_id']) {
                     $table .= '
                     <td>
                         ' . $prediction->prediction . '

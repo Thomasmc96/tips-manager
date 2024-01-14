@@ -115,8 +115,8 @@ const Table = ({ coupons }) => {
                       {!isFinished(match)
                         ? getDateString(match.kickoff_dtm)
                         : match.home_team_goals +
-                          " - " +
-                          match.away_team_goals}
+                        " - " +
+                        match.away_team_goals}
                     </span>
                   </div>
                 </td>
@@ -131,8 +131,8 @@ const Table = ({ coupons }) => {
                             (prediction.won && isFinished(match)
                               ? "bg-lightGreen"
                               : !prediction.won && isFinished(match)
-                              ? "bg-red-500"
-                              : "")
+                                ? "bg-red-500"
+                                : "")
                           }
                         >
                           <span key={prediction.id}>

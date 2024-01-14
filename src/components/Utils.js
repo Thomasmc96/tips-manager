@@ -1,8 +1,8 @@
 import axios from "axios";
 import environment from "../environment";
 
-Date.prototype.addHours = function(h) {
-  this.setTime(this.getTime() + (h*60*60*1000));
+Date.prototype.addHours = function (h) {
+  this.setTime(this.getTime() + (h * 60 * 60 * 1000));
   return this;
 }
 
@@ -157,9 +157,9 @@ const getPodiumNames = (podium, sortedCoupons) => {
   for (let i = 0; i < sortedCoupons.length; i++) {
     if (
       podium.first.names.length +
-        podium.second.names.length +
-        podium.third.names.length >
-        2 &&
+      podium.second.names.length +
+      podium.third.names.length >
+      2 &&
       sortedCoupons[i].amountCorrect !== lastAmountCorrect
     ) {
       break;
@@ -227,8 +227,8 @@ const getPodiumPrizes = (podium, totalCoupons) => {
   };
 };
 
-const toFixedIfNecessary =( value, dp ) => {
-  return +parseFloat(value).toFixed( dp );
+const toFixedIfNecessary = (value, dp) => {
+  return +parseFloat(value).toFixed(dp);
 }
 
 export const countryName = (code) => {

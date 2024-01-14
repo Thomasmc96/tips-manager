@@ -42,7 +42,7 @@ const TipsBuilder = () => {
 
   const submitForm = (e) => {
     e.preventDefault();
-    let diff = matches.length - predictions.length;
+    let diff = matches2.length - predictions.length;
 
     if (diff > 0) {
       setError("Du mangler " + diff + (diff > 1 ? " kampe" : " kamp"));
@@ -148,11 +148,11 @@ const TipsBuilder = () => {
           />
         ))} */}
         {matches2.map((match2) => (
-          <Match 
-          key={match2.matches2_id}
+          <Match
+            key={match2.matches2_id}
             setPredictions={setPredictions}
             predictions={predictions}
-            setError={setError} 
+            setError={setError}
             match={match2}
           />
         ))}

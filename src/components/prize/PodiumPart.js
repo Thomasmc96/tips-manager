@@ -5,8 +5,8 @@ const PodiumPart = ({ placement, number }) => {
     number === "1st"
       ? "text-gold"
       : number === "2nd"
-      ? "text-silver"
-      : "text-bronze";
+        ? "text-silver"
+        : "text-bronze";
   return (
     <section className="flex flex-col justify-center items-center my-2 sm:max-w-[30%] max-w-full mx-auto">
       <h1 className={"font-bold text-6xl sm:text-5xl mb-1 " + textColor}>

@@ -23,14 +23,14 @@ const Login = () => {
         password: password
       }).then((response) => {
         console.log(response)
-        if(response.data.code === 200) {
+        if (response.data.code === 200) {
           localStorage.setItem("jwt", response.data.jwt);
           localStorage.setItem("name", response.data.name);
           navigate('/tilmeldinger');
         } else {
           setError("Forkert login")
         }
-      }).catch((error)=> {
+      }).catch((error) => {
         console.log(error)
       }).finally(() => {
         setLoading(false);
@@ -39,14 +39,14 @@ const Login = () => {
 
   const handleMail = (e) => {
     setMail(e.target.value);
-    if(error !== "") {
+    if (error !== "") {
       setError("");
     }
   }
 
   const handlePassword = (e) => {
     setPassword(e.target.value);
-    if(error !== "") {
+    if (error !== "") {
       setError("");
     }
   }
@@ -83,26 +83,26 @@ const Login = () => {
       </div>
       <div className="mb-4 w-80 mx-auto">
         <p className="text-red-500">{error}</p>
-        </div>
+      </div>
       <div className="flex items-center justify-between w-80 mx-auto">
         <button
           type="submit"
           className="bg-sandBeige text-black py-2 px-4 w-full rounded focus:outline-none focus:shadow-outline flex justify-center"
         >
           {!loading ? (
-          <>Login</>
-        ) : (
-          <FidgetSpinner
-            visible={true}
-            height="24"
-            width="24"
-            ariaLabel="dna-loading"
-            wrapperStyle={{}}
-            wrapperClass="dna-wrapper"
-            ballColors={["#003e21", "#067242", "#098b54"]}
-            backgroundColor="#f8d098"
-          />
-        )}
+            <>Login</>
+          ) : (
+            <FidgetSpinner
+              visible={true}
+              height="24"
+              width="24"
+              ariaLabel="dna-loading"
+              wrapperStyle={{}}
+              wrapperClass="dna-wrapper"
+              ballColors={["#003e21", "#067242", "#098b54"]}
+              backgroundColor="#f8d098"
+            />
+          )}
         </button>
       </div>
     </form>
