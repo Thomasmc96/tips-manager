@@ -61,8 +61,8 @@ const Match = () => {
           homeTeam: match.home_team,
           awayTeam: match.away_team,
           kickOff: new Date(match.kickoff_dtm).addHours(1).toISOString().slice(0, 19).replace('T', ' '),
-          homeTeamGoals: Number(match.home_team_goals),
-          awayTeamGoals: Number(match.away_team_goals),
+          homeTeamGoals: ['', null].includes(match.home_team_goals) ? null : Number(match.home_team_goals),
+          awayTeamGoals: ['', null].includes(match.away_team_goals) ? null : Number(match.away_team_goals),
           updatedDtm: new Date().addHours(1).toISOString().slice(0, 19).replace('T', ' ')
         })
         .then((response) => {
@@ -206,7 +206,7 @@ const Match = () => {
             placeholder="Mål"
             name="homeTeamGoals"
             className="flex mx-auto my-2 w-80 h-9 rounded-md p-1 text-black mb-4"
-            value={match.home_team_goals}
+            value={match.home_team_goals === null ? '' : match.home_team_goals}
             onChange={e => setMatch(prev => {
               let copy = Object.assign({}, prev)
               copy.home_team_goals = e.target.value;
@@ -219,7 +219,7 @@ const Match = () => {
             placeholder="Mål"
             name="awayTeamGoals"
             className="flex mx-auto my-2 w-80 h-9 rounded-md p-1 text-black mb-4"
-            value={match.away_team_goals}
+            value={match.away_team_goals === null ? '' : match.away_team_goals}
             onChange={e => setMatch(prev => {
               let copy = Object.assign({}, prev)
               copy.away_team_goals = e.target.value;

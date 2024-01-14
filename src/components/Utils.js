@@ -297,7 +297,7 @@ export const countries = [
     'name': 'Rumænien'
   },
   {
-    'code': 'sch',
+    'code': 'sui',
     'name': 'Schweiz'
   },
   {

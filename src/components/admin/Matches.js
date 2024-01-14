@@ -134,8 +134,8 @@ const CreateMatch = ({addNewMatch}) => {
         homeTeam: homeTeam,
         awayTeam: awayTeam,
         kickOff: new Date(kickOff).addHours(1).toISOString().slice(0, 19).replace('T', ' '),
-        homeTeamGoals: 0,
-        awayTeamGoals: 0
+        homeTeamGoals: null,
+        awayTeamGoals: null
       })
       .then((response) => {
         if (response.data.code === 200) {

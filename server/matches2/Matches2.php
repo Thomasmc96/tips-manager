@@ -16,9 +16,9 @@ class Matches2
         string $homeTeam, 
         string $awayTeam, 
         string $kickoff,
-        int $homeTeamGoals,
-        int $awayTeamGoals,
-        string $updatedDtm = null,
+        ?int $homeTeamGoals,
+        ?int $awayTeamGoals,
+        ?string $updatedDtm = null,
         )
     {
         $this->homeTeam = $homeTeam;
