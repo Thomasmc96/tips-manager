@@ -13,6 +13,7 @@ if (empty($data->name) || empty($data->mail) || empty($data->password)) {
     echo json_encode([
         "message" => "Values are missing",
         "code" => 400,
+        "data" => $data
     ]);
     exit(0);
 }

@@ -7,7 +7,8 @@ include_once dirname(__DIR__, 2) . '/admin/AdminService.php';
 // Get incoming data
 $data = json_decode(file_get_contents("php://input"));
 
-$token = $_SERVER['HTTP_AUTHORIZATION'];
+$authorizationHeader = isset($_SERVER['HTTP_AUTHORIZATION']) ? $_SERVER['HTTP_AUTHORIZATION'] : '';
+$token = str_replace('Bearer ', '', $authorizationHeader);
 $headers = apache_request_headers();
 
 if (!$token) {

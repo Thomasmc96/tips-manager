@@ -108,7 +108,7 @@ export const verify = async () => {
       {
         headers: {
           "Content-Type": "application/json",
-          Authorization: jwt,
+          "Authorization": `Bearer ${jwt}`,
         },
       }
     )
