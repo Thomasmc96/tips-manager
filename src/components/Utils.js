@@ -332,4 +332,52 @@ export const countries = [
     'code': 'plvinderC',
     'name': 'Play off vinder C'
   },
+  {
+    'code': 'pol',
+    'name': 'Polen'
+  },
+  {
+    'code': 'est',
+    'name': 'Estland'
+  },
+  {
+    'code': 'wal',
+    'name': 'Wales'
+  },
+  {
+    'code': 'fin',
+    'name': 'Finland'
+  },
+  {
+    'code': 'isr',
+    'name': 'Israel'
+  },
+  {
+    'code': 'ice',
+    'name': 'Island'
+  },
+  {
+    'code': 'bos',
+    'name': 'Bosnien'
+  },
+  {
+    'code': 'ukr',
+    'name': 'Ukraine'
+  },
+  {
+    'code': 'geo',
+    'name': 'Georgien'
+  },
+  {
+    'code': 'lux',
+    'name': 'Luxembourg'
+  },
+  {
+    'code': 'gre',
+    'name': 'Grækenland'
+  },
+  {
+    'code': 'kaz',
+    'name': 'Kasakhstan'
+  },
 ]
