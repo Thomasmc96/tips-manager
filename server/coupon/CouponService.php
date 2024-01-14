@@ -6,7 +6,7 @@ include_once dirname(__DIR__) . '/matches2/Matches2.php';
 class CouponService
 {
 
-    private $from_email = "tips-manager@jcrl.dk";
+    private $from_email = "tips-manager@thch.dk";
 
     public function __construct()
     {
