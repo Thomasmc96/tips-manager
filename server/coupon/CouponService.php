@@ -1,6 +1,7 @@
 <?php
 include_once __DIR__ . '/CouponRepository.php';
-include_once dirname(__DIR__) . '/matches/MatchesRepository.php';
+include_once dirname(__DIR__) . '/matches2/Matches2Repository.php';
+include_once dirname(__DIR__) . '/matches2/Matches2.php';
 
 class CouponService
 {
@@ -14,9 +15,9 @@ class CouponService
     public function getCouponsWithResults(): array
     {
         $couponRepo = new CouponRepository();
-        $matchesRepo = new MatchesRepository();
+        $matches2Repo = new Matches2Repository();
         $coupons = $couponRepo->getAccepted();
-        $matches = $matchesRepo->getLatest();
+        $matches2 = $matches2Repo->getAll();
 
         if (!$coupons) {
             return [];
@@ -28,15 +29,25 @@ class CouponService
             $amountCorrect = 0;
 
             foreach ($predictions as $prediction_index => $prediction) {
-                $match = array_values(array_filter(json_decode($matches['data']), fn ($match) => $match->id === $prediction->id));
-
-                if (empty($match)) {
+                // var_dump($matches2);
+                $match_array = array_values(array_filter($matches2, fn ($match) => $match['matches2_id'] === $prediction->id));
+                if (empty($match_array)) {
                     continue;
                 }
-                $match = $match[0];
+                
+                $match = new Matches2(
+                    $match_array[0]['home_team'],
+                    $match_array[0]['away_team'],
+                    $match_array[0]['kickoff_dtm'],
+                    $match_array[0]['home_team_goals'],
+                    $match_array[0]['away_team_goals'],
+                    $match_array[0]['updated_dtm'],
+                );
 
-                $homeTeamScore = $match->participants[0]->finalResult;
-                $awayTeamScore = $match->participants[1]->finalResult;
+                $match->setId($match_array[0]['matches2_id']);
+
+                $homeTeamScore = $match->homeTeamGoals;
+                $awayTeamScore = $match->awayTeamGoals;
 
                 $tipResult = "";
                 if ($homeTeamScore > $awayTeamScore) {
@@ -47,7 +58,7 @@ class CouponService
                     $tipResult = "x";
                 }
 
-                if ($prediction->prediction === $tipResult && $match->state === "FINISHED") {
+                if ($prediction->prediction === $tipResult && $this->isFinished($match)) {
                     $prediction->won = true;
                     $amountCorrect++;
                 } else {
@@ -60,6 +71,13 @@ class CouponService
         }
 
         return $coupons;
+    }
+
+    private function isFinished($match) {
+        if($match->homeTeamGoals !== null && $match->awayTeamGoals !== null) {
+            return true;
+        }
+        return false;
     }
 
     public function getSortedByAmountCorrect()
@@ -80,19 +98,19 @@ class CouponService
 
     private function getSortedMatchesByStartDate()
     {
-        $matchesRepo = new MatchesRepository();
-        $matches = json_decode($matchesRepo->getLatest()['data']);
+        $matches2Repo = new Matches2Repository();
+        $matches2 = $matches2Repo->getAll();
 
-        usort($matches, function ($a, $b) {
-            if ($a->startDate > $b->startDate) {
+        usort($matches2, function ($a, $b) {
+            if ($a['kickoff_dtm'] > $b['kickoff_dtm']) {
                 return 1;
-            } elseif ($a->startDate < $b->startDate) {
+            } elseif ($a['kickoff_dtm'] < $b['kickoff_dtm']) {
                 return -1;
             }
             return 0;
         });
 
-        return $matches;
+        return $matches2;
     }
 
     public function sendStandingsEmail($to_email, $to_name)
@@ -170,15 +188,15 @@ class CouponService
                 <tr>
                     <td>
                         <div>
-                            <span>' . $match->participants[0]->name . ' - ' . $match->participants[1]->name . '</span>
-                            <span>' . ($match->state === "FINISHED" ? $match->participants[0]->finalResult . " - " . $match->participants[1]->finalResult : "") . '</span>
+                            <span>' . $match->home_team . ' - ' . $match->away_team . '</span>
+                            <span>' . ($this->isFinished($match) ? $match->home_team_goals . " - " . $match->away_team_goals : "") . '</span>
                         </div>
                     </td>';
             foreach ($sortedStandings as $sortedStanding) {
                 foreach ($sortedStanding['predictions'] as $prediction) {
-                    if ($prediction->id === $match->id) {
+                    if ($prediction->id === $match->matches2_id) {
                         $table .= '
-                        <td style="' . ($prediction->won && $match->state === "FINISHED" ? 'background-color:#098b54' : (!$prediction->won && $match->state === "FINISHED" ? 'background-color:red' : '')) . '">
+                        <td style="' . ($prediction->won && $this->isFinished($match) ? 'background-color:#098b54' : (!$prediction->won && $this->isFinished($match) ? 'background-color:red' : '')) . '">
                             ' . $prediction->prediction . '
                         </td>';
                     }
@@ -316,11 +334,11 @@ class CouponService
                 <tr>
                     <td>
                         <div>
-                            <span>' . $match->participants[0]->name . ' - ' . $match->participants[1]->name . '</span>
+                            <span>' . $match->home_team . ' - ' . $match->away_team . '</span>
                         </div>
                     </td>';
             foreach ($predictions as $prediction) {
-                if ($prediction->id === $match->id) {
+                if ($prediction->id === $match->matches2_id) {
                     $table .= '
                     <td>
                         ' . $prediction->prediction . '

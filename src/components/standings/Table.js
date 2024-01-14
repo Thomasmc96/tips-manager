@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import environment from "../../environment";
 import { FidgetSpinner } from "react-loader-spinner";
-import { getDateString } from "../Utils";
+import { countryName, getDateString, sortByKickOff } from "../Utils";
 import { sortByDate } from "../Utils";
 
 const Table = ({ coupons }) => {
   const [zoom, setZoom] = useState(100);
   const [matches, setMatches] = useState([]);
+  const [matches2, setMatches2] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
@@ -15,14 +16,14 @@ const Table = ({ coupons }) => {
 
   useEffect(() => {
     axios
-      // .get(`${environment[0]}/server/endpoints/matches/getMatches.php`)
-      .get(
-        `${environment[0]}/server/endpoints/matches/getLimitedMatches.php?limit=7`
-      )
+      .get(`${environment[0]}/server/endpoints/matches2/getAll.php`)
+      // .get(
+      //   `${environment[0]}/server/endpoints/matches/getLimitedMatches.php?limit=7`
+      // )
       .then((response) => {
         if (response.data.code === 200) {
           console.log(response);
-          setMatches(sortByDate(JSON.parse(response.data.matches.data)));
+          setMatches2(sortByKickOff(response.data.matches2));
         } else {
           setError("Noget gik galt");
         }
@@ -33,9 +34,17 @@ const Table = ({ coupons }) => {
       .finally(() => {
         setTimeout(() => {
           setLoading(false);
+          console.log(matches2)
         }, 1000);
       });
   }, []);
+
+  const isFinished = (match) => {
+    if (match.home_team_goals !== null && match.away_team_goals !== null) {
+      return true
+    }
+    return false;
+  }
 
   if (loading) {
     return (
@@ -94,33 +103,34 @@ const Table = ({ coupons }) => {
             </tr>
           </thead>
           <tbody>
-            {matches.map(({ id, participants, startDate, state }, i) => (
+            {/* {matches.map(({ id, participants, startDate, state }, i) => ( */}
+            {matches2.map((match, i) => (
               <tr key={i}>
                 <td className={`p-2 text-center border-[1px] border-black`}>
                   <div className="flex flex-col">
                     <span>
-                      {participants[0].name} - {participants[1].name}
+                      {countryName(match.home_team)} - {countryName(match.away_team)}
                     </span>
                     <span>
-                      {state !== "FINISHED"
-                        ? getDateString(startDate)
-                        : participants[0].finalResult +
+                      {!isFinished(match)
+                        ? getDateString(match.kickoff_dtm)
+                        : match.home_team_goals +
                           " - " +
-                          participants[1].finalResult}
+                          match.away_team_goals}
                     </span>
                   </div>
                 </td>
                 {coupons.map(({ coupons_id, predictions }, j) =>
                   predictions.map((prediction, j) => {
-                    if (prediction.id === id) {
+                    if (prediction.id === match.matches2_id) {
                       return (
                         <td
                           key={coupons_id}
                           className={
                             `p-6 text-center border-[1px] border-black ` +
-                            (prediction.won && state === "FINISHED"
+                            (prediction.won && isFinished(match)
                               ? "bg-lightGreen"
-                              : !prediction.won && state === "FINISHED"
+                              : !prediction.won && isFinished(match)
                               ? "bg-red-500"
                               : "")
                           }

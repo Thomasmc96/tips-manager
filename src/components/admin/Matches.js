@@ -3,7 +3,7 @@ import axios from "axios";
 import { FidgetSpinner } from "react-loader-spinner";
 import environment from "../../environment";
 import AdminMenu from "./AdminMenu";
-import { countries, countryName, sortByKickOff } from "../Utils";
+import { countries, countryName, sortByKickOff, getDateString } from "../Utils";
 import { useNavigate } from "react-router-dom";
 
 const Matches = () => {
@@ -110,7 +110,7 @@ const ShowMatches = ({matches2}) => {
                 
                 <td className="py-2 px-4 border-b border-gray-300 text-center hidden sm:table-cell">{match.home_team_goals}</td>
                 <td className="py-2 px-4 border-b border-gray-300 text-center hidden sm:table-cell">{match.away_team_goals}</td>
-                <td className="py-2 px-4 border-b border-gray-300 text-center hidden sm:table-cell">{match.kickoff_dtm}</td>
+                <td className="py-2 px-4 border-b border-gray-300 text-center hidden sm:table-cell">{getDateString(match.kickoff_dtm)}</td>
               </tr>
             ))}
         </tbody>
