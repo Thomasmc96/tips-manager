@@ -9,9 +9,9 @@ import { useNavigate } from "react-router-dom";
 
 const EditMatch = () => {
   return (
-    <div className="container mx-auto px-2 flex flex-col my-2 flex-wrap">
+    <div className="container mx-auto flex flex-col my-2 flex-wrap px-2">
       <div>
-        <h1 className="text-3xl mb-3 mt-5 mx-2">
+        <h1 className="text-3xl mb-3 mt-5 ">
           Hej {localStorage.getItem("name")}
         </h1>
         <AdminMenu />
@@ -128,7 +128,7 @@ const Match = () => {
 
   return (
     <div className="container flex flex-col my-2 px-2 flex-wrap w-full sm:w-80">
-      <h2 className="text-3xl mb-5 mt-5">Opdater kamp #{id}</h2>
+      <h3 className="text-2xl mb-5 mt-5">Opdater kamp #{id}</h3>
       <form className="container mt-2" onSubmit={updateMatch}>
         <label className="flex w-full rounded-md text-white">Hjemmebanehold</label>
         <select

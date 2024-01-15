@@ -2,6 +2,8 @@ import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import environment from "../../environment";
 import { FidgetSpinner } from "react-loader-spinner";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 
 const Coupon = ({ coupon }) => {
   const { coupons_id, name, mail, paid, subscribeToMails } = coupon;
@@ -90,7 +92,7 @@ const Coupon = ({ coupon }) => {
   return (
     <div
       className={
-        "rounded-lg shadow-md sm:w-auto w-full border-2 inline-flex flex-col mt-2 " +
+        "rounded-lg shadow-md min-w-12 sm:w-auto w-full border-2 inline-flex flex-col mt-2 sm:mr-4 " +
         (approved ? "border-lightGreen" : "border-red-500")
       }
     >
@@ -123,7 +125,7 @@ const Coupon = ({ coupon }) => {
           />
         }
         <p className="text-white text-sm mb-4">{mail}</p>
-        <div className="flex flex-row gap-5 items-center h-10">
+        <div className="flex flex-row justify-between items-center h-10">
           {!approved ? (
             <button
               className="bg-sandBeige hover:bg-green-700 text-black py-2 px-4 rounded focus:outline-none focus:shadow-outline"
@@ -151,12 +153,10 @@ const Coupon = ({ coupon }) => {
               Godkendt
             </p>
           )}
-          {/* <button className="bg-transparent border-2 border-lightGreen hover:bg-green-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">Se tips</button> */}
-          {/* <TipsModal data={[
-  { label: "Name", value: "John Smith" },
-  { label: "Age", value: "30" },
-  { label: "Location", value: "New York" },
-]}/> */}
+          <span className="text-xl">
+          
+            <FontAwesomeIcon icon={faTrashCan} />
+          </span>
         </div>
       </div>
 

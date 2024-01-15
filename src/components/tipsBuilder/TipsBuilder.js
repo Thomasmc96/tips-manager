@@ -19,13 +19,9 @@ const TipsBuilder = () => {
   useEffect(() => {
     axios
       .get(`${environment[0]}/server/endpoints/matches2/getAll.php`)
-      // .get(
-      //   `${environment[0]}/server/endpoints/matches/getLimitedMatches.php?limit=6`
-      // )
       .then((response) => {
         if (response.data.code === 200) {
           console.log(response.data.matches2);
-          // setMatches(sortByDate(JSON.parse(response.data.matches.data)));
           setMatches2(sortByKickOff(response.data.matches2));
         } else {
           setError("Noget gik galt");
@@ -94,8 +90,8 @@ const TipsBuilder = () => {
   }
 
   return (
-    <form className="container mx-auto mt-2" onSubmit={submitForm}>
-      <div className="w-80 mx-2">
+    <form className="container mx-auto mt-2 px-2" onSubmit={submitForm}>
+      <div className="sm:w-80 w-full">
       <h1 className="text-3xl mb-9 mt-5">Udfyld din kupon</h1>
       <label className="flex w-full rounded-md text-white">Navn</label>
       <input
