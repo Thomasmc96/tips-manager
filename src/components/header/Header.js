@@ -7,10 +7,10 @@ const Header = () => {
       <nav className="container mx-auto flex space-x-6 justify-between">
         <div className="space-x-6">
           <Link to={"/"} className="hover:text-sandBeige">
-            Tavle
+            Stilling
           </Link>
           <Link to={"/tipskupon"} className="hover:text-sandBeige">
-            Ny kupon
+            Opret kupon
           </Link>
           <Link to={"/praemie"} className="hover:text-sandBeige">
             Præmie

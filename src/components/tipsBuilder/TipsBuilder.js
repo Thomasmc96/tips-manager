@@ -95,7 +95,7 @@ const TipsBuilder = () => {
 
   return (
     <form className="container mx-auto mt-2" onSubmit={submitForm}>
-      <div className="w-80">
+      <div className="w-80 mx-2">
       <h1 className="text-3xl mb-9 mt-5">Udfyld din kupon</h1>
       <label className="flex w-full rounded-md text-white">Navn</label>
       <input
@@ -138,6 +138,7 @@ const TipsBuilder = () => {
       </div>
       </div>
       <section className="mt-10">
+      <h2 className="text-2xl mb-9 mt-5 mx-2">Vælg dine tips herunder:</h2>
         {matches2.map((match2) => (
           <Match
             key={match2.matches2_id}

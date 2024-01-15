@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 const EditMatch = () => {
   return (
-    <div className="container mx-auto flex flex-col my-2 px-2 flex-wrap">
+    <div className="container mx-auto px-2 flex flex-col my-2 flex-wrap">
       <div>
         <h1 className="text-3xl mb-3 mt-5 mx-2">
           Hej {localStorage.getItem("name")}
