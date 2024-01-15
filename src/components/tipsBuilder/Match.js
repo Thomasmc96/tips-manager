@@ -30,7 +30,7 @@ const Match = ({
   };
 
   return (
-    <div className="bg-lightGreen mb-10 p-2 rounded-md">
+    <div className="bg-lightGreen mb-10 p-2">
       <h3 className="text-xl text-center">
         <div className="flex space-x-5 justify-center">
           <div className="flex items-center space-x-3">

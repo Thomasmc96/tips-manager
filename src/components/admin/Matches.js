@@ -168,12 +168,12 @@ const CreateMatch = ({ addNewMatch }) => {
       });
   }
   return (
-    <div className="container mx-auto flex flex-col my-2 px-2 flex-wrap w-80">
+    <div className="container flex flex-col my-2 px-2 flex-wrap w-full sm:w-80">
       <h2 className="text-2xl mb-3 mt-5">Tilføj en kamp</h2>
-      <form className="container mx-auto mt-2" onSubmit={saveMatch}>
-        <label className="flex mx-auto w-80 rounded-md text-white">Hjemmebanehold</label>
+      <form className="container mt-2" onSubmit={saveMatch}>
+        <label className="flex w-full rounded-md text-white">Hjemmebanehold</label>
         <select
-          className="flex mx-auto my-2 w-80 h-9 rounded-md p-1 text-black mb-4"
+          className="flex my-2 w-full h-9 rounded-md p-1 text-black mb-4"
           onChange={e => setHomeTeam(e.target.value)}
           required
           name="homeTeam"
@@ -194,9 +194,9 @@ const CreateMatch = ({ addNewMatch }) => {
             alt={homeTeam}
             className="w-12 mb-5"
           />)}
-        <label className="flex mx-auto w-80 rounded-md text-white">Udebanehold</label>
+        <label className="flex w-full rounded-md text-white">Udebanehold</label>
         <select
-          className="flex mx-auto my-2 w-80 h-9 rounded-md p-1 text-black mb-4"
+          className="flex my-2 w-full h-9 rounded-md p-1 text-black mb-4"
           onChange={e => setAwayTeam(e.target.value)}
           required
           name="awayTeam"
@@ -217,19 +217,19 @@ const CreateMatch = ({ addNewMatch }) => {
             alt={awayTeam}
             className="w-12 mb-5"
           />)}
-        <label className="flex mx-auto w-80 rounded-md text-white">Kickoff</label>
+        <label className="flex w-full rounded-md text-white">Kickoff</label>
         <input
           type="datetime-local"
           placeholder="Kick off"
           name="kickOff"
-          className="flex mx-auto my-2 w-80 h-9 rounded-md p-1 text-black mb-4"
+          className="flex my-2 w-full h-9 rounded-md p-1 text-black mb-4"
           required
           value={kickOff}
           onChange={(e) => setKickOff(e.target.value)}
         />
         <button
           type="submit"
-          className="bg-sandBeige rounded-md w-80 h-10 text-black text-lg hover:cursor-pointer hover:scale-110 duration-200 mb-7 mx-auto flex justify-center items-center"
+          className="bg-sandBeige rounded-md w-full h-10 text-black text-lg hover:cursor-pointer hover:scale-110 duration-200 mb-7 flex justify-center items-center"
         >
           {!loading ? (
             <>Opret kamp</>

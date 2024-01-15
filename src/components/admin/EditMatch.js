@@ -127,12 +127,12 @@ const Match = () => {
   }
 
   return (
-    <div className="container mx-auto flex flex-col my-2 px-2 flex-wrap w-80">
-      <h2 className="text-3xl mb-5 mt-5 mx-auto">Opdater kamp #{id}</h2>
-      <form className="container mx-auto mt-2" onSubmit={updateMatch}>
-        <label className="flex mx-auto w-80 rounded-md text-white">Hjemmebanehold</label>
+    <div className="container flex flex-col my-2 px-2 flex-wrap w-full sm:w-80">
+      <h2 className="text-3xl mb-5 mt-5">Opdater kamp #{id}</h2>
+      <form className="container mt-2" onSubmit={updateMatch}>
+        <label className="flex w-full rounded-md text-white">Hjemmebanehold</label>
         <select
-          className="flex mx-auto my-2 w-80 h-9 rounded-md p-1 text-black mb-4"
+          className="flex my-2 w-full h-9 rounded-md p-1 text-black mb-4"
           onChange={e => setMatch(prev => {
             let copy = Object.assign({}, prev)
             copy.home_team = e.target.value;
@@ -158,9 +158,9 @@ const Match = () => {
             className="w-12 mb-5"
           />)}
 
-        <label className="flex mx-auto w-80 rounded-md text-white">Udebanehold</label>
+        <label className="flex w-full rounded-md text-white">Udebanehold</label>
         <select
-          className="flex mx-auto my-2 w-80 h-9 rounded-md p-1 text-black mb-4"
+          className="flex my-2 w-full h-9 rounded-md p-1 text-black mb-4"
           onChange={e => setMatch(prev => {
             let copy = Object.assign({}, prev)
             copy.away_team = e.target.value;
@@ -186,12 +186,12 @@ const Match = () => {
             className="w-12 mb-5"
           />)}
 
-        <label className="flex mx-auto w-80 rounded-md text-white">Kickoff</label>
+        <label className="flex w-full rounded-md text-white">Kickoff</label>
         <input
           type="datetime-local"
           placeholder="Kick off"
           name="kickOff"
-          className="flex mx-auto my-2 w-80 h-9 rounded-md p-1 text-black mb-4"
+          className="flex my-2 w-full h-9 rounded-md p-1 text-black mb-4"
           required
           value={match.kickoff_dtm}
           onChange={e => setMatch(prev => {
@@ -200,12 +200,12 @@ const Match = () => {
             return copy
           })}
         />
-        <label className="flex mx-auto w-80 rounded-md text-white">Hjemmebaneholds mål</label>
+        <label className="flex w-full rounded-md text-white">Hjemmebaneholds mål</label>
         <input
           type="number"
           placeholder="Mål"
           name="homeTeamGoals"
-          className="flex mx-auto my-2 w-80 h-9 rounded-md p-1 text-black mb-4"
+          className="flex my-2 w-full h-9 rounded-md p-1 text-black mb-4"
           value={match.home_team_goals === null ? '' : match.home_team_goals}
           onChange={e => setMatch(prev => {
             let copy = Object.assign({}, prev)
@@ -213,12 +213,12 @@ const Match = () => {
             return copy
           })}
         />
-        <label className="flex mx-auto w-80 rounded-md text-white">Udebaneholds mål</label>
+        <label className="flex w-full rounded-md text-white">Udebaneholds mål</label>
         <input
           type="number"
           placeholder="Mål"
           name="awayTeamGoals"
-          className="flex mx-auto my-2 w-80 h-9 rounded-md p-1 text-black mb-4"
+          className="flex my-2 w-full h-9 rounded-md p-1 text-black mb-4"
           value={match.away_team_goals === null ? '' : match.away_team_goals}
           onChange={e => setMatch(prev => {
             let copy = Object.assign({}, prev)
@@ -228,7 +228,7 @@ const Match = () => {
         />
         <button
           type="submit"
-          className="bg-sandBeige rounded-md w-80 h-10 text-black text-lg hover:cursor-pointer hover:scale-110 duration-200 mb-3 mx-auto flex justify-center items-center"
+          className="bg-sandBeige rounded-md w-full h-10 text-black text-lg hover:cursor-pointer hover:scale-110 duration-200 mb-3 flex justify-center items-center"
         >
           {!loading ? (
             <>Gem</>
@@ -247,7 +247,7 @@ const Match = () => {
         </button>
         <button
           type="button"
-          className="border border-red-500 rounded-md w-80 h-10 text-white text-lg hover:cursor-pointer hover:scale-110 duration-200 mb-7 mx-auto flex justify-center items-center"
+          className="border border-red-500 rounded-md w-full h-10 text-white text-lg hover:cursor-pointer hover:scale-110 duration-200 mb-7 flex justify-center items-center"
           onClick={deleteMatch}
         >
           {!loading ? (

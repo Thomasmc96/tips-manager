@@ -95,32 +95,33 @@ const TipsBuilder = () => {
 
   return (
     <form className="container mx-auto mt-2" onSubmit={submitForm}>
-      <h1 className="text-3xl text-center mb-9 mt-5">Udfyld din kupon</h1>
-      <label className="flex mx-auto w-80 rounded-md text-white">Navn</label>
+      <div className="w-80">
+      <h1 className="text-3xl mb-9 mt-5">Udfyld din kupon</h1>
+      <label className="flex w-full rounded-md text-white">Navn</label>
       <input
         type="text"
         placeholder="Dit navn"
         name="name"
-        className="flex mx-auto my-2 w-80 h-9 rounded-md p-1 text-black"
+        className="flex my-2 w-full h-9 rounded-md p-1 text-black"
         required
         value={name}
         onChange={(e) => {
           setName(e.target.value);
         }}
       />
-      <label className="flex mx-auto w-80 rounded-md text-white">Mail</label>
+      <label className="flex w-full rounded-md text-white">Mail</label>
       <input
         type="email"
         placeholder="Din mail"
         name="mail"
-        className="flex mx-auto my-2 w-80 h-9 rounded-md p-1 text-black"
+        className="flex my-2 w-full h-9 rounded-md p-1 text-black"
         required
         value={mail}
         onChange={(e) => {
           setMail(e.target.value);
         }}
       />
-      <div className="flex items-center justify-center mx-auto mt-2 w-80">
+      <div className="flex items-center mt-2 w-full">
         <input
           id="link-checkbox"
           type="checkbox"
@@ -135,18 +136,8 @@ const TipsBuilder = () => {
           også ses her på siden)
         </label>
       </div>
+      </div>
       <section className="mt-10">
-        {/* {matches.map(({ id, startDate, participants }) => (
-          <Match
-            key={id}
-            id={id}
-            startDate={startDate}
-            participants={participants}
-            setPredictions={setPredictions}
-            predictions={predictions}
-            setError={setError}
-          />
-        ))} */}
         {matches2.map((match2) => (
           <Match
             key={match2.matches2_id}
@@ -160,7 +151,7 @@ const TipsBuilder = () => {
       {error && <p className="text-red-500 text-center mb-5">{error}</p>}
       <button
         type="submit"
-        className="bg-sandBeige rounded-md w-4/5 h-10 text-black text-lg hover:cursor-pointer hover:scale-110 duration-200 mb-7 mx-auto flex justify-center items-center"
+        className="bg-sandBeige rounded-md w-full h-10 text-black text-lg hover:cursor-pointer hover:scale-110 duration-200 mb-7 flex justify-center items-center"
       >
         {!loadingSubmit ? (
           <>Indsend</>
