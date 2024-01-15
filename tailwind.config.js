@@ -13,7 +13,7 @@ module.exports = {
         bronze: "#CD7F32"
       },
       minWidth: {
-        '12': '12rem'
+        '14': '14rem'
       }
     },
   },

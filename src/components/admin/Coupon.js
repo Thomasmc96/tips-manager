@@ -92,7 +92,7 @@ const Coupon = ({ coupon }) => {
   return (
     <div
       className={
-        "rounded-lg shadow-md min-w-12 sm:w-auto w-full border-2 inline-flex flex-col mt-2 sm:mr-4 " +
+        "rounded-lg shadow-md min-w-14 sm:w-auto w-full border-2 inline-flex flex-col mt-2 sm:mr-4 " +
         (approved ? "border-lightGreen" : "border-red-500")
       }
     >
