@@ -332,7 +332,7 @@ class CouponService
                 <tr>
                     <td>
                         <div>
-                            <span>' . $match['home_team'] . ' - ' . $match['away_team'] . '</span>
+                            <span>' . $this->countryName($match['home_team']) . ' - ' . $this->countryName($match['away_team']) . '</span>
                         </div>
                     </td>';
             foreach ($predictions as $prediction) {
@@ -389,4 +389,155 @@ class CouponService
         }
         </style>';
     }
+
+    private function countryName($code) {
+        return array_values(array_filter($this->countries, fn($country) => $country['code'] === $code))[0]['name'];
+    }
+
+    private array $countries = [
+        [
+          'code'=> 'ger',
+          'name'=> 'Tyskland'
+        ],
+        [
+          'code'=> 'bel',
+          'name'=> 'Belgien',
+        ],
+        [
+          'code'=> 'fra',
+          'name'=> 'Frankrig'
+        ],
+        [
+          'code'=> 'por',
+          'name'=> 'Portugal'
+        ],
+        [
+          'code'=> 'esp',
+          'name'=> 'Spanien'
+        ],
+        [
+          'code'=> 'sco',
+          'name'=> 'Skotland'
+        ],
+        [
+          'code'=> 'tur',
+          'name'=> 'Tyrkiet'
+        ],
+        [
+          'code'=> 'aut',
+          'name'=> 'Østrig'
+        ],
+        [
+          'code'=> 'eng',
+          'name'=> 'England'
+        ],
+        [
+          'code'=> 'hun',
+          'name'=> 'Ungarn'
+        ],
+        [
+          'code'=> 'svk',
+          'name'=> 'Slovakiet'
+        ],
+        [
+          'code'=> 'alb',
+          'name'=> 'Albanien'
+        ],
+        [
+          'code'=> 'den',
+          'name'=> 'Danmark'
+        ],
+        [
+          'code'=> 'ned',
+          'name'=> 'Holland'
+        ],
+        [
+          'code'=> 'rom',
+          'name'=> 'Rumænien'
+        ],
+        [
+          'code'=> 'sui',
+          'name'=> 'Schweiz'
+        ],
+        [
+          'code'=> 'srb',
+          'name'=> 'Serbien'
+        ],
+        [
+          'code'=> 'slo',
+          'name'=> 'Slovenien'
+        ],
+        [
+          'code'=> 'ita',
+          'name'=> 'Italien'
+        ],
+        [
+          'code'=> 'cze',
+          'name'=> 'Tjekkiet'
+        ],
+        [
+          'code'=> 'cro',
+          'name'=> 'Kroatien'
+        ],
+        [
+          'code'=> 'plvinderA',
+          'name'=> 'Play off vinder A'
+        ],
+        [
+          'code'=> 'plvinderB',
+          'name'=> 'Play off vinder B'
+        ],
+        [
+          'code'=> 'plvinderC',
+          'name'=> 'Play off vinder C'
+        ],
+        [
+          'code'=> 'pol',
+          'name'=> 'Polen'
+        ],
+        [
+          'code'=> 'est',
+          'name'=> 'Estland'
+        ],
+        [
+          'code'=> 'wal',
+          'name'=> 'Wales'
+        ],
+        [
+          'code'=> 'fin',
+          'name'=> 'Finland'
+        ],
+        [
+          'code'=> 'isr',
+          'name'=> 'Israel'
+        ],
+        [
+          'code'=> 'ice',
+          'name'=> 'Island'
+        ],
+        [
+          'code'=> 'bos',
+          'name'=> 'Bosnien'
+        ],
+        [
+          'code'=> 'ukr',
+          'name'=> 'Ukraine'
+        ],
+        [
+          'code'=> 'geo',
+          'name'=> 'Georgien'
+        ],
+        [
+          'code'=> 'lux',
+          'name'=> 'Luxembourg'
+        ],
+        [
+          'code'=> 'gre',
+          'name'=> 'Grækenland'
+        ],
+        [
+          'code'=> 'kaz',
+          'name'=> 'Kasakhstan'
+        ],
+    ]; 
 }

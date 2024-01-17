@@ -246,7 +246,7 @@ export const countries = [
   },
   {
     'code': 'fra',
-    'name': 'Frankring'
+    'name': 'Frankrig'
   },
   {
     'code': 'por',
