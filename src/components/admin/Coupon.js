@@ -4,6 +4,7 @@ import environment from "../../environment";
 import { FidgetSpinner } from "react-loader-spinner";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { faRotateLeft } from "@fortawesome/free-solid-svg-icons";
 
 const Coupon = ({ coupon, removeCoupon }) => {
   const { coupons_id, name, mail, paid, subscribeToMails } = coupon;
@@ -58,6 +59,26 @@ const Coupon = ({ coupon, removeCoupon }) => {
         console.log(response);
         if (response.data.code === 200) {
           setApproved(true);
+        }
+      })
+      .catch((error) => { 
+        console.log(error)
+      })
+      .finally(() => {
+        setLoadingSubmit(false);
+      });
+  };
+
+  const unapprove = (coupons_id) => {
+    setLoadingSubmit(true);
+    axios
+      .post(`${environment[0]}/server/endpoints/coupon/unapprove.php`, {
+        coupons_id: coupons_id,
+      })
+      .then((response) => {
+        console.log(response);
+        if (response.data.code === 200) {
+          setApproved(false);
         }
       })
       .catch((error) => { })
@@ -168,9 +189,14 @@ const Coupon = ({ coupon, removeCoupon }) => {
               )}
             </button>
           ) : (
-            <p className="text-lightGreen  rounded focus:outline-none focus:shadow-outline">
-              Godkendt
-            </p>
+            <div className="flex items-center">
+              <p className="text-lightGreen  rounded focus:outline-none focus:shadow-outline">
+                Godkendt
+              </p>
+              <span className="text-xl hover:cursor-pointer p-1 ml-1" onClick={() => {unapprove(coupon.coupons_id)}}>
+                <FontAwesomeIcon icon={faRotateLeft} />
+              </span>
+            </div>
           )}
           <span className="text-xl hover:cursor-pointer p-1" onClick={() => deleteCoupon(coupon)}>
             <FontAwesomeIcon icon={faTrashCan} />

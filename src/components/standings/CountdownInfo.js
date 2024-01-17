@@ -1,4 +1,6 @@
 import React from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 const CountdownInfo = ({ coupons, days, hours, minutes, seconds }) => {
   days = days < 100 ? ("0" + days).slice(-2) : days;
@@ -14,7 +16,10 @@ const CountdownInfo = ({ coupons, days, hours, minutes, seconds }) => {
         <h3 className="text-center">
         Antal tilmeldinger:
         </h3>
-        <span className="text-center">{coupons.length} 👤</span>
+        <span className="text-center"> <span>{coupons.length}</span>          
+         <span className="text-xl2 ml-1 hover:cursor-pointer p-1">
+            <FontAwesomeIcon icon={faUser} />
+          </span></span>
       </section>
       <section className="flex justify-center align-center flex-col text-3xl mt-20">
         <h3 className="text-center">Vi begynder om:</h3>
