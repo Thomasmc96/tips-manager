@@ -7,6 +7,7 @@ class CouponService
 {
 
     private $from_email = "tips-manager@thch.dk";
+    private $url = 'tips-manager.thch.dk';
 
     public function __construct()
     {
@@ -74,8 +75,14 @@ class CouponService
     }
 
     private function isFinished($match) {
-        if($match->homeTeamGoals !== null && $match->awayTeamGoals !== null) {
-            return true;
+        if(is_array($match)) {
+            if($match['home_team_goals'] !== null && $match['away_team_goals'] !== null) {
+                return true;
+            }
+        } else {
+            if($match->homeTeamGoals !== null && $match->awayTeamGoals !== null) {
+                return true;
+            }
         }
         return false;
     }
@@ -138,7 +145,7 @@ class CouponService
             %s",
             $tableStyles,
             $to_name,
-            'https://jcrl.dk',
+            $this->url,
             $table
         );
 
@@ -188,13 +195,13 @@ class CouponService
                 <tr>
                     <td>
                         <div>
-                            <span>' . $match->home_team . ' - ' . $match->away_team . '</span>
-                            <span>' . ($this->isFinished($match) ? $match->home_team_goals . " - " . $match->away_team_goals : "") . '</span>
+                            <div>' . $this->countryName($match['home_team']) . ' - ' . $this->countryName($match['away_team']) . '</div>
+                            <div>' . ($this->isFinished($match) ? $match['home_team_goals'] . " - " . $match['away_team_goals'] : date('', $match['kickoff_dtm'])) . '</div>
                         </div>
                     </td>';
             foreach ($sortedStandings as $sortedStanding) {
                 foreach ($sortedStanding['predictions'] as $prediction) {
-                    if ($prediction->id === $match->matches2_id) {
+                    if ($prediction->id === $match['matches2_id']) {
                         $table .= '
                         <td style="' . ($prediction->won && $this->isFinished($match) ? 'background-color:#098b54' : (!$prediction->won && $this->isFinished($match) ? 'background-color:red' : '')) . '">
                             ' . $prediction->prediction . '
@@ -373,13 +380,6 @@ class CouponService
         th {
             background-color: #f2f2f2;
             font-weight: bold;
-        }
-        
-        td div {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
         }
         
         td span {
