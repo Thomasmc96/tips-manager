@@ -203,4 +203,23 @@ class CouponRepository
 
         return $statement->execute();
     }
+
+    public function delete($coupons_id)
+    {
+        $databaseService = new DatabaseService();
+        $connection = $databaseService->getConnection();
+
+        $query = "
+                DELETE FROM 
+                    coupons
+                WHERE
+                    coupons_id = :coupons_id
+            ";
+
+        $statement = $connection->prepare($query);
+
+        $statement->bindParam(":coupons_id", $coupons_id);
+
+        return $statement->execute();
+    }
 }

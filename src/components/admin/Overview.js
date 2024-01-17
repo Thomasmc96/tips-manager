@@ -26,6 +26,15 @@ const Overview = () => {
       });
   }, []);
 
+  const removeCoupon = (coupon) => {
+      let copy = coupons;
+      copy = copy.filter((c) => {
+        return c.coupons_id !== coupon.coupons_id
+      });
+
+      setCoupons(copy);
+  }
+
   if (loading) {
     return (
       <div className="flex mx-auto justify-center h-40 items-center">
@@ -51,7 +60,7 @@ const Overview = () => {
         </h1>
         <AdminMenu />
         {coupons.map((coupon) => {
-          return <Coupon key={coupon.coupons_id} coupon={coupon} />;
+          return <Coupon key={coupon.coupons_id} coupon={coupon} removeCoupon={removeCoupon} />;
         })}
       </div>
     </div>

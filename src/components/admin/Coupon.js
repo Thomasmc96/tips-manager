@@ -5,7 +5,7 @@ import { FidgetSpinner } from "react-loader-spinner";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 
-const Coupon = ({ coupon }) => {
+const Coupon = ({ coupon, removeCoupon }) => {
   const { coupons_id, name, mail, paid, subscribeToMails } = coupon;
 
   const [approved, setApproved] = useState(paid == "1");
@@ -86,7 +86,26 @@ const Coupon = ({ coupon }) => {
       .catch((error) => {
         console.log(error)
       })
+  }
 
+  const deleteCoupon = (coupon) => {
+    if (!window.confirm('Er du sikker på du vil slette kuponen af ' + coupon.name + '?')) {
+      return;
+    }
+
+    axios
+    .post(`${environment[0]}/server/endpoints/coupon/delete.php`, {
+      coupons_id: coupons_id,
+    })
+    .then((response) => {
+      console.log(response);
+      if (response.data.code === 200) {
+        removeCoupon(coupon)
+      }
+    })
+    .catch((error) => {
+      console.log(error)
+    })
   }
 
   return (
@@ -153,8 +172,7 @@ const Coupon = ({ coupon }) => {
               Godkendt
             </p>
           )}
-          <span className="text-xl">
-          
+          <span className="text-xl hover:cursor-pointer p-1" onClick={() => deleteCoupon(coupon)}>
             <FontAwesomeIcon icon={faTrashCan} />
           </span>
         </div>
