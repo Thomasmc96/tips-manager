@@ -3,7 +3,7 @@ import axios from "axios";
 import { FidgetSpinner } from "react-loader-spinner";
 import Match from "./Match";
 import environment from "../../environment";
-import { sortByDate, sortByKickOff } from "../Utils";
+import { sortByKickOff } from "../Utils";
 
 const TipsBuilder = () => {
   const [name, setName] = useState("");
@@ -13,7 +13,6 @@ const TipsBuilder = () => {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
   const [loadingSubmit, setLoadingSubmit] = useState(false);
-  const [matches, setMatches] = useState([]);
   const [matches2, setMatches2] = useState([]);
 
   useEffect(() => {
@@ -21,7 +20,6 @@ const TipsBuilder = () => {
       .get(`${environment[0]}/server/endpoints/matches2/getAll.php`)
       .then((response) => {
         if (response.data.code === 200) {
-          console.log(response.data.matches2);
           setMatches2(sortByKickOff(response.data.matches2));
         } else {
           setError("Noget gik galt");
@@ -32,7 +30,6 @@ const TipsBuilder = () => {
       })
       .finally(() => {
         setLoading(false);
-        console.log(matches2)
       });
   }, []);
 
@@ -57,7 +54,6 @@ const TipsBuilder = () => {
         if (response.data.code === 200) {
           window.location.replace("/kvittering");
         } else {
-          console.log(response);
           setError("Der skete desværre en fejl. Prøv igen.");
         }
       })

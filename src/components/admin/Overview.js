@@ -13,7 +13,6 @@ const Overview = () => {
     axios
       .get(`${environment[0]}/server/endpoints/coupon/all.php`)
       .then((response) => {
-        console.log(response);
         if (response.data.code === 200) {
           setCoupons(response.data.coupons);
         }

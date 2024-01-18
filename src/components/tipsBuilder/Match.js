@@ -2,9 +2,6 @@ import React from "react";
 import { getDateString, countryName } from "../Utils";
 
 const Match = ({
-  // id,
-  // participants,
-  // startDate,
   setPredictions,
   predictions,
   setError,
@@ -60,13 +57,13 @@ const Match = ({
           <input
             type="radio"
             name={match.matches2_id + "_radio"}
-            id={match.matches2_id + "_radio" + "_1"}
+            id={`${match.matches2_id}_radio_1`}
             className="hidden peer"
             value={"1"}
             onInput={(e) => handlePrediction(e, match.matches2_id)}
           />
           <label
-            htmlFor={match.matches2_id + "_radio" + "_1"}
+            htmlFor={`${match.matches2_id}_radio_1`}
             className="w-20 h-10 flex justify-center items-center rounded-md bg-normalGreen hover:cursor-pointer hover:scale-110 duration-200 peer-checked:bg-darkGreen"
           >
             1
@@ -76,13 +73,13 @@ const Match = ({
           <input
             type="radio"
             name={match.matches2_id + "_radio"}
-            id={match.matches2_id + "_radio" + "_x"}
+            id={`${match.matches2_id}_radio_x`}
             className="hidden peer"
             value={"x"}
             onInput={(e) => handlePrediction(e, match.matches2_id)}
           />
           <label
-            htmlFor={match.matches2_id + "_radio" + "_x"}
+            htmlFor={`${match.matches2_id}_radio_x`}
             className="w-20 h-10 flex justify-center items-center rounded-md bg-normalGreen hover:cursor-pointer hover:scale-110 duration-200 peer-checked:bg-darkGreen"
           >
             x
@@ -91,14 +88,14 @@ const Match = ({
         <div>
           <input
             type="radio"
-            name={match.matches2_id + "_radio"}
-            id={match.matches2_id + "_radio" + "_2"}
+            name={`${match.matches2_id}_radio`}
+            id={`${match.matches2_id}_radio_2`}
             className="hidden peer"
             value={"2"}
             onInput={(e) => handlePrediction(e, match.matches2_id)}
           />
           <label
-            htmlFor={match.matches2_id + "_radio" + "_2"}
+            htmlFor={`${match.matches2_id}_radio_2`}
             className="w-20 h-10 flex justify-center items-center rounded-md bg-normalGreen hover:cursor-pointer hover:scale-110 duration-200 peer-checked:bg-darkGreen"
           >
             2

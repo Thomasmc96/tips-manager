@@ -36,7 +36,6 @@ const Match = () => {
       )
       .then((response) => {
         if (response.data.code === 200) {
-          console.log(response.data)
           setMatch(response.data.match2);
         } else {
           alert("Noget gik galt");
@@ -53,7 +52,6 @@ const Match = () => {
 
   const updateMatch = (e) => {
     e.preventDefault()
-    console.log(match)
     setLoading(true)
     axios
       .post(`${environment[0]}/server/endpoints/matches2/update.php`, {
@@ -67,10 +65,8 @@ const Match = () => {
       })
       .then((response) => {
         if (response.data.code === 200) {
-          console.log(response)
           navigate('/kampe')
         } else {
-          console.log(response);
           alert("Der skete desværre en fejl. Prøv igen.");
         }
       })
@@ -95,7 +91,6 @@ const Match = () => {
           if (response.data.code === 200) {
             navigate('/kampe')
           } else {
-            console.log(response)
             alert("Noget gik galt");
           }
         })

@@ -116,7 +116,6 @@ export const verify = async () => {
       if (response.data.code === 200) {
         verified = true;
       } else {
-        console.log(response);
         localStorage.removeItem("jwt");
         localStorage.removeItem("name");
         verified = false;

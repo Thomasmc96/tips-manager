@@ -56,7 +56,6 @@ const Coupon = ({ coupon, removeCoupon }) => {
         coupons_id: coupons_id,
       })
       .then((response) => {
-        console.log(response);
         if (response.data.code === 200) {
           setApproved(true);
         }
@@ -76,7 +75,6 @@ const Coupon = ({ coupon, removeCoupon }) => {
         coupons_id: coupons_id,
       })
       .then((response) => {
-        console.log(response);
         if (response.data.code === 200) {
           setApproved(false);
         }
@@ -99,7 +97,6 @@ const Coupon = ({ coupon, removeCoupon }) => {
         name: newName
       })
       .then((response) => {
-        console.log(response);
         if (response.data.code === 200) {
           setNewSavedName(newName);
         }
@@ -119,7 +116,6 @@ const Coupon = ({ coupon, removeCoupon }) => {
       coupons_id: coupons_id,
     })
     .then((response) => {
-      console.log(response);
       if (response.data.code === 200) {
         removeCoupon(coupon)
       }

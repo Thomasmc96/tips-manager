@@ -139,7 +139,6 @@ const CreateMatch = ({ addNewMatch }) => {
       })
       .then((response) => {
         if (response.data.code === 200) {
-          console.log(response)
           setHomeTeam('')
           setAwayTeam('')
           setKickOff('')
@@ -155,7 +154,6 @@ const CreateMatch = ({ addNewMatch }) => {
             kickoff_dtm: newMatch.kickOff
           })
         } else {
-          console.log(response);
           alert("Der skete desværre en fejl. Prøv igen.");
         }
       })

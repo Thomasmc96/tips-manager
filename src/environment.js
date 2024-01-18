@@ -6,4 +6,6 @@ if (window.location.hostname === "localhost") {
 
 var version = "1.8.0";
 
-export default [hostname, version];
+const exports = [hostname, version]; 
+
+export default exports;

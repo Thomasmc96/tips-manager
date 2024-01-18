@@ -3,11 +3,9 @@ import axios from "axios";
 import environment from "../../environment";
 import { FidgetSpinner } from "react-loader-spinner";
 import { countryName, getDateString, sortByKickOff } from "../Utils";
-import { sortByDate } from "../Utils";
 
 const Table = ({ coupons }) => {
   const [zoom, setZoom] = useState(100);
-  const [matches, setMatches] = useState([]);
   const [matches2, setMatches2] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -17,12 +15,8 @@ const Table = ({ coupons }) => {
   useEffect(() => {
     axios
       .get(`${environment[0]}/server/endpoints/matches2/getAll.php`)
-      // .get(
-      //   `${environment[0]}/server/endpoints/matches/getLimitedMatches.php?limit=7`
-      // )
       .then((response) => {
         if (response.data.code === 200) {
-          console.log(response);
           setMatches2(sortByKickOff(response.data.matches2));
         } else {
           setError("Noget gik galt");
@@ -34,7 +28,6 @@ const Table = ({ coupons }) => {
       .finally(() => {
         setTimeout(() => {
           setLoading(false);
-          console.log(matches2)
         }, 1000);
       });
   }, []);
