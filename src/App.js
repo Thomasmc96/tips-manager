@@ -14,6 +14,7 @@ import NotFound from "./components/notFound/NotFound";
 import Overview from "./components/admin/Overview";
 import Matches from "./components/admin/Matches";
 import EditMatch from "./components/admin/EditMatch";
+import Email from "./components/admin/Email";
 
 function App() {
   return (
@@ -33,6 +34,11 @@ function App() {
         <Route path="/kampe/:id" element={
           <ProtectedRoute>
             <EditMatch />
+          </ProtectedRoute>
+        } />
+        <Route path="/email" element={
+          <ProtectedRoute>
+            <Email />
           </ProtectedRoute>
         } />
         <Route path="/" element={<Standings />} />

@@ -16,6 +16,7 @@ const AdminMenu = () => {
     <div >
       <LinkButton to="/tilmeldinger">Tilmeldinger</LinkButton>
       <LinkButton to="/kampe">Kampe</LinkButton>
+      <LinkButton to="/email">Email</LinkButton>
     </div>
   )
 
