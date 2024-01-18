@@ -53,7 +53,8 @@ const Prize = () => {
   const renderer = ({ days, hours, minutes, seconds, completed }) => {
     if (completed || authorized) {
       return (
-        <div className="container mx-auto mt-5 sm:mt-20 flex flex-col items-center justify-between min-h-[80vh]">
+        <div className="container mx-auto mt-5 flex flex-col items-center justify-between min-h-[80vh]">
+          <h1 className="text-3xl mb-5 sm:mb-0">Præmiefordeling 💰</h1>
           <div className="flex flex-col justify-around flex-wrap sm:flex-row w-full mx-auto gap-14 sm:gap-0">
             <PodiumPart placement={podium.first} number={"1st"} />
             {podium.second.names.length > 0 && (
@@ -63,28 +64,30 @@ const Prize = () => {
               <PodiumPart placement={podium.third} number={"3rd"} />
             )}
           </div>
-          <div className="mt-20 sm:my-6 p-2">
-            <h4 className="text-lg font-bold sm:text-center mb-1">
+          <div className="mt-20 sm:my-6 p-2 pl-6 rounded-lg shadow-md border-lightGreen border-2">
+            <h4 className="text-lg font-bold mb-1">
               Hvordan udregnes præmien?
             </h4>
-            <p className="text-left sm:text-center">
-              Puljen består af{" "}
-              {podium.first.totalPrize +
-                podium.second.totalPrize +
-                podium.third.totalPrize}{" "}
-              kr.
-            </p>
-            <p className="text-left sm:text-center">
-              Førstepladsen tager 70 %, andenpladsen tager 20 % og tredjepladsen
-              tager 10 %.
-            </p>
-            <p className="text-left sm:text-center">
-              Er der to personer på førstepladsen, så deler de to både første-
-              og andenpræmien.
-            </p>
-            <p className="text-left sm:text-center">
-              Er der tre personer på førstepladsen, så deler de hele puljen.
-            </p>
+            <ul className="list-disc">
+              <li className="text-left">
+                Puljen består af{" "}
+                {podium.first.totalPrize +
+                  podium.second.totalPrize +
+                  podium.third.totalPrize}{" "}
+                kr.
+              </li>
+              <li className="text-left">
+                Førstepladsen tager 70 %, andenpladsen tager 20 % og tredjepladsen
+                tager 10 %.
+              </li>
+              <li className="text-left">
+                Er der to personer på førstepladsen, så deler de to både første-
+                og andenpræmien.
+              </li>
+              <li className="text-left">
+                Er der tre personer på førstepladsen, så deler de hele puljen.
+              </li>
+            </ul>
           </div>
         </div>
       );

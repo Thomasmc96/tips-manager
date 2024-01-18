@@ -1,15 +1,16 @@
 import React from "react";
 
 const PodiumPart = ({ placement, number }) => {
-  const textColor =
+  const color =
     number === "1st"
-      ? "text-gold"
+      ? "gold"
       : number === "2nd"
-        ? "text-silver"
-        : "text-bronze";
+        ? "silver"
+        : "bronze";
+
   return (
-    <section className="flex flex-col justify-center items-center my-2 sm:max-w-[30%] max-w-full mx-auto">
-      <h1 className={"font-bold text-6xl sm:text-5xl mb-1 " + textColor}>
+    <section className="flex flex-col justify-center items-center my-2 sm:max-w-[30%] max-w-full mx-auto ">
+      <h1 className={"font-bold text-6xl sm:text-5xl mb-1 text-" + color}>
         {number}
       </h1>
       <p className="text-lg">

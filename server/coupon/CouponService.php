@@ -122,6 +122,7 @@ class CouponService
 
     public function sendStandingsEmail($to_email, $to_name)
     {
+        setlocale(LC_TIME, 'da_DK');
         $subject = 'Stilling - EM 2024 Tips';
         $from_email = $this->from_email;
         $from_name = 'Tipskupon - EM 2024';
@@ -196,7 +197,7 @@ class CouponService
                     <td>
                         <div>
                             <div>' . $this->countryName($match['home_team']) . ' - ' . $this->countryName($match['away_team']) . '</div>
-                            <div>' . ($this->isFinished($match) ? $match['home_team_goals'] . " - " . $match['away_team_goals'] : date('', $match['kickoff_dtm'])) . '</div>
+                            <div>' . ($this->isFinished($match) ? $match['home_team_goals'] . " - " . $match['away_team_goals'] : strftime('%e. %B %H:%M', strtotime($match['kickoff_dtm']))) . '</div>
                         </div>
                     </td>';
             foreach ($sortedStandings as $sortedStanding) {
