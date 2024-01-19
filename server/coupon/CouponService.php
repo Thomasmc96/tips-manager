@@ -120,7 +120,7 @@ class CouponService
         return $matches2;
     }
 
-    public function sendStandingsEmail($to_email, $to_name)
+    public function sendStandingsEmail($to_email, $to_name, $custom_message)
     {
         setlocale(LC_TIME, 'da_DK');
         $subject = 'Stilling - EM 2024 Tips';
@@ -132,14 +132,14 @@ class CouponService
 
         $table = $this->generateStandingsTable();
         $tableStyles = $this->generateTableStyles();
-
         $message = sprintf(
             "
             <html>
                 <head>%s</head>
                 <body>
                     <h2>Hej %s</h2>
-                    <p>Her er nuværende stilling for EM 2024 tipskonkurrencen.</p>
+                    " . ($custom_message ? $custom_message : " 
+                    <p>Her er nuværende stilling for EM 2024 tipskonkurrencen.</p>" ) ."
                     <p>Du kan også se stillingen <a href='%s'>her</a>.</p>
                 </body>
             </html>
