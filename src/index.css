@@ -70,3 +70,16 @@ body {
   /* background-color: var(--color-palet-2); */
   /* background-image: linear-gradient(var(--color-palet-1), var(--color-palet-2)); */
 }
+
+
+.yellowText {
+  color: var(--gold);
+}
+
+.footerImg {
+  width: 100%;
+  padding: 0rem 1rem;
+  position: static;
+  bottom: 0;
+}
+

@@ -1,18 +1,87 @@
 .countdownInfo {
-    display: flex;
-    flex-direction: column;
-    margin-top: 1rem;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
 }
 
 .countdownInfo h1 {
-    text-align: center;
-    font-size: 1.875rem;
+  text-align: center;
+  font-family: OswaldBold;
+  font-size: 3rem;
+  margin-top: 4rem;
 }
 
 .countdownInfo .undertitle {
-    text-transform: none;
+  text-transform: none;
+  text-align: center;
+  font-size: 1.25rem;
+  font-family: RobotoLightItalic;
+}
+
+.countdownInfo .sectionsContainer {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 5rem;
+  font-size: 1.25rem;
+}
+
+.countdownInfo .sectionsContainer section {
+  border: 2px solid white;
+  border-radius: 10px;
+  padding: 1rem 2rem;
+  text-align: center;
+}
+
+.countdownInfo .sectionsContainer .infoDetails {
+  font-family: RobotoMedium;
+  display: flex;
+  justify-content: center;
+  font-size: 2rem;
+}
+
+.countdownInfo .detailsIcon {
+  padding-left: 0.3rem;
+}
+
+.countdownInfo .lastH3 {
+  font-family: RobotoMedium;
+  font-size: 1.25rem;
+  text-align: center;
+  margin-top: 4rem;
+}
+
+@media only screen and (max-width: 600px) {
+  .countdownInfo h1 {
+    font-size: 1.6rem;
+  }
+
+  .countdownInfo .undertitle {
+    font-size: 1rem;
+  }
+
+  .countdownInfo .sectionsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 5rem;
+    font-size: 1rem;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .countdownInfo .lastH3 {
+    font-family: RobotoMedium;
+    font-size: 1rem;
+    text-align: center;
+    margin-top: 4rem;
+  }
+
+
 }
