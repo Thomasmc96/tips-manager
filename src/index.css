@@ -66,9 +66,6 @@ body {
   color: #fff;
   background-color: var(--grass-green);
   text-transform: uppercase;
-
-  /* background-color: var(--color-palet-2); */
-  /* background-image: linear-gradient(var(--color-palet-1), var(--color-palet-2)); */
 }
 
 
@@ -79,8 +76,9 @@ body {
 .footerImg {
   width: 100%;
   padding: 0rem 1rem;
-  position: fixed;
-  bottom: 0;
+  position: static;
+  padding-bottom: 1rem;
   left: 0;
+  bottom: 0;
 }
 
