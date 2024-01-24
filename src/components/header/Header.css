@@ -1,0 +1,30 @@
+.header {
+    padding: 1rem;
+    text-transform: uppercase;
+
+}
+
+.header nav {
+    /* mx-auto flex space-x-6 justify-between */
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header hr {
+    margin-top: 1rem;
+    height: 0.1rem;
+    border: none;
+    background-color: white;
+}
+
+.header.active,
+.header .headerLink:hover {
+    color: var(--gold);
+}
+
+.header .lockLink {
+    font-size: 1.2rem;
+}

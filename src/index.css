@@ -7,6 +7,8 @@
   --color-palet-1: #067242;
   --color-palet-3: #098b54;
   --color-palet-4: #f8d098;
+  --grass-green: #224920;
+  --gold: #FCBC02
 }
 
 html,
@@ -16,6 +18,7 @@ body {
 
 body {
   color: #fff;
-  background-color: var(--color-palet-2);
-  background-image: linear-gradient(var(--color-palet-1), var(--color-palet-2));
+  background-color: var(--grass-green);
+  /* background-color: var(--color-palet-2); */
+  /* background-image: linear-gradient(var(--color-palet-1), var(--color-palet-2)); */
 }

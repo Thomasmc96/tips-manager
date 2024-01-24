@@ -9,7 +9,7 @@ const CountdownInfo = ({ coupons, days, hours, minutes, seconds }) => {
   seconds = ("0" + seconds).slice(-2);
 
   return (
-    <div className="container mx-auto px-2 flex flex-col mt-4">
+    <div className="countdownInfo container mx-auto px-2 flex flex-col mt-4">
       <h1 className="text-center text-3xl">EM 2024 tips konkurrence ⚽</h1>
       <p className="text-center mt-2">- Arrangeret af René</p>
       <section className="flex justify-center align-center flex-col text-3xl mt-20">
