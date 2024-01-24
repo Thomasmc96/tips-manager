@@ -1,6 +1,7 @@
 .header {
     padding: 1rem;
-    font-weight: 500;
+    font-family: OswaldBold;
+    font-size: 1.25rem;
 }
 
 .header nav {

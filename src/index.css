@@ -2,13 +2,59 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: OswaldBold;
+  src: url("../src/assets/json/fonts/Oswald-Bold.ttf");
+}
+@font-face {
+  font-family: OswaldRegular;
+  src: url("../src/assets/json/fonts/Oswald-Regular.ttf");
+}
+
+@font-face {
+  font-family: RobotoBold;
+  src: url("../src/assets/json/fonts/Roboto-Bold.ttf");
+}
+@font-face {
+  font-family: RobotoItalic;
+  src: url("../src/assets/json/fonts/Roboto-Italic.ttf");
+}
+@font-face {
+  font-family: RobotoLight;
+  src: url("../src/assets/json/fonts/Roboto-Light.ttf");
+}
+@font-face {
+  font-family: RobotoLightItalic;
+  src: url("../src/assets/json/fonts/Roboto-LightItalic.ttf");
+}
+@font-face {
+  font-family: RobotoMedium;
+  src: url("../src/assets/json/fonts/Roboto-Medium.ttf");
+}
+@font-face {
+  font-family: RobotoRegular;
+  src: url("../src/assets/json/fonts/Roboto-Regular.ttf");
+}
+@font-face {
+  font-family: RobotoThinItalic;
+  src: url("../src/assets/json/fonts/Roboto-ThinItalic.ttf");
+}
+
+
 :root {
   --color-palet-2: #003e21;
   --color-palet-1: #067242;
   --color-palet-3: #098b54;
   --color-palet-4: #f8d098;
   --grass-green: #224920;
-  --gold: #FCBC02
+  --gold: #FCBC02; 
+  --darkest-green: #183417;
+  --dark-green: #1b401a;
+  --light-green: #387236;
+  --red: #9b1414;
+  --first-prize: #ffd700;
+  --second-prize: #c0c0c0;
+  --third-prize: #cd7f32;
 }
 
 html,
