@@ -2,6 +2,15 @@
     padding: 1rem;
     font-family: OswaldBold;
     font-size: 1.25rem;
+    position: relative;
+    padding-top: 2rem;
+}
+
+.header .footballLogo {
+    width: 8rem;
+    position: absolute;
+    left: 3rem;
+    top: -0.5rem;
 }
 
 .header nav {
@@ -27,4 +36,10 @@
 
 .header .lockLink {
     font-size: 1.2rem;
+}
+
+@media only screen and (max-width: 600px) {
+    .header .footballLogo {
+       display: none;
+    }
 }
