@@ -1,3 +1,18 @@
 .countdownInfo {
-    
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+.countdownInfo h1 {
+    text-align: center;
+    font-size: 1.875rem;
+}
+
+.countdownInfo .undertitle {
+    text-transform: none;
 }
