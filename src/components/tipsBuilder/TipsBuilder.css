@@ -1,0 +1,130 @@
+.TipsBuilderForm {
+  border: 2px solid white;
+  border-radius: 10px;
+  margin: 5rem 20rem;
+  padding: 3rem 8rem;
+}
+
+.TipsBuilderForm h1 {
+  font-size: 1.5rem;
+  text-align: center;
+  font-family: OswaldBold;
+  margin-bottom: 3rem;
+}
+
+.TipsBuilderForm .detailsContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.TipsBuilderForm .label {
+  font-size: 1.125rem;
+  font-family: RobotoBold;
+  margin-top: 1rem;
+}
+
+.TipsBuilderForm .input {
+  height: 35px;
+  border-radius: 5px;
+  box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
+  font-size: 0.75rem;
+  padding-left: 0.75rem;
+  font-family: RobotoRegular;
+  color: black;
+}
+
+.TipsBuilderForm .input::placeholder {
+  font-size: 0.75rem;
+  font-family: RobotoRegular;
+}
+
+.TipsBuilderForm .divCheckbox {
+  margin-bottom: 4rem;
+  margin-top: 1.5rem;
+}
+
+.TipsBuilderForm .labelCheckbox {
+  text-transform: none;
+  font-size: 1rem;
+  font-family: RobotoMedium;
+  padding-left: 3rem;
+}
+
+.TipsBuilderForm .labelCheckbox span {
+  text-transform: none;
+  font-size: 1rem;
+  font-family: RobotoLightItalic;
+}
+
+
+/* Checkmark */
+
+.container {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  /* Hide the browser's default checkbox */
+  .container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  /* Create a custom checkbox */
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 1.5rem;
+    width: 1.5rem;
+    border-radius: 2px;
+    box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
+    background-color: #eee;
+  }
+  
+  /* On mouse-over, add a grey background color */
+  .container:hover input ~ .checkmark {
+    background-color: var(--gold);
+  }
+  
+  /* When the checkbox is checked, add a blue background */
+  .container input:checked ~ .checkmark {
+    background-color: var(--gold);
+  }
+  
+  /* Create the checkmark/indicator (hidden when not checked) */
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  /* Show the checkmark when checked */
+  .container input:checked ~ .checkmark:after {
+    display: block;
+  }
+  
+  /* Style the checkmark/indicator */
+  .container .checkmark:after {
+    left: 9px;
+    top: 4px;
+    width: 7px;
+    height: 15px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+
+
+
+  

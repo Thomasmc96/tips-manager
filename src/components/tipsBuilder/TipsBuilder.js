@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { FidgetSpinner } from "react-loader-spinner";
-import Match from "./Match";
-import environment from "../../environment";
-import { sortByKickOff } from "../Utils";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { FidgetSpinner } from 'react-loader-spinner';
+import Match from './Match';
+import environment from '../../environment';
+import { sortByKickOff } from '../Utils';
+import './TipsBuilder.css';
 
 const TipsBuilder = () => {
-  const [name, setName] = useState("");
-  const [mail, setMail] = useState("");
+  const [name, setName] = useState('');
+  const [mail, setMail] = useState('');
   const [subscribeToMails, setSubscribeToMails] = useState(false);
   const [predictions, setPredictions] = useState([]);
   const [error, setError] = useState(false);
@@ -22,7 +23,7 @@ const TipsBuilder = () => {
         if (response.data.code === 200) {
           setMatches2(sortByKickOff(response.data.matches2));
         } else {
-          setError("Noget gik galt");
+          setError('Noget gik galt');
         }
       })
       .catch((error) => {
@@ -38,7 +39,7 @@ const TipsBuilder = () => {
     let diff = matches2.length - predictions.length;
 
     if (diff > 0) {
-      setError("Du mangler " + diff + (diff > 1 ? " kampe" : " kamp"));
+      setError('Du mangler ' + diff + (diff > 1 ? ' kampe' : ' kamp'));
       return;
     }
 
@@ -52,13 +53,13 @@ const TipsBuilder = () => {
       })
       .then((response) => {
         if (response.data.code === 200) {
-          window.location.replace("/kvittering");
+          window.location.replace('/kvittering');
         } else {
-          setError("Der skete desværre en fejl. Prøv igen.");
+          setError('Der skete desværre en fejl. Prøv igen.');
         }
       })
       .catch((error) => {
-        setError("Der skete desværre en fejl. Prøv igen.");
+        setError('Der skete desværre en fejl. Prøv igen.');
         console.log(error);
       })
       .finally(() => {
@@ -78,7 +79,7 @@ const TipsBuilder = () => {
           ariaLabel="dna-loading"
           wrapperStyle={{}}
           wrapperClass="dna-wrapper"
-          ballColors={["#003e21", "#067242", "#098b54"]}
+          ballColors={['#003e21', '#067242', '#098b54']}
           backgroundColor="#f8d098"
         />
       </div>
@@ -86,51 +87,54 @@ const TipsBuilder = () => {
   }
 
   return (
-    <form className="container mx-auto mt-2 px-2" onSubmit={submitForm}>
-      <div className="sm:w-80 w-full">
-      <h1 className="text-3xl mb-9 mt-5">Udfyld din kupon</h1>
-      <label className="flex w-full rounded-md text-white">Navn</label>
-      <input
-        type="text"
-        placeholder="Dit navn"
-        name="name"
-        className="flex my-2 w-full h-9 rounded-md p-1 text-black"
-        required
-        value={name}
-        onChange={(e) => {
-          setName(e.target.value);
-        }}
-      />
-      <label className="flex w-full rounded-md text-white">Mail</label>
-      <input
-        type="email"
-        placeholder="Din mail"
-        name="mail"
-        className="flex my-2 w-full h-9 rounded-md p-1 text-black"
-        required
-        value={mail}
-        onChange={(e) => {
-          setMail(e.target.value);
-        }}
-      />
-      <div className="flex items-center mt-2 w-full">
+    <form className="TipsBuilderForm" onSubmit={submitForm}>
+      <div className="detailsContainer">
+        <h1 className="">
+          Udfyld din <span className="yellowText">kupon</span>
+        </h1>
+        <label className="label">Navn</label>
         <input
-          id="link-checkbox"
-          type="checkbox"
-          value={subscribeToMails}
-          onClick={() => {
-            setSubscribeToMails(!subscribeToMails);
+          type="text"
+          placeholder="Dit navn"
+          name="name"
+          className="input"
+          required
+          value={name}
+          onChange={(e) => {
+            setName(e.target.value);
           }}
-          className="w-8 h-8 rounded"
         />
-        <label htmlFor="link-checkbox" className="ml-2 text-sm font-medium">
-          Ja, jeg vil gerne modtage mails omkring stillingen. (Stillingen kan
-          også ses her på siden)
-        </label>
+        <label className="label">Mail</label>
+        <input
+          type="email"
+          placeholder="Din mail"
+          name="mail"
+          className="input"
+          required
+          value={mail}
+          onChange={(e) => {
+            setMail(e.target.value);
+          }}
+        />
+        <div className="divCheckbox">
+          <label htmlFor="link-checkbox" className="labelCheckbox container">
+            <input
+              id="link-checkbox"
+              type="checkbox"
+              value={subscribeToMails}
+              onClick={() => {
+                setSubscribeToMails(!subscribeToMails);
+              }}
+              className="inputCheckbox"
+            />{' '}
+            <span class="checkmark"></span>
+            Ja tak, jeg vil gerne modtage mails omkring stillingen!* <br />
+            <span>*Stillingen kan også ses her på siden.</span>
+          </label>
+        </div>
       </div>
-      </div>
-      <section className="mt-10">
-      <h2 className="text-2xl mb-9 mt-5 mx-2">Vælg dine tips herunder:</h2>
+      <section className="">
+        <h2 className="">Vælg dine tips herunder:</h2>
         {matches2.map((match2) => (
           <Match
             key={match2.matches2_id}
@@ -142,10 +146,7 @@ const TipsBuilder = () => {
         ))}
       </section>
       {error && <p className="text-red-500 text-center mb-5">{error}</p>}
-      <button
-        type="submit"
-        className="bg-sandBeige rounded-md w-full h-10 text-black text-lg hover:cursor-pointer hover:scale-110 duration-200 mb-7 flex justify-center items-center"
-      >
+      <button type="submit" className="">
         {!loadingSubmit ? (
           <>Indsend</>
         ) : (
@@ -156,7 +157,7 @@ const TipsBuilder = () => {
             ariaLabel="dna-loading"
             wrapperStyle={{}}
             wrapperClass="dna-wrapper"
-            ballColors={["#003e21", "#067242", "#098b54"]}
+            ballColors={['#003e21', '#067242', '#098b54']}
             backgroundColor="#f8d098"
           />
         )}
