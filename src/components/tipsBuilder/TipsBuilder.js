@@ -133,7 +133,7 @@ const TipsBuilder = () => {
           </label>
         </div>
       </div>
-      <section className="">
+      <section className="matchSection">
         <h2 className="">Vælg dine tips herunder:</h2>
         {matches2.map((match2) => (
           <Match
