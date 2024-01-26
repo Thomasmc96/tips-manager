@@ -34,13 +34,13 @@
 .header .active {
     color: var(--gold);
     border-style: solid;
-    border-width: 1px;
+    /* border-width: 1px;
     border-radius: 10px;
-    border-color: var(--gold);
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    border-color: var(--gold); */
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    /* padding-left: 1rem;
+    padding-right: 1rem; */
 }
 
 .header .headerLink:hover {
@@ -55,5 +55,20 @@
 @media only screen and (max-width: 600px) {
     .header .footballLogo {
        display: none;
+    }
+
+    .header .headerLinks {
+        margin-left: unset;
+    }
+
+    .header .headerLink {
+        font-size: 1rem;
+    }
+    .header .lockLink {
+        margin-right: 1rem;
+    }
+
+    .header hr {
+        margin-top: unset;
     }
 }

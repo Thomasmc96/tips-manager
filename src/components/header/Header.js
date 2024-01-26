@@ -4,7 +4,7 @@ import './Header.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLock } from "@fortawesome/free-solid-svg-icons";
 import { useLocation } from "react-router-dom";
-import football from '../../assets/json/graphic/football1.svg';
+import football from '../../assets/graphic/football1.svg';
 
 
 const Header = () => {

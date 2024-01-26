@@ -4,40 +4,40 @@
 
 @font-face {
   font-family: OswaldBold;
-  src: url("../src/assets/json/fonts/Oswald-Bold.ttf");
+  src: url("../src/assets/fonts/Oswald-Bold.ttf");
 }
 @font-face {
   font-family: OswaldRegular;
-  src: url("../src/assets/json/fonts/Oswald-Regular.ttf");
+  src: url("../src/assets/fonts/Oswald-Regular.ttf");
 }
 
 @font-face {
   font-family: RobotoBold;
-  src: url("../src/assets/json/fonts/Roboto-Bold.ttf");
+  src: url("../src/assets/fonts/Roboto-Bold.ttf");
 }
 @font-face {
   font-family: RobotoItalic;
-  src: url("../src/assets/json/fonts/Roboto-Italic.ttf");
+  src: url("../src/assets/fonts/Roboto-Italic.ttf");
 }
 @font-face {
   font-family: RobotoLight;
-  src: url("../src/assets/json/fonts/Roboto-Light.ttf");
+  src: url("../src/assets/fonts/Roboto-Light.ttf");
 }
 @font-face {
   font-family: RobotoLightItalic;
-  src: url("../src/assets/json/fonts/Roboto-LightItalic.ttf");
+  src: url("../src/assets/fonts/Roboto-LightItalic.ttf");
 }
 @font-face {
   font-family: RobotoMedium;
-  src: url("../src/assets/json/fonts/Roboto-Medium.ttf");
+  src: url("../src/assets/fonts/Roboto-Medium.ttf");
 }
 @font-face {
   font-family: RobotoRegular;
-  src: url("../src/assets/json/fonts/Roboto-Regular.ttf");
+  src: url("../src/assets/fonts/Roboto-Regular.ttf");
 }
 @font-face {
   font-family: RobotoThinItalic;
-  src: url("../src/assets/json/fonts/Roboto-ThinItalic.ttf");
+  src: url("../src/assets/fonts/Roboto-ThinItalic.ttf");
 }
 
 
@@ -80,5 +80,12 @@ body {
   padding-bottom: 1rem;
   left: 0;
   bottom: 0;
+}
+
+h1 {
+  text-align: center;
+  font-family: OswaldBold;
+  font-size: 3rem;
+  margin-top: 4rem;
 }
 

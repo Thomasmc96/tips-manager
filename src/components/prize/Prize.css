@@ -1,0 +1,32 @@
+.prize {
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* justify-content: space-between; */
+
+}
+
+.prize .prizesContainer {
+    margin-top: 10rem;
+}
+
+.prize .rules {
+    max-width: 32rem;
+    border: solid;
+    border-width: 1px;
+    padding: 3rem;
+    border-radius: 10px;
+}
+
+.prize .rules h4 {
+    font-size: 1.5rem;
+}
+
+.prize .rules ul {
+    list-style: unset;
+}
+
+.prize .rules li {
+    font-size: 1rem;
+    margin-top: 1rem;
+    text-transform: none;
+}

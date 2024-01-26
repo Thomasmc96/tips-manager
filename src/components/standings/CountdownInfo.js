@@ -2,8 +2,8 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faClock } from '@fortawesome/free-solid-svg-icons';
 import './Standings.css';
-import jubler from '../../assets/json/graphic/jubler.svg';
-import jublerMobile from '../../assets/json/graphic/jubler_mobile.svg';
+import jubler from '../../assets/graphic/jubler.svg';
+import jublerMobile from '../../assets/graphic/jubler_mobile.svg';
 
 const CountdownInfo = ({ coupons, days, hours, minutes, seconds }) => {
   days = days < 100 ? ('0' + days).slice(-2) : days;
