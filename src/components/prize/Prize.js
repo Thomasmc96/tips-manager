@@ -59,7 +59,7 @@ const Prize = () => {
           <h1><span className="yellowText">Præmie</span>fordeling</h1>
           <div className="prizesContainer">
             <img src={prizes} className="prizesImg"/>
-
+              <PrizeRules podium={podium}/>
           </div>
         </div>
         // <div className="prize container mx-auto mt-5 flex flex-col items-center justify-between min-h-[80vh]">

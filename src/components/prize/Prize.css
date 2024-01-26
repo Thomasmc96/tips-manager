@@ -6,10 +6,14 @@
 }
 
 .prize .prizesContainer {
+    position: relative;
     margin-top: 10rem;
 }
 
 .prize .rules {
+    position: absolute;
+    top: 0;
+    right: 5%;
     max-width: 32rem;
     border: solid;
     border-width: 1px;
