@@ -13,24 +13,24 @@ const Header = () => {
 
   return (
     <header className="header">
-      <img className="footballLogo" src={football} alt="Fodbold" />
-      <nav className="container">
-        <div className="space-x-6">
+      <nav className="">
+        <div className="space-x-6 headerLinks">
+          <Link to={"/"}>
+            <img className="footballLogo" src={football} alt="Fodbold" />
+          </Link>
           <Link to={"/"} className={'headerLink ' + (pathname === '/' ? 'active ' : '')}>
-            Stilling
+            Stillingen
           </Link>
           <Link to={"/tipskupon"} className={'headerLink ' + (pathname === '/tipskupon' ? 'active' : '')}>
             Opret kupon
           </Link>
           <Link to={"/praemie"} className={"headerLink " + (pathname === '/praemie' ? 'active' : '')}>
-            Præmie
+            Præmien
           </Link>
         </div>
-        <div>
           <Link to={"/tilmeldinger"} className="lockLink">
             <FontAwesomeIcon icon={faLock}/>
           </Link>
-        </div>
       </nav>
       <hr />
     </header>
