@@ -19,10 +19,10 @@ const Header = () => {
           <Link to={"/"} className={'headerLink ' + (pathname === '/' ? 'active ' : '')}>
             Stilling
           </Link>
-          <Link to={"/tipskupon"} className={"headerLink " + pathname === '/tipskupon' ? 'active' : ''}>
+          <Link to={"/tipskupon"} className={'headerLink ' + (pathname === '/tipskupon' ? 'active' : '')}>
             Opret kupon
           </Link>
-          <Link to={"/praemie"} className={"headerLink " + pathname === '/praemie' ? 'active' : ''}>
+          <Link to={"/praemie"} className={"headerLink " + (pathname === '/praemie' ? 'active' : '')}>
             Præmie
           </Link>
         </div>
