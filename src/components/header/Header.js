@@ -13,7 +13,7 @@ const Header = () => {
   return (
     <header className="header">
       <nav className="">
-        <div className="space-x-6 headerLinks">
+        <div className=" headerLinks">
           <Link to={"/"}>
             <img className="footballLogo" src={football} alt="Fodbold" />
           </Link>

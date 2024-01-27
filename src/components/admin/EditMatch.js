@@ -45,7 +45,7 @@ const Match = () => {
         setTimeout(() => {
         }, 1000);
       });
-  }, [])
+  }, [id])
 
   const updateMatch = (e) => {
     e.preventDefault()

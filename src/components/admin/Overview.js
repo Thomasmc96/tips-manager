@@ -7,6 +7,7 @@ import AdminMenu from "./AdminMenu";
 
 const Overview = () => {
   const [coupons, setCoupons] = useState([]);
+  const [couponsNotApproved, setCouponsNotApproved] = useState([]);
   const [loading, setLoading] = useState([]);
 
   useEffect(() => {
@@ -14,7 +15,8 @@ const Overview = () => {
       .get(`${environment[0]}/server/endpoints/coupon/all.php`)
       .then((response) => {
         if (response.data.code === 200) {
-          setCoupons(response.data.coupons);
+          setCoupons(response.data.coupons.filter((coupon) => coupon.paid === 1));
+          setCouponsNotApproved(response.data.coupons.filter((coupon) => coupon.paid === 0));
         }
       })
       .catch((error) => {
@@ -52,10 +54,15 @@ const Overview = () => {
   }
 
   return (
-    <div className="container mx-auto px-2 flex flex-col my-2 flex-wrap">
+    <div className="overview container">
       <div>
         <AdminMenu />
+        <h2><span className="yellowText">Godkendte</span> tilmeldinger</h2>
         {coupons.map((coupon) => {
+          return <Coupon key={coupon.coupons_id} coupon={coupon} removeCoupon={removeCoupon} />;
+        })}
+        <h2 className="notApproved"><span className="yellowText">Ikke</span> Godkendte tilmeldinger</h2>
+        {couponsNotApproved.map((coupon) => {
           return <Coupon key={coupon.coupons_id} coupon={coupon} removeCoupon={removeCoupon} />;
         })}
       </div>

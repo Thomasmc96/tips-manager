@@ -29,6 +29,7 @@
     display: flex;
     align-items: center;
     margin-left: 3rem;
+    gap: 3rem;
 }
 
 .header .active {
@@ -59,10 +60,14 @@
 
     .header .headerLinks {
         margin-left: unset;
+        gap: unset;
+        /* padding: 1rem; */
+        /* gap: 1rem; */
     }
 
     .header .headerLink {
         font-size: 1rem;
+        /* padding: 0.7rem; */
     }
     .header .lockLink {
         margin-right: 1rem;
@@ -71,4 +76,5 @@
     .header hr {
         margin-top: unset;
     }
+    
 }
