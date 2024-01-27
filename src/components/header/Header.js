@@ -9,7 +9,6 @@ import football from '../../assets/graphic/football1.svg';
 
 const Header = () => {
   const {pathname} = useLocation();
-  console.log(pathname)
 
   return (
     <header className="header">

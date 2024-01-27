@@ -8,6 +8,7 @@ import Countdown from "react-countdown";
 import { verify } from "../Utils";
 import './Prize.css'
 import prizes from '../../assets/graphic/prizes.svg'
+import prizesMobile from '../../assets/graphic/prizes_mobile.svg'
 
 const Prize = () => {
   const [loading, setLoading] = useState(true);
@@ -58,7 +59,7 @@ const Prize = () => {
         <div className="prize">
           <h1><span className="yellowText">Præmie</span>fordeling</h1>
           <div className="prizesContainer">
-            <img src={prizes} className="prizesImg"/>
+            <img src={prizesMobile} className="prizesImg"/>
               <PrizeRules podium={podium}/>
           </div>
         </div>
