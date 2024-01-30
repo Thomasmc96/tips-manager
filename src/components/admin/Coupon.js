@@ -6,8 +6,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { faRotateLeft } from "@fortawesome/free-solid-svg-icons";
 
-const Coupon = ({ coupon, removeCoupon }) => {
-  const { coupons_id, name, mail, paid, subscribeToMails } = coupon;
+const Coupon = ({ coupon, removeCoupon, changeCouponState={changeCouponState} }) => {
+  let { coupons_id, name, mail, paid, subscribeToMails } = coupon;
 
   const [approved, setApproved] = useState(paid == "1");
   const [loadingSubmit, setLoadingSubmit] = useState(false);
@@ -58,6 +58,8 @@ const Coupon = ({ coupon, removeCoupon }) => {
       .then((response) => {
         if (response.data.code === 200) {
           setApproved(true);
+          paid = "1";
+          changeCouponState(coupon, true)
         }
       })
       .catch((error) => { 
@@ -77,6 +79,7 @@ const Coupon = ({ coupon, removeCoupon }) => {
       .then((response) => {
         if (response.data.code === 200) {
           setApproved(false);
+          changeCouponState(coupon, false)
         }
       })
       .catch((error) => { })
@@ -128,8 +131,8 @@ const Coupon = ({ coupon, removeCoupon }) => {
   return (
     <div
       className={
-        "rounded-lg shadow-md min-w-14 sm:w-auto w-full border-2 inline-flex flex-col mt-2 sm:mr-4 " +
-        (approved ? "border-lightGreen" : "border-red-500")
+        "coupon rounded-lg shadow-md min-w-14 sm:w-auto w-full border-2 inline-flex flex-col mt-2 sm:mr-4 " +
+        (approved ? "approvedContainer" : "notApprovedContainer")
       }
     >
       {subscribeToMails == "1" ?
@@ -164,7 +167,7 @@ const Coupon = ({ coupon, removeCoupon }) => {
         <div className="flex flex-row justify-between items-center h-10">
           {!approved ? (
             <button
-              className="bg-sandBeige hover:bg-green-700 text-black py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              className="approveBtn py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="button"
               onClick={(e) => approve(e, coupons_id)}
             >
@@ -186,7 +189,7 @@ const Coupon = ({ coupon, removeCoupon }) => {
             </button>
           ) : (
             <div className="flex items-center">
-              <p className="text-lightGreen  rounded focus:outline-none focus:shadow-outline">
+              <p className="approvedBtn rounded focus:outline-none focus:shadow-outline">
                 Godkendt
               </p>
               <span className="text-xl hover:cursor-pointer p-1 ml-1" onClick={() => {unapprove(coupon.coupons_id)}}>

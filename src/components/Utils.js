@@ -92,6 +92,20 @@ export const sortByWins = (coupons) => {
   return couponsSorted;
 };
 
+export const sortByCouponsId = (coupons) => {
+  const couponsSorted = coupons.sort((a, b) => {
+    if (a.coupons_id < b.coupons_id) {
+      return 1;
+    }
+    if (a.coupons_id > b.coupons_id) {
+      return -1;
+    }
+
+    return 0;
+  });
+  return couponsSorted;
+}
+
 
 export const verify = async () => {
   let verified = false;

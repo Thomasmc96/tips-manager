@@ -4,6 +4,7 @@ import { FidgetSpinner } from "react-loader-spinner";
 import environment from "../../environment";
 import Coupon from "./Coupon";
 import AdminMenu from "./AdminMenu";
+import { sortByCouponsId } from "../Utils";
 
 const Overview = () => {
   const [coupons, setCoupons] = useState([]);
@@ -29,11 +30,35 @@ const Overview = () => {
 
   const removeCoupon = (coupon) => {
       let copy = coupons;
+
       copy = copy.filter((c) => {
         return c.coupons_id !== coupon.coupons_id
       });
 
       setCoupons(copy);
+  }
+
+  const changeCouponState = (coupon, isApproved) => {
+    if (isApproved) {
+      let copy = coupons;
+      coupon.paid = "1";
+      copy.push(coupon);
+      setCoupons(sortByCouponsId(coupons));
+
+      let copy2 = couponsNotApproved;
+      copy2 = copy2.filter((c) => {
+        return c.coupons_id !== coupon.coupons_id
+      });
+      setCouponsNotApproved(copy2);
+      
+    } else {
+      let copy = couponsNotApproved;
+      coupon.paid = "0";
+      copy.push(coupon);
+      setCouponsNotApproved(sortByCouponsId(copy));
+      removeCoupon(coupon);
+      
+    }
   }
 
   if (loading) {
@@ -59,11 +84,11 @@ const Overview = () => {
         <AdminMenu />
         <h2><span className="yellowText">Godkendte</span> tilmeldinger</h2>
         {coupons.map((coupon) => {
-          return <Coupon key={coupon.coupons_id} coupon={coupon} removeCoupon={removeCoupon} />;
+          return <Coupon key={coupon.coupons_id} coupon={coupon} removeCoupon={removeCoupon} changeCouponState={changeCouponState} />;
         })}
         <h2 className="notApproved"><span className="yellowText">Ikke</span> Godkendte tilmeldinger</h2>
         {couponsNotApproved.map((coupon) => {
-          return <Coupon key={coupon.coupons_id} coupon={coupon} removeCoupon={removeCoupon} />;
+          return <Coupon key={coupon.coupons_id} coupon={coupon} removeCoupon={removeCoupon} changeCouponState={changeCouponState}/>;
         })}
       </div>
     </div>

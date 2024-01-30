@@ -45,14 +45,35 @@
     padding-right: .5rem;
     padding-left: .5rem;
     flex-wrap: wrap;
+    margin-bottom: 2rem;
 }
 
 .overview h2 {
     margin-top: 1rem;
     font-size: 1.5rem;
     font-family: OswaldBold;
+    margin-bottom: 1rem;
 }
 
 .overview .notApproved {
     margin-top: 3rem;
+}
+
+.overview .coupon .approveBtn {
+    background-color: var(--gold);
+    color: black;
+    font-weight: bold;
+}
+
+.overview .coupon .approvedBtn {
+    font-weight: bold;
+    color: var(--light-green);
+}
+
+.overview .notApprovedContainer {
+    border-color: var(--red);
+}
+
+
+.overview .approvedContainer {
 }
