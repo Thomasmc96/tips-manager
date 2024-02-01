@@ -17,7 +17,7 @@ const AdminMenu = () => {
 
   return (
     <div className="adminMenu">
-      <h2>
+      <h2 className="headline">
         Hej <span className="yellowText">{localStorage.getItem("name")}</span>, dette er dit dashboard!
       </h2>
       <hr />

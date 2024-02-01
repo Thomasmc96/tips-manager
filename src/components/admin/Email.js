@@ -6,11 +6,9 @@ import environment from "../../environment";
 
 const Email = () => {
     return (
-        <div className="container mx-auto flex flex-col my-2 flex-wrap px-2">
-            <div>
-                <AdminMenu />
-                <EmailStandingsForm />
-            </div>
+        <div className="container email">
+            <AdminMenu />
+            <EmailStandingsForm />
         </div>
     )
 }
@@ -47,7 +45,7 @@ const EmailStandingsForm = () => {
     }
 
     return (
-        <div className="container flex flex-col my-2 px-2 flex-wrap w-full">
+        <div className="">
             <h2 className="text-2xl mb-3 mt-5">Send mail med stillingen</h2>
             <div className="flex items-center mt-2 w-full mb-2">
                 <input

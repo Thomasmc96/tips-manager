@@ -35,7 +35,7 @@ const Matches = () => {
   }
 
   return (
-    <div className="container mx-auto flex flex-col my-2 flex-wrap px-2">
+    <div className="container matches">
       <div>
         <AdminMenu />
         <CreateMatch addNewMatch={addNewMatch} />
@@ -163,10 +163,10 @@ const CreateMatch = ({ addNewMatch }) => {
       });
   }
   return (
-    <div className="container flex flex-col my-2 px-2 flex-wrap w-full sm:w-80">
-      <h2 className="text-2xl mb-3 mt-5">Tilføj en kamp</h2>
-      <form className="container mt-2" onSubmit={saveMatch}>
-        <label className="flex w-full rounded-md text-white">Hjemmebanehold</label>
+    <div className="container createMatch">
+      <h2 className="">Tilføj en <span className="yellowText">kamp</span></h2>
+      <form className="createMatchForm" onSubmit={saveMatch}>
+        <label>Hjemmebanehold</label>
         <select
           className="flex my-2 w-full h-9 rounded-md p-1 text-black mb-4"
           onChange={e => setHomeTeam(e.target.value)}

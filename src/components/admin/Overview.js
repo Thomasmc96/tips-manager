@@ -87,11 +87,11 @@ const Overview = () => {
     <div className="overview container">
       <div>
         <AdminMenu />
-        <h2><span className="yellowText">Godkendte</span> tilmeldinger</h2>
+        <h2 className="apporvedHeadline"><span className="yellowText">Godkendte</span> tilmeldinger</h2>
         {sortByUpdated(coupons).map((coupon) => {
           return <Coupon key={coupon.coupons_id} coupon={coupon} removeCoupon={removeCoupon} changeCouponState={changeCouponState} />;
         })}
-        <h2 className="notApproved"><span className="yellowText">Ikke</span> Godkendte tilmeldinger</h2>
+        <h2 className="notApprovedHeadline"><span className="yellowText">Ikke</span> Godkendte tilmeldinger</h2>
         {sortByUpdated(couponsNotApproved).map((coupon) => {
           return <Coupon key={coupon.coupons_id} coupon={coupon} removeCoupon={removeCoupon} changeCouponState={changeCouponState}/>;
         })}

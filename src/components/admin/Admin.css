@@ -3,7 +3,7 @@
 
 }
 
-.adminMenu h2 {
+.adminMenu .headline {
     font-size: 1.5rem;
     margin-top: 2rem;
     text-align: center;
@@ -37,7 +37,7 @@
 
 /* Overview ********************************/
 
-.overview {
+.overview, .matches, .email {
     display: flex;
     flex-direction: column;
     margin-left: auto;
@@ -49,14 +49,14 @@
 }
 
 .overview h2 {
-    margin-top: 1rem;
+    /* margin-top: 1rem; */
     font-size: 1.5rem;
     font-family: OswaldBold;
-    margin-bottom: 1rem;
+    /* margin-bottom: 1rem; */
 }
 
-.overview .notApproved {
-    margin-top: 3rem;
+.overview .notApprovedHeadline, .overview .apporvedHeadline {
+    margin-top: 2rem;
 }
 
 .overview .coupon .approveBtn {
@@ -75,5 +75,38 @@
 }
 
 
-.overview .approvedContainer {
+/* Machtes ****************/
+
+.createMatch {
+    width: 35rem;
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid white;
+    border-radius: 10px;
+    margin-top: 3rem;
+
 }
+
+.createMatch h2 {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-top: 1rem;
+}
+
+.createMatch .createMatchForm {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1rem;
+}
+.createMatch .createMatchForm label {
+    width: 100%;
+    border-radius: 10px;
+}
+.createMatch .createMatchForm select {}
+.createMatch .createMatchForm img {}
+
