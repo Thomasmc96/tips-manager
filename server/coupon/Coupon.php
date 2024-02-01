@@ -10,14 +10,16 @@ class Coupon
     public $paid;
     public $predictions;
     public $subscribeToMails;
+    public $updated_dtm;
 
-    public function __construct(string $name, string $mail, bool $paid, array $predictions, bool $subscribeToMails)
+    public function __construct(string $name, string $mail, bool $paid, array $predictions, bool $subscribeToMails, string $updated_dtm)
     {
         $this->name = $name;
         $this->mail = $mail;
         $this->paid = $paid;
         $this->predictions = $predictions;
         $this->subscribeToMails = $subscribeToMails;
+        $this->updated_dtm = $updated_dtm;
     }
 
     public function setId($id) {

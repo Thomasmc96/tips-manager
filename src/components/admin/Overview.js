@@ -4,7 +4,7 @@ import { FidgetSpinner } from "react-loader-spinner";
 import environment from "../../environment";
 import Coupon from "./Coupon";
 import AdminMenu from "./AdminMenu";
-import { sortByCouponsId } from "../Utils";
+import { sortByUpdated } from "../Utils";
 
 const Overview = () => {
   const [coupons, setCoupons] = useState([]);
@@ -16,6 +16,7 @@ const Overview = () => {
       .get(`${environment[0]}/server/endpoints/coupon/all.php`)
       .then((response) => {
         if (response.data.code === 200) {
+          console.log(response.data)
           setCoupons(response.data.coupons.filter((coupon) => coupon.paid === 1));
           setCouponsNotApproved(response.data.coupons.filter((coupon) => coupon.paid === 0));
         }
@@ -39,11 +40,15 @@ const Overview = () => {
   }
 
   const changeCouponState = (coupon, isApproved) => {
+    coupon.updated_dtm = new Date().toISOString();
+
     if (isApproved) {
       let copy = coupons;
       coupon.paid = "1";
+      // coupon.updated_dtm = new
+      console.log(new Date().toISOString())
       copy.push(coupon);
-      setCoupons(sortByCouponsId(coupons));
+      setCoupons(coupons);
 
       let copy2 = couponsNotApproved;
       copy2 = copy2.filter((c) => {
@@ -55,7 +60,7 @@ const Overview = () => {
       let copy = couponsNotApproved;
       coupon.paid = "0";
       copy.push(coupon);
-      setCouponsNotApproved(sortByCouponsId(copy));
+      setCouponsNotApproved(copy);
       removeCoupon(coupon);
       
     }
@@ -83,11 +88,11 @@ const Overview = () => {
       <div>
         <AdminMenu />
         <h2><span className="yellowText">Godkendte</span> tilmeldinger</h2>
-        {coupons.map((coupon) => {
+        {sortByUpdated(coupons).map((coupon) => {
           return <Coupon key={coupon.coupons_id} coupon={coupon} removeCoupon={removeCoupon} changeCouponState={changeCouponState} />;
         })}
         <h2 className="notApproved"><span className="yellowText">Ikke</span> Godkendte tilmeldinger</h2>
-        {couponsNotApproved.map((coupon) => {
+        {sortByUpdated(couponsNotApproved).map((coupon) => {
           return <Coupon key={coupon.coupons_id} coupon={coupon} removeCoupon={removeCoupon} changeCouponState={changeCouponState}/>;
         })}
       </div>

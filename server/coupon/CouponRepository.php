@@ -130,13 +130,15 @@ class CouponRepository
                 UPDATE 
                     coupons
                 SET 
-                    paid = 1
+                    paid = 1,
+                    updated_dtm = :updated_dtm
                 WHERE
                     coupons_id = :coupons_id
             ";
 
         $statement = $connection->prepare($query);
 
+        $statement->bindParam(":updated_dtm", date('Y-m-d H:i:s'));
         $statement->bindParam(":coupons_id", $coupons_id);
 
         return $statement->execute();
@@ -183,7 +185,8 @@ class CouponRepository
                     mail = :mail,
                     predictions = :preditions,
                     subscribeToMails = :subscribeToMails,
-                    paid = :paid
+                    paid = :paid,
+                    updated_dtm = :updated_dtm,
                 WHERE
                     coupons_id = :coupons_id
         ";
@@ -232,13 +235,15 @@ class CouponRepository
                 UPDATE 
                     coupons
                 SET 
-                    paid = 0
+                    paid = 0,
+                    updated_dtm = :updated_dtm
                 WHERE
                     coupons_id = :coupons_id
             ";
 
         $statement = $connection->prepare($query);
 
+        $statement->bindParam(":updated_dtm", date('Y-m-d H:i:s'));
         $statement->bindParam(":coupons_id", $coupons_id);
 
         return $statement->execute();

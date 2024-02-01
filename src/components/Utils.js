@@ -92,12 +92,12 @@ export const sortByWins = (coupons) => {
   return couponsSorted;
 };
 
-export const sortByCouponsId = (coupons) => {
+export const sortByUpdated = (coupons) => {
   const couponsSorted = coupons.sort((a, b) => {
-    if (a.coupons_id < b.coupons_id) {
+    if (a.updated_dtm > b.updated_dtm) {
       return 1;
     }
-    if (a.coupons_id > b.coupons_id) {
+    if (a.updated_dtm < b.updated_dtm) {
       return -1;
     }
 
