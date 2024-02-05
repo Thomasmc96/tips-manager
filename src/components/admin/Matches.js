@@ -190,7 +190,6 @@ const CreateMatch = ({ addNewMatch }) => {
         </div>
         <label>Udebanehold</label>
         <div className="countryContainer">
-
           <select
             onChange={e => setAwayTeam(e.target.value)}
             required
@@ -211,8 +210,8 @@ const CreateMatch = ({ addNewMatch }) => {
               src={`https://flags.tv2a.dk/tv2football/${awayTeam}.svg`}
               alt={awayTeam}
             />)}
-          <label>Kickoff</label>
         </div>
+        <label>Kickoff</label>
         <input
           type="datetime-local"
           placeholder="Kick off"

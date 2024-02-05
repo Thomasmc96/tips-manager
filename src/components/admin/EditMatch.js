@@ -119,71 +119,71 @@ const Match = () => {
   }
 
   return (
-    <div className="container flex flex-col my-2 px-2 flex-wrap w-full sm:w-80">
-      <h3 className="text-2xl mb-5 mt-5">Opdater kamp #{id}</h3>
-      <form className="container mt-2" onSubmit={updateMatch}>
-        <label className="flex w-full rounded-md text-white">Hjemmebanehold</label>
-        <select
-          className="flex my-2 w-full h-9 rounded-md p-1 text-black mb-4"
-          onChange={e => setMatch(prev => {
-            let copy = Object.assign({}, prev)
-            copy.home_team = e.target.value;
-            return copy
-          })}
-          required
-          name="homeTeam"
-          value={match.home_team}
-        >
-          <option key={'-1'} value={''}>Vælg hold</option>s
-          {countries.sort((a, b) => {
-            if (a.name < b.name) { return -1; }
-            if (a.name > b.name) { return 1; }
-            return 0;
-          }).map((country) => {
-            return <option key={country.code} value={country.code}>{country.name}</option>
-          })}
-        </select>
-        {match.home_team !== '' && (
-          <img
-            src={`https://flags.tv2a.dk/tv2football/${match.home_team}.svg`}
-            alt={match.home_team}
-            className="w-12 mb-5"
-          />)}
+    <div className="container editMatch">
+      <h2>Opdater <span className="yellowText">kamp #{id}</span></h2>
+      <form className="editMatchForm" onSubmit={updateMatch}>
+        <label>Hjemmebanehold</label>
+        <div className="countryContainer">
 
-        <label className="flex w-full rounded-md text-white">Udebanehold</label>
-        <select
-          className="flex my-2 w-full h-9 rounded-md p-1 text-black mb-4"
-          onChange={e => setMatch(prev => {
-            let copy = Object.assign({}, prev)
-            copy.away_team = e.target.value;
-            return copy
-          })}
-          required
-          name="awayTeam"
-          value={match.away_team}
-        >
-          <option key={'-1'} value={''}>Vælg hold</option>
-          {countries.sort((a, b) => {
-            if (a.name < b.name) { return -1; }
-            if (a.name > b.name) { return 1; }
-            return 0;
-          }).map((country) => {
-            return <option key={country.code} value={country.code}>{country.name}</option>
-          })}
-        </select>
-        {match.away_team !== '' && (
-          <img
-            src={`https://flags.tv2a.dk/tv2football/${match.away_team}.svg`}
-            alt={match.away_team}
-            className="w-12 mb-5"
-          />)}
-
-        <label className="flex w-full rounded-md text-white">Kickoff</label>
+          <select
+            onChange={e => setMatch(prev => {
+              let copy = Object.assign({}, prev)
+              copy.home_team = e.target.value;
+              return copy
+            })}
+            required
+            name="homeTeam"
+            value={match.home_team}
+          >
+            <option key={'-1'} value={''}>Vælg hold</option>s
+            {countries.sort((a, b) => {
+              if (a.name < b.name) { return -1; }
+              if (a.name > b.name) { return 1; }
+              return 0;
+            }).map((country) => {
+              return <option key={country.code} value={country.code}>{country.name}</option>
+            })}
+          </select>
+          {match.home_team !== '' && (
+            <img
+              src={`https://flags.tv2a.dk/tv2football/${match.home_team}.svg`}
+              alt={match.home_team}
+              className="w-12 mb-5"
+            />)}
+        </div>
+        <label>Udebanehold</label>
+        <div className="countryContainer">
+          <select
+            onChange={e => setMatch(prev => {
+              let copy = Object.assign({}, prev)
+              copy.away_team = e.target.value;
+              return copy
+            })}
+            required
+            name="awayTeam"
+            value={match.away_team}
+          >
+            <option key={'-1'} value={''}>Vælg hold</option>
+            {countries.sort((a, b) => {
+              if (a.name < b.name) { return -1; }
+              if (a.name > b.name) { return 1; }
+              return 0;
+            }).map((country) => {
+              return <option key={country.code} value={country.code}>{country.name}</option>
+            })}
+          </select>
+          {match.away_team !== '' && (
+            <img
+              src={`https://flags.tv2a.dk/tv2football/${match.away_team}.svg`}
+              alt={match.away_team}
+              className="w-12 mb-5"
+            />)}
+        </div>
+        <label>Kickoff</label>
         <input
           type="datetime-local"
           placeholder="Kick off"
           name="kickOff"
-          className="flex my-2 w-full h-9 rounded-md p-1 text-black mb-4"
           required
           value={match.kickoff_dtm}
           onChange={e => setMatch(prev => {
@@ -192,12 +192,11 @@ const Match = () => {
             return copy
           })}
         />
-        <label className="flex w-full rounded-md text-white">Hjemmebaneholds mål</label>
+        <label>Hjemmebaneholds mål</label>
         <input
           type="number"
           placeholder="Mål"
           name="homeTeamGoals"
-          className="flex my-2 w-full h-9 rounded-md p-1 text-black mb-4"
           value={match.home_team_goals === null ? '' : match.home_team_goals}
           onChange={e => setMatch(prev => {
             let copy = Object.assign({}, prev)
@@ -205,12 +204,11 @@ const Match = () => {
             return copy
           })}
         />
-        <label className="flex w-full rounded-md text-white">Udebaneholds mål</label>
+        <label>Udebaneholds mål</label>
         <input
           type="number"
           placeholder="Mål"
           name="awayTeamGoals"
-          className="flex my-2 w-full h-9 rounded-md p-1 text-black mb-4"
           value={match.away_team_goals === null ? '' : match.away_team_goals}
           onChange={e => setMatch(prev => {
             let copy = Object.assign({}, prev)
@@ -218,45 +216,47 @@ const Match = () => {
             return copy
           })}
         />
-        <button
-          type="submit"
-          className="bg-sandBeige rounded-md w-full h-10 text-black text-lg hover:cursor-pointer hover:scale-110 duration-200 mb-3 flex justify-center items-center"
-        >
-          {!loading ? (
-            <>Gem</>
-          ) : (
-            <FidgetSpinner
-              visible={true}
-              height="30"
-              width="30"
-              ariaLabel="dna-loading"
-              wrapperStyle={{}}
-              wrapperClass="dna-wrapper"
-              ballColors={["#003e21", "#067242", "#098b54"]}
-              backgroundColor="#f8d098"
-            />
-          )}
-        </button>
-        <button
-          type="button"
-          className="border border-red-500 rounded-md w-full h-10 text-white text-lg hover:cursor-pointer hover:scale-110 duration-200 mb-7 flex justify-center items-center"
-          onClick={deleteMatch}
-        >
-          {!loading ? (
-            <>Slet kamp</>
-          ) : (
-            <FidgetSpinner
-              visible={true}
-              height="30"
-              width="30"
-              ariaLabel="dna-loading"
-              wrapperStyle={{}}
-              wrapperClass="dna-wrapper"
-              ballColors={["#003e21", "#067242", "#098b54"]}
-              backgroundColor="#f8d098"
-            />
-          )}
-        </button>
+        <div className="actionBtns">
+          <button
+            type="button"
+            className="deleteBtn"
+            onClick={deleteMatch}
+          >
+            {!loading ? (
+              <>Slet kamp</>
+            ) : (
+              <FidgetSpinner
+                visible={true}
+                height="30"
+                width="30"
+                ariaLabel="dna-loading"
+                wrapperStyle={{}}
+                wrapperClass="dna-wrapper"
+                ballColors={["#003e21", "#067242", "#098b54"]}
+                backgroundColor="#f8d098"
+              />
+            )}
+          </button>
+          <button
+            type="submit"
+            className="submitBtn"
+            >
+            {!loading ? (
+              <>Gem</>
+            ) : (
+              <FidgetSpinner
+                visible={true}
+                height="30"
+                width="30"
+                ariaLabel="dna-loading"
+                wrapperStyle={{}}
+                wrapperClass="dna-wrapper"
+                ballColors={["#003e21", "#067242", "#098b54"]}
+                backgroundColor="#f8d098"
+              />
+            )}
+          </button>
+        </div>
       </form>
     </div>
   )
