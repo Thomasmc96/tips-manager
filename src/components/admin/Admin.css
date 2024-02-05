@@ -1,7 +1,5 @@
 /* Menu ********************************/
-.adminMenu {
-
-}
+.adminMenu {}
 
 .adminMenu .headline {
     font-size: 1.5rem;
@@ -37,7 +35,9 @@
 
 /* Overview ********************************/
 
-.overview, .matches, .email {
+.overview,
+.matches,
+.email {
     display: flex;
     flex-direction: column;
     margin-left: auto;
@@ -55,7 +55,8 @@
     /* margin-bottom: 1rem; */
 }
 
-.overview .notApprovedHeadline, .overview .apporvedHeadline {
+.overview .notApprovedHeadline,
+.overview .apporvedHeadline {
     margin-top: 2rem;
 }
 
@@ -79,7 +80,7 @@
 
 .editMatch,
 .createMatch {
-    width: 35rem;
+    max-width: 35rem;
     display: flex;
     flex-direction: column;
     margin-left: auto;
@@ -129,9 +130,12 @@
 
 .editMatch .editMatchForm img,
 .createMatch .createMatchForm img {
-    width: 3rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    object-fit: cover;
+    border-radius: 50%;
     position: absolute;
-    top: 0.3rem;
+    top: 0;
     left: -3.7rem;
 }
 
@@ -208,15 +212,20 @@
     table-layout: fixed;
 }
 
-.showMatches table thead tr {
+.showMatches table thead tr {}
 
-}
 .showMatches table tbody tr td,
 .showMatches table thead tr th {
     text-align: center;
     padding: .5rem;
     border-bottom: 1px white solid;
     width: 1%;
+}
+.showMatches table tbody tr td img {
+    border-radius: 50%;
+    height: 1.7rem;
+    width: 1.7rem;
+    object-fit: cover;
 }
 
 .showMatches table thead tr th {
@@ -235,7 +244,7 @@
 
 /* EMAIL *****************************/
 .emailContainer {
-    width: 35rem;
+    max-width: 35rem;
     display: flex;
     flex-direction: column;
     margin-left: auto;
@@ -268,6 +277,7 @@
     margin-bottom: 1rem;
     gap: .5rem;
 }
+
 .emailContainer .emailForm .checkboxContainer .checkboxLabel {
     font-weight: unset;
 }
@@ -291,4 +301,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+
+@media only screen and (max-width:600px) {
+    .adminMenu .adminLinks {
+        gap: unset;
+    }
+
+    .editMatch .editMatchForm img,
+    .createMatch .createMatchForm img {
+        width: 2rem;
+        height: 2rem;
+        left: -2.7rem;
+    }
 }

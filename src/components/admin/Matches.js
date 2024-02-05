@@ -77,9 +77,9 @@ const ShowMatches = ({ matches2 }) => {
           <tr>
             <th className="">Hjemmebane</th>
             <th className="">Udebane</th>
-            <th className=" hidden sm:table-cell">HB. Mål</th>
-            <th className=" hidden sm:table-cell">UB. Mål</th>
-            <th className=" hidden sm:table-cell">Kickoff</th>
+            <th className="hidden sm:table-cell">HB. Mål</th>
+            <th className="hidden sm:table-cell">UB. Mål</th>
+            <th className="hidden sm:table-cell">Kickoff</th>
           </tr>
         </thead>
         <tbody>
@@ -104,9 +104,9 @@ const ShowMatches = ({ matches2 }) => {
                   />
                 </td>
 
-                <td className="sm:table-cell">{match.home_team_goals}</td>
-                <td className="sm:table-cell">{match.away_team_goals}</td>
-                <td className="sm:table-cell">{getDateString(match.kickoff_dtm)}</td>
+                <td className="hidden sm:table-cell">{match.home_team_goals}</td>
+                <td className="hidden sm:table-cell">{match.away_team_goals}</td>
+                <td className="hidden sm:table-cell">{getDateString(match.kickoff_dtm)}</td>
               </tr>
             ))}
         </tbody>
