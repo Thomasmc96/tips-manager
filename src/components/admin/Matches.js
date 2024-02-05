@@ -77,8 +77,8 @@ const ShowMatches = ({ matches2 }) => {
           <tr>
             <th className="">Hjemmebane</th>
             <th className="">Udebane</th>
-            <th className=" hidden sm:table-cell">Mål (1)</th>
-            <th className=" hidden sm:table-cell">Mål (2)</th>
+            <th className=" hidden sm:table-cell">HB. Mål</th>
+            <th className=" hidden sm:table-cell">UB. Mål</th>
             <th className=" hidden sm:table-cell">Kickoff</th>
           </tr>
         </thead>

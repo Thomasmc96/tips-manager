@@ -165,4 +165,15 @@
     width: 1%;
 }
 
+.showMatches table thead tr th {
+    color: var(--gold);
+    background-color: var(--darkest-green);
+}
 
+.showMatches table tbody tr:nth-child(odd) {
+    background-color: var(--dark-green);
+}
+
+.showMatches table tbody tr:nth-child(even) {
+    background-color: var(--dark-green);
+}
