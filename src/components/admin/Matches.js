@@ -71,23 +71,22 @@ const ShowMatches = ({ matches2 }) => {
   }
 
   return (
-    <div className="container flex flex-col my-2 px-2 flex-wrap">
-      <h2 className="text-2xl mb-3 mt-5">Kampe</h2>
-      <table className="min-w-full border border-gray-300 shadow-md">
+    <div className="container showMatches">
+      <table>
         <thead>
           <tr>
-            <th className="py-2 px-4 border-b border-gray-300 text-center">Hjemmebane</th>
-            <th className="py-2 px-4 border-b border-gray-300 text-center">Udebane</th>
-            <th className="py-2 px-4 border-b border-gray-300 text-center hidden sm:table-cell">Mål (1)</th>
-            <th className="py-2 px-4 border-b border-gray-300 text-center hidden sm:table-cell">Mål (2)</th>
-            <th className="py-2 px-4 border-b border-gray-300 text-center hidden sm:table-cell">Kickoff</th>
+            <th className="">Hjemmebane</th>
+            <th className="">Udebane</th>
+            <th className=" hidden sm:table-cell">Mål (1)</th>
+            <th className=" hidden sm:table-cell">Mål (2)</th>
+            <th className=" hidden sm:table-cell">Kickoff</th>
           </tr>
         </thead>
         <tbody>
           {matches2.length > 0 &&
             sortByKickOff(matches2).map((match) => (
               <tr key={match.matches2_id} onClick={() => seeMatch(match.matches2_id)} className="cursor-pointer">
-                <td className="py-2 px-4 border-b border-gray-300 text-center">
+                <td>
                   <span>{countryName(match.home_team)}</span>
                   <img
                     src={`https://flags.tv2a.dk/tv2football/${match.home_team}.svg`}
@@ -96,7 +95,7 @@ const ShowMatches = ({ matches2 }) => {
                   />
                 </td>
 
-                <td className="py-2 px-4 border-b border-gray-300 text-center">
+                <td>
                   <span>{countryName(match.away_team)}</span>
                   <img
                     src={`https://flags.tv2a.dk/tv2football/${match.away_team}.svg`}
@@ -105,9 +104,9 @@ const ShowMatches = ({ matches2 }) => {
                   />
                 </td>
 
-                <td className="py-2 px-4 border-b border-gray-300 text-center hidden sm:table-cell">{match.home_team_goals}</td>
-                <td className="py-2 px-4 border-b border-gray-300 text-center hidden sm:table-cell">{match.away_team_goals}</td>
-                <td className="py-2 px-4 border-b border-gray-300 text-center hidden sm:table-cell">{getDateString(match.kickoff_dtm)}</td>
+                <td className="sm:table-cell">{match.home_team_goals}</td>
+                <td className="sm:table-cell">{match.away_team_goals}</td>
+                <td className="sm:table-cell">{getDateString(match.kickoff_dtm)}</td>
               </tr>
             ))}
         </tbody>
@@ -167,64 +166,64 @@ const CreateMatch = ({ addNewMatch }) => {
       <h2 className="">Tilføj en <span className="yellowText">kamp</span></h2>
       <form className="createMatchForm" onSubmit={saveMatch}>
         <label>Hjemmebanehold</label>
-        <select
-          className="flex my-2 w-full h-9 rounded-md p-1 text-black mb-4"
-          onChange={e => setHomeTeam(e.target.value)}
-          required
-          name="homeTeam"
-          value={homeTeam}
-        >
-          <option key={'-1'} value={''}>Vælg hold</option>
-          {countries.sort((a, b) => {
-            if (a.name < b.name) { return -1; }
-            if (a.name > b.name) { return 1; }
-            return 0;
-          }).map((country) => {
-            return <option key={country.code} value={country.code}>{country.name}</option>
-          })}
-        </select>
-        {homeTeam !== '' && (
-          <img
-            src={`https://flags.tv2a.dk/tv2football/${homeTeam}.svg`}
-            alt={homeTeam}
-            className="w-12 mb-5"
-          />)}
-        <label className="flex w-full rounded-md text-white">Udebanehold</label>
-        <select
-          className="flex my-2 w-full h-9 rounded-md p-1 text-black mb-4"
-          onChange={e => setAwayTeam(e.target.value)}
-          required
-          name="awayTeam"
-          value={awayTeam}
-        >
-          <option key={'-1'} value={''}>Vælg hold</option>
-          {countries.sort((a, b) => {
-            if (a.name < b.name) { return -1; }
-            if (a.name > b.name) { return 1; }
-            return 0;
-          }).map((country) => {
-            return <option key={country.code} value={country.code}>{country.name}</option>
-          })}
-        </select>
-        {awayTeam !== '' && (
-          <img
-            src={`https://flags.tv2a.dk/tv2football/${awayTeam}.svg`}
-            alt={awayTeam}
-            className="w-12 mb-5"
-          />)}
-        <label className="flex w-full rounded-md text-white">Kickoff</label>
+        <div className="countryContainer">
+          <select
+            onChange={e => setHomeTeam(e.target.value)}
+            required
+            name="homeTeam"
+            value={homeTeam}
+          >
+            <option key={'-1'} value={''}>Vælg hold</option>
+            {countries.sort((a, b) => {
+              if (a.name < b.name) { return -1; }
+              if (a.name > b.name) { return 1; }
+              return 0;
+            }).map((country) => {
+              return <option key={country.code} value={country.code}>{country.name}</option>
+            })}cover
+          </select>
+          {homeTeam !== '' && (
+            <img
+              src={`https://flags.tv2a.dk/tv2football/${homeTeam}.svg`}
+              alt={homeTeam}
+            />)}
+        </div>
+        <label>Udebanehold</label>
+        <div className="countryContainer">
+
+          <select
+            onChange={e => setAwayTeam(e.target.value)}
+            required
+            name="awayTeam"
+            value={awayTeam}
+          >
+            <option key={'-1'} value={''}>Vælg hold</option>
+            {countries.sort((a, b) => {
+              if (a.name < b.name) { return -1; }
+              if (a.name > b.name) { return 1; }
+              return 0;
+            }).map((country) => {
+              return <option key={country.code} value={country.code}>{country.name}</option>
+            })}
+          </select>
+          {awayTeam !== '' && (
+            <img
+              src={`https://flags.tv2a.dk/tv2football/${awayTeam}.svg`}
+              alt={awayTeam}
+            />)}
+          <label>Kickoff</label>
+        </div>
         <input
           type="datetime-local"
           placeholder="Kick off"
           name="kickOff"
-          className="flex my-2 w-full h-9 rounded-md p-1 text-black mb-4"
           required
           value={kickOff}
           onChange={(e) => setKickOff(e.target.value)}
         />
         <button
           type="submit"
-          className="bg-sandBeige rounded-md w-full h-10 text-black text-lg hover:cursor-pointer hover:scale-110 duration-200 mb-7 flex justify-center items-center"
+          className="submitBtn"
         >
           {!loading ? (
             <>Opret kamp</>
