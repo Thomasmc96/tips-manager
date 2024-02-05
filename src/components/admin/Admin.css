@@ -60,6 +60,21 @@
     margin-top: 2rem;
 }
 
+.overview .notApprovedContainer {
+    border-color: var(--red);
+}
+
+.overview .coupon {
+    display: inline-flex;
+    flex-direction: column;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 10px;
+    margin-top: 1rem;
+    min-width: 14rem;
+    margin-right: 1rem;
+}
+
 .overview .coupon .approveBtn {
     background-color: var(--gold);
     color: black;
@@ -71,8 +86,15 @@
     color: var(--light-green);
 }
 
-.overview .notApprovedContainer {
-    border-color: var(--red);
+.overview .coupon h2 {
+    text-transform: none;
+    font-family: RobotoRegular;
+    font-size: 1rem;
+}
+
+.overview .coupon .mail {
+    text-transform: none;
+    font-size: 0.875rem;
 }
 
 
@@ -307,6 +329,10 @@
 @media only screen and (max-width:600px) {
     .adminMenu .adminLinks {
         gap: unset;
+    }
+    .overview .coupon {
+        width: 100%;
+        margin-right: unset;
     }
 
     .editMatch .editMatchForm img,

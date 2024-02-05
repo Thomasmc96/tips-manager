@@ -5,6 +5,7 @@ import { FidgetSpinner } from "react-loader-spinner";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { faRotateLeft } from "@fortawesome/free-solid-svg-icons";
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
 const Coupon = ({ coupon, removeCoupon, changeCouponState={changeCouponState} }) => {
   let { coupons_id, name, mail, paid, subscribeToMails } = coupon;
@@ -131,15 +132,14 @@ const Coupon = ({ coupon, removeCoupon, changeCouponState={changeCouponState} })
   return (
     <div
       className={
-        "coupon rounded-lg shadow-md min-w-14 sm:w-auto w-full border-2 inline-flex flex-col mt-2 sm:mr-4 " +
-        (approved ? "approvedContainer" : "notApprovedContainer")
+        "coupon " + (approved ? "approvedContainer" : "notApprovedContainer")
       }
     >
       {subscribeToMails == "1" ?
         <div className="ml-auto mr-1">
-          <span title="Modtager mails">📧</span>
+          <span title="Modtager mails"><FontAwesomeIcon icon={faEnvelope}/></span>
         </div>
-        : <div className="invisible">📧</div>
+        : <div className="invisible"><span title="Modtager mails"><FontAwesomeIcon icon={faEnvelope}/></span></div>
       }
       <div className="px-6 pb-6">
 
@@ -163,7 +163,7 @@ const Coupon = ({ coupon, removeCoupon, changeCouponState={changeCouponState} })
             onKeyDown={enter}
           />
         }
-        <p className="text-white text-sm mb-4">{mail}</p>
+        <p className="mail text-white text-sm mb-4">{mail}</p>
         <div className="flex flex-row justify-between items-center h-10">
           {!approved ? (
             <button

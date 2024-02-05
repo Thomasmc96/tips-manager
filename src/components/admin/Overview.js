@@ -45,7 +45,6 @@ const Overview = () => {
     if (isApproved) {
       let copy = coupons;
       coupon.paid = "1";
-      // coupon.updated_dtm = new
       console.log(new Date().toISOString())
       copy.push(coupon);
       setCoupons(coupons);
