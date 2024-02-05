@@ -231,3 +231,64 @@
 .showMatches table tbody tr:nth-child(even) {
     background-color: var(--dark-green);
 }
+
+
+/* EMAIL *****************************/
+.emailContainer {
+    width: 35rem;
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid white;
+    border-radius: 10px;
+    margin-top: 3rem;
+}
+
+.emailContainer h2 {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-top: 1rem;
+    font-weight: bold;
+}
+
+.emailContainer .emailForm {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1rem;
+}
+
+.emailContainer .emailForm .checkboxContainer {
+    display: flex;
+    align-items: center;
+    text-transform: none;
+    margin-bottom: 1rem;
+    gap: .5rem;
+}
+.emailContainer .emailForm .checkboxContainer .checkboxLabel {
+    font-weight: unset;
+}
+
+.emailContainer .emailForm label {
+    font-weight: bold;
+}
+
+.emailContainer .emailForm .submitBtn {
+    background-color: var(--gold);
+    color: black;
+    border-radius: 10px;
+    width: 60%;
+    height: 3rem;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2.5rem;
+    margin-top: 2.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
