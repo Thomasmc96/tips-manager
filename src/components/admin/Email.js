@@ -21,6 +21,7 @@ const EmailStandingsForm = () => {
 
     const sendMail = (e) => {
         e.preventDefault();
+        setLoading(true);
 
         axios
             .post(`${environment[0]}/server/endpoints/email/sendStandings.php`, {
@@ -29,6 +30,7 @@ const EmailStandingsForm = () => {
             .then((response) => {
                 if (response.data.code === 200) {
                     console.log(response)
+                    alert('Mailen blev sendt!')
                 } else {
                     console.log(response);
                     alert("Der skete desværre en fejl. Prøv igen.");
@@ -64,16 +66,16 @@ const EmailStandingsForm = () => {
                     </label>
                 </div>
                 {isCustom &&
-                    <>
+                    <div className="emailTextContainer">
                         <label>Min besked</label>
                         <textarea
-                            className="text-black w-full p-2 rounded-md h-48"
+                            className="emailText text-black w-full p-2 rounded-md h-48"
                             type="textarea"
                             placeholder="Her er nuværende stilling for EM 2024 tipskonkurrencen."
                             value={emailText}
                             onChange={(e) => setEmailText(e.target.value)}
                         />
-                    </>
+                    </div>
                 }
                 <button
                     type="submit"

@@ -297,6 +297,7 @@
     align-items: center;
     text-transform: none;
     margin-bottom: 1rem;
+    margin-top: 1rem;
     gap: .5rem;
 }
 
@@ -306,6 +307,14 @@
 
 .emailContainer .emailForm label {
     font-weight: bold;
+}
+
+.emailContainer .emailForm .emailTextContainer {
+    margin-top: 1rem;
+}
+
+.emailContainer .emailForm .emailText {
+    background-color: var(--grey);
 }
 
 .emailContainer .emailForm .submitBtn {
