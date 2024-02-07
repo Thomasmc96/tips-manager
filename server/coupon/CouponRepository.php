@@ -167,7 +167,7 @@ class CouponRepository
         }
 
         $row = $statement->fetch(PDO::FETCH_ASSOC);
-        $coupon = new Coupon($row['name'], $row['mail'], $row['paid'], json_decode($row['predictions']), $row['subscribeToMails']);
+        $coupon = new Coupon($row['name'], $row['mail'], $row['paid'], json_decode($row['predictions']), $row['subscribeToMails'], $row['updated_dtm']);
         $coupon->coupons_id = (int)$coupons_id;
         return $coupon;
     }

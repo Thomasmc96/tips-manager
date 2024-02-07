@@ -7,7 +7,7 @@ class CouponService
 {
 
     private $from_email = "tips-manager@thch.dk";
-    private $url = 'tips-manager.thch.dk';
+    private $url = 'tips.thch.dk';
 
     public function __construct()
     {
@@ -281,7 +281,7 @@ class CouponService
             margin-left: auto;
             margin-right: auto;
             display: inline-flex;
-            background-color: sandybrown;
+            background-color: #FCBC02;
             padding: 8px;
             border-radius: 4px;
             color: black !important;
@@ -389,6 +389,60 @@ class CouponService
             text-overflow: ellipsis;
         }
         </style>';
+    }
+
+    public function sendApprovedEmail(Coupon $coupon) {
+        $to = $coupun->mail;
+        $subject = 'Så du med - EM 2024 Tips';
+        $from_email = $this->from_email;
+        $from_name = 'Tipskupon - EM 2024';
+        $reply_to_email = $this->from_email;
+        $reply_to_name = 'Tipskupon - EM 2024';
+        $charset = 'UTF-8';
+
+        $style = "
+        <style>
+            .actionBtn {
+                margin-top: 20px;
+                margin-left: auto;
+                margin-right: auto;
+                display: inline-flex;
+                background-color: #FCBC02;
+                padding: 8px;
+                border-radius: 4px;
+                color: black !important;
+                text-decoration: none;
+            }
+        </style>
+        ";
+
+        $message = sprintf(
+            "
+            <html>
+                <head>%s</head>
+                <body>
+                    <h2>Hej %</h2>
+                    <p>Din kupon er netop blevet bekræfter!</p>
+                    <a href='%s' class='actionBtn'>Se stillingen</a>
+                </body>
+            </html>",
+            $style,
+            $coupon->name,
+            "http://" . $_SERVER['HTTP_HOST'] 
+        );
+
+        $headers = [];
+        $headers[] = "MIME-Version: 1.0";
+        $headers[] = "Content-type: text/html; charset={$charset}";
+        $headers[] = "From: {$from_name} <{$from_email}>";
+        $headers[] = "Reply-To: {$reply_to_name} <{$reply_to_email}>";
+        $headers[] = "X-Mailer: PHP/" . phpversion();
+        $headers[] = "X-Priority: 3";
+        $headers[] = "X-Assp-ID: " . md5(uniqid(time()));
+
+        $headers_string = implode("\r\n", $headers);
+
+        return mail($to, $subject, $message, $headers_string);
     }
 
     private function countryName($code) {

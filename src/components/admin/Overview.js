@@ -30,6 +30,8 @@ const Overview = () => {
   }, []);
 
   const removeCoupon = (coupon) => {
+    if (coupon.paid == '1') {
+
       let copy = coupons;
 
       copy = copy.filter((c) => {
@@ -37,6 +39,16 @@ const Overview = () => {
       });
 
       setCoupons(copy);
+    } else {
+      let copy = couponsNotApproved;
+
+      copy = copy.filter((c) => {
+        return c.coupons_id !== coupon.coupons_id
+      });
+
+      setCouponsNotApproved(copy);
+    }
+
   }
 
   const changeCouponState = (coupon, isApproved) => {
