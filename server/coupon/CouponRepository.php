@@ -191,8 +191,7 @@ class CouponRepository
                     mail = :mail,
                     predictions = :preditions,
                     subscribeToMails = :subscribeToMails,
-                    paid = :paid,
-                    updated_dtm = :updated_dtm,
+                    paid = :paid
                 WHERE
                     coupons_id = :coupons_id
         ";

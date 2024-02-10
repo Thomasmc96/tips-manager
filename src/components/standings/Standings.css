@@ -52,6 +52,31 @@
   display: none;
 }
 
+
+.tableContainer .couponName {
+  text-transform: none;
+  font-family: RobotoRegular;
+  font-weight: normal;
+  font-size: .8rem;
+}
+
+.tableContainer .countryNames {
+  text-transform: none;
+  font-family: RobotoRegular;
+  font-size: .8rem;
+}
+
+.tableContainer .matchInfo {
+  text-transform: none;
+  font-family: RobotoMedium;
+  font-size: .8rem;
+}
+
+.tableContainer .prediction {
+  font-size: .8rem;
+  font-family: RobotoRegular;
+}
+
 @media only screen and (max-width: 600px) {
   .countdownInfo h1 {
     font-size: 1.6rem;

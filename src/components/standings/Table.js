@@ -3,6 +3,8 @@ import axios from "axios";
 import environment from "../../environment";
 import { FidgetSpinner } from "react-loader-spinner";
 import { countryName, getDateString, sortByKickOff } from "../Utils";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
 const Table = ({ coupons }) => {
   const [zoom, setZoom] = useState(100);
@@ -57,7 +59,7 @@ const Table = ({ coupons }) => {
   }
 
   return (
-    <div className="container mx-auto flex flex-col my-4">
+    <div className="tableContainer container mx-auto flex flex-col my-4">
       {!isFirefox && (
         <section className="container mx-auto flex">
           <button
@@ -78,33 +80,32 @@ const Table = ({ coupons }) => {
       )}
 
       <div className="overflow-x-auto">
-        <table className="table-fixed relative " style={{ zoom: zoom + "%" }}>
+        <table className="table-fixed relative border-[2px] border-solid border-white rounded-lg " style={{ zoom: zoom + "%" }}>
           <thead className="sticky top-0 z-50">
-            <tr className="bg-darkGreen border-[1px] border-black ">
+            <tr className="bg-darkestGreenNew border-[1px] border-white ">
               <th className="min-w-[12rem]"></th>
               {coupons.map(({ coupons_id, name, amountCorrect }) => (
                 <th
                   key={coupons_id}
-                  className="border-[1px] border-black w-40 px-1 text-xs"
+                  className="border-[1px] border-white w-40 px-1 text-xs"
                 >
-                  <div className="flex flex-col h-auto w-full justify-between">
-                    <span>{name}</span>
-                    <span className="mt-1">{amountCorrect} ✔</span>
+                  <div className="flex flex-col h-auto w-full justify-between py-1 px-2">
+                    <span className="couponName">{name}</span>
+                    <span className="mt-1">{amountCorrect}<FontAwesomeIcon className="ml-1" icon={faCheck}></FontAwesomeIcon></span>
                   </div>
                 </th>
               ))}
             </tr>
           </thead>
           <tbody>
-            {/* {matches.map(({ id, participants, startDate, state }, i) => ( */}
             {matches2.map((match, i) => (
               <tr key={i}>
-                <td className={`p-2 text-center border-[1px] border-black`}>
+                <td className={`p-2 text-center border-[1px] border-white`}>
                   <div className="flex flex-col">
-                    <span>
+                    <span className="countryNames">
                       {countryName(match.home_team)} - {countryName(match.away_team)}
                     </span>
-                    <span>
+                    <span className="yellowText matchInfo">
                       {!isFinished(match)
                         ? getDateString(match.kickoff_dtm)
                         : match.home_team_goals +
@@ -120,15 +121,15 @@ const Table = ({ coupons }) => {
                         <td
                           key={coupons_id}
                           className={
-                            `p-6 text-center border-[1px] border-black ` +
+                            `p-2 text-center border-[1px] border-white ` +
                             (prediction.won && isFinished(match)
-                              ? "bg-lightGreen"
+                              ? "bg-lightGreenNew"
                               : !prediction.won && isFinished(match)
-                                ? "bg-red-500"
+                                ? "bg-red"
                                 : "")
                           }
                         >
-                          <span key={prediction.id}>
+                          <span className="prediction" key={prediction.id}>
                             {prediction.prediction}
                           </span>
                         </td>
