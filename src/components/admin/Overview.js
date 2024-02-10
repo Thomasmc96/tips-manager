@@ -53,11 +53,11 @@ const Overview = () => {
 
   const changeCouponState = (coupon, isApproved) => {
     coupon.updated_dtm = new Date().toISOString();
+    console.log(coupon);
 
     if (isApproved) {
       let copy = coupons;
       coupon.paid = "1";
-      console.log(new Date().toISOString())
       copy.push(coupon);
       setCoupons(coupons);
 
@@ -72,8 +72,12 @@ const Overview = () => {
       coupon.paid = "0";
       copy.push(coupon);
       setCouponsNotApproved(copy);
-      removeCoupon(coupon);
-      
+
+      let copy2 = coupons;
+      copy2 = copy2.filter((c) => {
+        return c.coupons_id !== coupon.coupons_id
+      });
+      setCoupons(copy2);
     }
   }
 

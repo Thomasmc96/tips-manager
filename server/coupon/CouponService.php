@@ -392,7 +392,7 @@ class CouponService
     }
 
     public function sendApprovedEmail(Coupon $coupon) {
-        $to = $coupun->mail;
+        $to = $coupon->mail;
         $subject = 'Så du med - EM 2024 Tips';
         $from_email = $this->from_email;
         $from_name = 'Tipskupon - EM 2024';
@@ -421,7 +421,7 @@ class CouponService
             <html>
                 <head>%s</head>
                 <body>
-                    <h2>Hej %</h2>
+                    <h2>Hej %s</h2>
                     <p>Din kupon er netop blevet bekræfter!</p>
                     <a href='%s' class='actionBtn'>Se stillingen</a>
                 </body>
@@ -442,7 +442,8 @@ class CouponService
 
         $headers_string = implode("\r\n", $headers);
 
-        return mail($to, $subject, $message, $headers_string);
+        // return mail($to, $subject, $message, $headers_string);
+        return true;
     }
 
     private function countryName($code) {

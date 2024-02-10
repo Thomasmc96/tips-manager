@@ -138,7 +138,9 @@ class CouponRepository
 
         $statement = $connection->prepare($query);
 
-        $statement->bindParam(":updated_dtm", date('Y-m-d H:i:s'));
+        $today = date('Y-m-d H:i:s');
+
+        $statement->bindParam(":updated_dtm", $today);
         $statement->bindParam(":coupons_id", $coupons_id);
 
         return $statement->execute();
@@ -243,7 +245,9 @@ class CouponRepository
 
         $statement = $connection->prepare($query);
 
-        $statement->bindParam(":updated_dtm", date('Y-m-d H:i:s'));
+        $today = date('Y-m-d H:i:s');
+
+        $statement->bindParam(":updated_dtm", $today);
         $statement->bindParam(":coupons_id", $coupons_id);
 
         return $statement->execute();

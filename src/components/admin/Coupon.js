@@ -51,16 +51,18 @@ const Coupon = ({ coupon, removeCoupon, changeCouponState={changeCouponState} })
 
   const approve = (e, coupons_id) => {
     e.preventDefault();
-    setLoadingSubmit(true);
+    console.log('test');
     axios
       .post(`${environment[0]}/server/endpoints/coupon/approve.php`, {
         coupons_id: coupons_id,
       })
       .then((response) => {
+        console.log(response);
         if (response.data.code === 200) {
           setApproved(true);
           paid = "1";
           changeCouponState(coupon, true)
+          console.log(coupon);
         }
       })
       .catch((error) => { 
@@ -78,8 +80,11 @@ const Coupon = ({ coupon, removeCoupon, changeCouponState={changeCouponState} })
         coupons_id: coupons_id,
       })
       .then((response) => {
+        console.log(response);
+
         if (response.data.code === 200) {
           setApproved(false);
+          paid = "0";
           changeCouponState(coupon, false)
         }
       })
