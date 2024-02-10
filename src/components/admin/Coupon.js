@@ -51,6 +51,7 @@ const Coupon = ({ coupon, removeCoupon, changeCouponState={changeCouponState} })
 
   const approve = (e, coupons_id) => {
     e.preventDefault();
+    setLoadingSubmit(true);
     axios
       .post(`${environment[0]}/server/endpoints/coupon/approve.php`, {
         coupons_id: coupons_id,
