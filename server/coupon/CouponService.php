@@ -422,8 +422,8 @@ class CouponService
                 <head>%s</head>
                 <body>
                     <h2>Hej %s</h2>
-                    <p>Din kupon er netop blevet bekræfter!</p>
-                    <a href='%s' class='actionBtn'>Se stillingen</a>
+                    <p>Din kupon er netop blevet bekræftet!</p>
+                    <p>Få overblikket når vi går i gang <a href='%s' class='actionBtn'>her</a></p>
                 </body>
             </html>",
             $style,
@@ -441,9 +441,12 @@ class CouponService
         $headers[] = "X-Assp-ID: " . md5(uniqid(time()));
 
         $headers_string = implode("\r\n", $headers);
+        
+        if ($_SERVER['SERVER_NAME'] === 'localhost') {
+            return true;
+        }
 
-        // return mail($to, $subject, $message, $headers_string);
-        return true;
+        return mail($to, $subject, $message, $headers_string);
     }
 
     private function countryName($code) {

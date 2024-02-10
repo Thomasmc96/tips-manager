@@ -26,7 +26,7 @@ try {
     $coupon = $couponRepo->getById($data->coupons_id);
     $couponService->sendApprovedEmail($coupon);
     echo json_encode([
-        "code" => 200
+        "code" => 200,
     ]);
 } catch (\Exception $e) {
     echo json_encode([

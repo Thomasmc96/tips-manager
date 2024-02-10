@@ -16,7 +16,6 @@ const Overview = () => {
       .get(`${environment[0]}/server/endpoints/coupon/all.php`)
       .then((response) => {
         if (response.data.code === 200) {
-          console.log(response.data)
           setCoupons(response.data.coupons.filter((coupon) => coupon.paid === 1));
           setCouponsNotApproved(response.data.coupons.filter((coupon) => coupon.paid === 0));
         }
@@ -53,7 +52,6 @@ const Overview = () => {
 
   const changeCouponState = (coupon, isApproved) => {
     coupon.updated_dtm = new Date().toISOString();
-    console.log(coupon);
 
     if (isApproved) {
       let copy = coupons;
