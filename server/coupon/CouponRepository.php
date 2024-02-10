@@ -102,12 +102,16 @@ class CouponRepository
         $connection = $databaseService->getConnection();
 
         $query = "
-            SELECT
-                *
-            FROM
-                coupons
-            WHERE
-                paid = :paid AND subscribeToMails = :subscribeToMails
+            SELECT * FROM (
+                SELECT
+                    *,
+                    ROW_NUMBER() OVER(PARTITION BY mail ORDER BY coupons_id DESC) rn
+                FROM
+                    coupons
+                WHERE
+                    paid = :paid AND subscribeToMails = :subscribeToMails
+                ) a
+            WHERE rn = 1;
         ";
 
         $statement = $connection->prepare($query);

@@ -51,6 +51,7 @@ const TipsBuilder = () => {
         subscribeToMails: subscribeToMails,
       })
       .then((response) => {
+        console.log(response)
         if (response.data.code === 200) {
           window.location.replace("/kvittering");
         } else {

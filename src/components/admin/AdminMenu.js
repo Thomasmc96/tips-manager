@@ -18,7 +18,7 @@ const AdminMenu = () => {
   return (
     <div className="adminMenu">
       <h2 className="headline">
-        Hej <span className="yellowText">{localStorage.getItem("name")}</span>, dette er dit dashboard!
+        Hej <span className="yellowText">{localStorage.getItem("name")}</span><span className="hidden sm:inline">, dette er dit dashboard!</span>
       </h2>
       <hr />
     <div className="adminLinks">

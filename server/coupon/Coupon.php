@@ -12,7 +12,7 @@ class Coupon
     public $subscribeToMails;
     public $updated_dtm;
 
-    public function __construct(string $name, string $mail, bool $paid, array $predictions, bool $subscribeToMails, string $updated_dtm)
+    public function __construct(string $name, string $mail, bool $paid, array $predictions, bool $subscribeToMails, string $updated_dtm = null)
     {
         $this->name = $name;
         $this->mail = $mail;

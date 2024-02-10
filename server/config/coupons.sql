@@ -35,7 +35,7 @@ CREATE TABLE `coupons` (
   `predictions` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`predictions`)),
   `subscribeToMails` tinyint(4) NOT NULL,
   `created_dtm` datetime NOT NULL DEFAULT current_timestamp(),
-  `updated_dtm` datetime NOT NULL
+  `updated_dtm` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --

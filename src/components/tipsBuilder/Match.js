@@ -7,7 +7,6 @@ const Match = ({
   setError,
   match
 }) => {
-  console.log(match)
   const handlePrediction = (e, id) => {
     e.preventDefault();
     setError(false);

@@ -161,6 +161,10 @@ class CouponService
 
         $headers_string = implode("\r\n", $headers);
 
+        if ($_SERVER['SERVER_NAME'] === 'localhost') {
+            return true;
+        }
+
         if (!mail($to_email, $subject, $message, $headers_string)) {
             throw new Exception('Email not sent');
         }
@@ -260,6 +264,10 @@ class CouponService
 
         $headers_string = implode("\r\n", $headers);
 
+        if ($_SERVER['SERVER_NAME'] === 'localhost') {
+            return true;
+        }
+
         return mail($coupon->mail, $subject, $message, $headers_string);
     }
 
@@ -315,6 +323,10 @@ class CouponService
     $headers[] = "X-Assp-ID: " . md5(uniqid(time()));
 
     $headers_string = implode("\r\n", $headers);
+
+    if ($_SERVER['SERVER_NAME'] === 'localhost') {
+        return true;
+    }
 
     return mail($to, $subject, $message, $headers_string);
 }
@@ -393,7 +405,7 @@ class CouponService
 
     public function sendApprovedEmail(Coupon $coupon) {
         $to = $coupon->mail;
-        $subject = 'Så du med - EM 2024 Tips';
+        $subject = 'Godkendt - EM 2024 Tips';
         $from_email = $this->from_email;
         $from_name = 'Tipskupon - EM 2024';
         $reply_to_email = $this->from_email;
@@ -403,7 +415,6 @@ class CouponService
         $style = "
         <style>
             .actionBtn {
-                margin-top: 20px;
                 margin-left: auto;
                 margin-right: auto;
                 display: inline-flex;
