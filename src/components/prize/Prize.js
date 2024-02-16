@@ -56,26 +56,26 @@ const Prize = () => {
   const renderer = ({ days, hours, minutes, seconds, completed }) => {
     if (completed || authorized) {
       return (
-        <div className="prize">
-          <h1><span className="yellowText">Præmie</span>fordeling</h1>
-          <div className="prizesContainer">
-            <img src={prizesMobile} className="prizesImg"/>
-              <PrizeRules podium={podium}/>
-          </div>
-        </div>
-        // <div className="prize container mx-auto mt-5 flex flex-col items-center justify-between min-h-[80vh]">
+        // <div className="prize">
         //   <h1><span className="yellowText">Præmie</span>fordeling</h1>
-        //   <div className="flex flex-col justify-around flex-wrap sm:flex-row w-full mx-auto gap-14 sm:gap-0">
-        //     <PodiumPart placement={podium.first} number={"1st"} />
-        //     {podium.second.names.length > 0 && (
-        //       <PodiumPart placement={podium.second} number={"2nd"} />
-        //     )}
-        //     {podium.third.names.length > 0 && (
-        //       <PodiumPart placement={podium.third} number={"3rd"} />
-        //     )}
+        //   <div className="prizesContainer">
+        //     <img src={prizesMobile} className="prizesImg"/>
+        //       <PrizeRules podium={podium}/>
         //   </div>
-        //     <PrizeRules podium={podium} />
         // </div>
+        <div className="prize container mx-auto mt-5 flex flex-col items-center min-h-[80vh]">
+          <h1><span className="yellowText">Præmie</span>fordeling</h1>
+          <div className="flex flex-col justify-around flex-wrap sm:flex-row w-full mx-auto gap-14 sm:gap-0 mt-10">
+            <PodiumPart placement={podium.first} number={"1st"} />
+            {podium.second.names.length > 0 && (
+              <PodiumPart placement={podium.second} number={"2nd"} />
+            )}
+            {podium.third.names.length > 0 && (
+              <PodiumPart placement={podium.third} number={"3rd"} />
+            )}
+          </div>
+            <PrizeRules podium={podium} />
+        </div>
       );
     } else {
       return (
