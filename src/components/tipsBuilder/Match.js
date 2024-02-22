@@ -42,11 +42,11 @@ const Match = ({
                 alt={match.home_team}
                 className="flagHomeMobile"
               />
-              <p>{countryName(match.home_team)}</p>
+              <p className="countryName">{countryName(match.home_team)}</p>
             </div>
             <span>-</span>
             <div className="flex items-center space-x-3">
-              <p>{countryName(match.away_team)}</p>
+              <p className="countryName">{countryName(match.away_team)}</p>
               <img
                 src={`https://flags.tv2a.dk/tv2football/${match.away_team}.svg`}
                 alt={match.away_team}
