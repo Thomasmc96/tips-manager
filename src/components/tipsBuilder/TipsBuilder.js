@@ -121,6 +121,7 @@ const TipsBuilder = () => {
           <label htmlFor="link-checkbox" className="labelCheckbox container">
             <input
               id="link-checkbox"
+              class="checkboxInput"
               type="checkbox"
               value={subscribeToMails}
               onClick={() => {
