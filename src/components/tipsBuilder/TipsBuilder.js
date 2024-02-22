@@ -5,6 +5,7 @@ import Match from './Match';
 import environment from '../../environment';
 import { sortByKickOff } from '../Utils';
 import './TipsBuilder.css';
+import Loader from '../utils/Loader';
 
 const TipsBuilder = () => {
   const [name, setName] = useState('');
@@ -73,7 +74,8 @@ const TipsBuilder = () => {
   if (loading) {
     return (
       <div className="flex mx-auto justify-center h-40 items-center">
-        <FidgetSpinner
+        <Loader />
+        {/* <FidgetSpinner
           visible={true}
           height="100"
           width="100"
@@ -82,7 +84,7 @@ const TipsBuilder = () => {
           wrapperClass="dna-wrapper"
           ballColors={['#003e21', '#067242', '#098b54']}
           backgroundColor="#f8d098"
-        />
+        /> */}
       </div>
     );
   }

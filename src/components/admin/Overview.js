@@ -5,6 +5,7 @@ import environment from "../../environment";
 import Coupon from "./Coupon";
 import AdminMenu from "./AdminMenu";
 import { sortByUpdated } from "../Utils";
+import Loader from "../utils/Loader";
 
 const Overview = () => {
   const [coupons, setCoupons] = useState([]);
@@ -82,7 +83,8 @@ const Overview = () => {
   if (loading) {
     return (
       <div className="flex mx-auto justify-center h-40 items-center">
-        <FidgetSpinner
+        <Loader/>
+        {/* <FidgetSpinner
           visible={true}
           height="100"
           width="100"
@@ -91,7 +93,7 @@ const Overview = () => {
           wrapperClass="dna-wrapper"
           ballColors={["#003e21", "#067242", "#098b54"]}
           backgroundColor="#f8d098"
-        />
+        /> */}
       </div>
     );
   }

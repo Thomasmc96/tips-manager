@@ -7,8 +7,7 @@ import PodiumPart from "./PodiumPart";
 import Countdown from "react-countdown";
 import { verify } from "../Utils";
 import './Prize.css'
-import prizes from '../../assets/graphic/prizes.svg'
-import prizesMobile from '../../assets/graphic/prizes_mobile.svg'
+import Loader from "../utils/Loader";
 
 const Prize = () => {
   const [loading, setLoading] = useState(true);
@@ -39,7 +38,8 @@ const Prize = () => {
   if (loading) {
     return (
       <div className="flex mx-auto justify-center h-40 items-center">
-        <FidgetSpinner
+        <Loader />
+        {/* <FidgetSpinner
           visible={true}
           height="100"
           width="100"
@@ -48,7 +48,7 @@ const Prize = () => {
           wrapperClass="dna-wrapper"
           ballColors={["#003e21", "#067242", "#098b54"]}
           backgroundColor="#f8d098"
-        />
+        /> */}
       </div>
     );
   }

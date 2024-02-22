@@ -5,6 +5,7 @@ import { FidgetSpinner } from "react-loader-spinner";
 import { countryName, getDateString, sortByKickOff } from "../Utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import Loader from "../utils/Loader";
 
 const Table = ({ coupons }) => {
   const [zoom, setZoom] = useState(100);
@@ -44,7 +45,8 @@ const Table = ({ coupons }) => {
   if (loading) {
     return (
       <div className="flex mx-auto justify-center h-40 items-center">
-        <FidgetSpinner
+        <Loader/>
+        {/* <FidgetSpinner
           visible={true}
           height="100"
           width="100"
@@ -53,7 +55,7 @@ const Table = ({ coupons }) => {
           wrapperClass="dna-wrapper"
           ballColors={["#003e21", "#067242", "#098b54"]}
           backgroundColor="#f8d098"
-        />
+        /> */}
       </div>
     );
   }

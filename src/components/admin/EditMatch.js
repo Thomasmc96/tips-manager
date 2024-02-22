@@ -6,6 +6,7 @@ import { FidgetSpinner } from "react-loader-spinner";
 import environment from "../../environment";
 import { countryName, countries } from "../Utils";
 import { useNavigate } from "react-router-dom";
+import Loader from "../utils/Loader";
 
 const EditMatch = () => {
   return (
@@ -104,7 +105,8 @@ const Match = () => {
   if (match === '') {
     return (
       <div className="flex mx-auto justify-center h-40 items-center">
-        <FidgetSpinner
+        <Loader />
+        {/* <FidgetSpinner
           visible={true}
           height="100"
           width="100"
@@ -113,7 +115,7 @@ const Match = () => {
           wrapperClass="dna-wrapper"
           ballColors={["#003e21", "#067242", "#098b54"]}
           backgroundColor="#f8d098"
-        />
+        /> */}
       </div>
     );
   }

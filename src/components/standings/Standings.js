@@ -7,6 +7,7 @@ import Table from "./Table";
 import CountdownInfo from "./CountdownInfo";
 import { sortByWins } from "../Utils";
 import { verify } from "../Utils";
+import Loader from "../utils/Loader";
 
 const Standings = () => {
   const [coupons, setCoupons] = useState([]);
@@ -33,20 +34,21 @@ const Standings = () => {
     verify().then((response) => setAuthorized(response));
   }, []);
 
-  if (loading) {
+  if (!loading) {
     return (
-      <div className="flex mx-auto justify-center h-40 items-center">
-        <FidgetSpinner
-          visible={true}
-          height="100"
-          width="100"
-          ariaLabel="dna-loading"
-          wrapperStyle={{}}
-          wrapperClass="dna-wrapper"
-          ballColors={["#003e21", "#067242", "#098b54"]}
-          backgroundColor="#f8d098"
-        />
-      </div>
+      <Loader />
+      // <div className="flex mx-auto justify-center h-40 items-center">
+      //   <FidgetSpinner
+      //     visible={true}
+      //     height="100"
+      //     width="100"
+      //     ariaLabel="dna-loading"
+      //     wrapperStyle={{}}
+      //     wrapperClass="dna-wrapper"
+      //     ballColors={["#003e21", "#067242", "#098b54"]}
+      //     backgroundColor="#f8d098"
+      //   />
+      // </div>
     );
   }
 

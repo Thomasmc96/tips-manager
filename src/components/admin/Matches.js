@@ -5,6 +5,7 @@ import environment from "../../environment";
 import AdminMenu from "./AdminMenu";
 import { countries, countryName, sortByKickOff, getDateString } from "../Utils";
 import { useNavigate } from "react-router-dom";
+import Loader from "../utils/Loader";
 
 const Matches = () => {
   const [matches2, setMatches2] = useState([]);
@@ -56,7 +57,8 @@ const ShowMatches = ({ matches2 }) => {
   if (matches2.length === 0) {
     return (
       <div className="flex mx-auto justify-center h-40 items-center">
-        <FidgetSpinner
+        <Loader />
+        {/* <FidgetSpinner
           visible={true}
           height="100"
           width="100"
@@ -65,7 +67,7 @@ const ShowMatches = ({ matches2 }) => {
           wrapperClass="dna-wrapper"
           ballColors={["#003e21", "#067242", "#098b54"]}
           backgroundColor="#f8d098"
-        />
+        /> */}
       </div>
     );
   }
