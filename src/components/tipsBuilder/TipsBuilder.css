@@ -1,8 +1,15 @@
 .TipsBuilderForm {
   border: 2px solid white;
   border-radius: 10px;
-  margin: 5rem 20rem;
-  padding: 3rem 8rem;
+  padding-bottom: 3rem;
+  width: 60rem;
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5rem;
+  justify-content: center;
+  margin-bottom: 2rem;
 }
 
 .TipsBuilderForm h1 {
@@ -15,6 +22,10 @@
 .TipsBuilderForm .detailsContainer {
   display: flex;
   flex-direction: column;
+  width: 80%;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .TipsBuilderForm .label {
@@ -127,19 +138,100 @@
 
 
 
+.matchSection {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+
 .matchSection h2 {
     font-size: 1.125rem;
     font-family: RobotoMedium;
     margin-bottom: 1rem;
 }
 
-
+.TipsBuilderForm .submitBtn {
+  background-color: var(--gold);
+  color: black;
+  border-radius: 10px;
+  height: 3rem;
+  width: 15rem;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2.5rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 
 /* Match.css  ???*/
 
-.matchBackground {
+.match {
     background-color: var(--darkest-green);
     margin-bottom: 2rem;
     padding: 2rem 0rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    border-radius: 10px;
+    align-items: center;
+}
+
+.match .flagAway,
+.match .flagHome {
+  width: 7rem;
+  border-radius: 10px;
+  height: 4.8rem;
+  box-shadow: 1px 2px 6px black;
+}
+.match .flagAwayMobile,
+.match .flagHomeMobile {
+  display: none
+}
+
+
+@media only screen and (max-width:1050px) {
+  .TipsBuilderForm {
+      width: 100%;
+    border: unset;
+
+  }
+}
+@media only screen and (max-width:700px) {
+  .TipsBuilderForm {
+    margin-top: unset;
+    margin-bottom: unset;
+    border-radius: unset;
+}
+  .matchSection{
+    width: 100%;
+  }
+
+  .matchSection h2 {
+    text-align: center;
+  }
+
+  .match{
+    border-radius: unset;
+  }
+
+  .match .flagAway,
+  .match .flagHome {
+      width: 4rem;
+      height: 3.1rem;
+      box-shadow: none;
+      display: none;
+  }
+  .match .flagAwayMobile,
+  .match .flagHomeMobile {
+    display: unset;
+    width: 3rem;
+  }
 }
