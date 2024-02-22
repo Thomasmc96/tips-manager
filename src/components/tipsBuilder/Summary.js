@@ -10,11 +10,17 @@ const Summary = () => {
       <p className="text-center mt-2">...næsten</p>
       <p className="text-center mt-10 text-xl">
         Husk at overføre
+      </p>
+
+        <div className="flex justify-center">
+        <p className="text-center text-xl">
+
         <span className="text-sandBeige text-lg mx-2">100 kr.</span>
         til
         <span className="text-sandBeige text-lg mx-2">30 32 12 12</span>
         💰
-      </p>
+        </p>
+        </div>
 
       <p className="text-center mt-5 text-xl">
         Du har også modtaget en mail med dine tips

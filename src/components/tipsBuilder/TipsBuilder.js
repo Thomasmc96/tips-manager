@@ -146,7 +146,7 @@ const TipsBuilder = () => {
           />
         ))}
       </section>
-      {error && <p className="text-red-500 text-center mb-5">{error}</p>}
+      {error && <p className="text-red-500 text-center mb-5 ">{error}</p>}
       <button type="submit" className="submitBtn">
         {!loadingSubmit ? (
           <>Indsend</>
