@@ -34,7 +34,7 @@ const Standings = () => {
     verify().then((response) => setAuthorized(response));
   }, []);
 
-  if (!loading) {
+  if (loading) {
     return (
       <Loader />
       // <div className="flex mx-auto justify-center h-40 items-center">
