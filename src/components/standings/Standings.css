@@ -64,6 +64,10 @@
 
 }
 
+.tableContainer{
+  margin-top: 2rem;
+}
+
 .tableContainer .couponName {
   text-transform: none;
   font-family: RobotoRegular;
@@ -89,6 +93,11 @@
 }
 
 @media only screen and (max-width: 600px) {
+
+  .tableContainer{
+    margin-top: 1rem;
+  }
+  
   .countdownInfo h1 {
     font-size: 1.6rem;
   }

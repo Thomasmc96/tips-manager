@@ -78,22 +78,21 @@ const ShowMatches = ({ matches2 }) => {
           {matches2.length > 0 &&
             sortByKickOff(matches2).map((match) => (
               <tr key={match.matches2_id} onClick={() => seeMatch(match.matches2_id)} className="cursor-pointer">
-                <td>
-                  <span>{countryName(match.home_team)}</span>
+                <td className="countryCell">
                   <img
                     src={`https://flags.tv2a.dk/tv2football/${match.home_team}.svg`}
                     alt={match.home_team}
-                    className="w-8 ml-2 inline"
+                    className="w-8 mr-2 inline"
                   />
+                  <span>{countryName(match.home_team)}</span>
                 </td>
-
-                <td>
-                  <span>{countryName(match.away_team)}</span>
+                <td className="countryCell">
                   <img
                     src={`https://flags.tv2a.dk/tv2football/${match.away_team}.svg`}
                     alt={match.away_team}
-                    className="w-8 ml-2 inline"
+                    className="w-8 mr-2 inline"
                   />
+                  <span>{countryName(match.away_team)}</span>
                 </td>
 
                 <td className="hidden sm:table-cell">{match.home_team_goals}</td>

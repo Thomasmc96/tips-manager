@@ -97,7 +97,7 @@ const Table = () => {
         </section>
       )}
 
-      <div className="overflow-x-auto">
+      <div className="mt-1 overflow-x-auto">
         <table className="table-fixed relative border-[2px] border-solid border-white rounded-lg " style={{ zoom: zoom + "%" }}>
           <thead className="sticky top-0 z-50">
             <tr className="bg-darkestGreenNew border-[1px] border-white ">

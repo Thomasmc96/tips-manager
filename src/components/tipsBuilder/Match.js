@@ -70,7 +70,7 @@ const Match = ({
             />
             <label
               htmlFor={`${match.matches2_id}_radio_1`}
-              className="w-20 h-10 flex justify-center items-center rounded-md bg-normalGreen hover:cursor-pointer hover:scale-110 duration-200 peer-checked:bg-darkGreen peer-checked:text-gold peer-checked:border-gold peer-checked:border-[1px]"
+              className="w-20 h-10 flex justify-center items-center rounded-md bg-lightGreenNew hover:cursor-pointer hover:scale-110 duration-200 peer-checked:bg-darkGreen peer-checked:text-gold peer-checked:border-gold peer-checked:border-[1px]"
             >
               1
             </label>
@@ -86,7 +86,7 @@ const Match = ({
             />
             <label
               htmlFor={`${match.matches2_id}_radio_x`}
-              className="w-20 h-10 flex justify-center items-center rounded-md bg-normalGreen hover:cursor-pointer hover:scale-110 duration-200 peer-checked:bg-darkGreen peer-checked:text-gold peer-checked:border-gold peer-checked:border-[1px]"
+              className="w-20 h-10 flex justify-center items-center rounded-md bg-lightGreenNew hover:cursor-pointer hover:scale-110 duration-200 peer-checked:bg-darkGreen peer-checked:text-gold peer-checked:border-gold peer-checked:border-[1px]"
             >
               x
             </label>
@@ -102,7 +102,7 @@ const Match = ({
             />
             <label
               htmlFor={`${match.matches2_id}_radio_2`}
-              className="w-20 h-10 flex justify-center items-center rounded-md bg-normalGreen hover:cursor-pointer hover:scale-110 duration-200 peer-checked:bg-darkGreen peer-checked:text-gold peer-checked:border-gold peer-checked:border-[1px]"
+              className="w-20 h-10 flex justify-center items-center rounded-md bg-lightGreenNew hover:cursor-pointer hover:scale-110 duration-200 peer-checked:bg-darkGreen peer-checked:text-gold peer-checked:border-gold peer-checked:border-[1px]"
             >
               2
             </label>
