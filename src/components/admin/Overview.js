@@ -101,11 +101,13 @@ const Coupons = () => {
   return (
     <>
       <h2 className="apporvedHeadline"><span className="yellowText">Godkendte</span> tilmeldinger</h2>
+      {coupons.length === 0 && <p className=" normal-case">Ingen godkendte tilmeldinger</p>}
       {sortByUpdated(coupons).map((coupon) => {
         return <Coupon key={coupon.coupons_id} coupon={coupon} removeCoupon={removeCoupon} changeCouponState={changeCouponState} />;
       })}
 
       <h2 className="notApprovedHeadline"><span className="yellowText">Ikke</span> Godkendte tilmeldinger</h2>
+      {couponsNotApproved.length === 0 && <p className=" normal-case">Ingen ikke-godkendte tilmeldinger</p>}
       {sortByUpdated(couponsNotApproved).map((coupon) => {
         return <Coupon key={coupon.coupons_id} coupon={coupon} removeCoupon={removeCoupon} changeCouponState={changeCouponState}/>;
       })}
