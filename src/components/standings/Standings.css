@@ -50,8 +50,19 @@
 
 .footerImgMobile {
   display: none;
+  z-index: -1;
 }
 
+.footerImg {
+  width: 100%;
+  padding: 0rem 1rem;
+  position: fixed;
+  padding-bottom: 1rem;
+  left: 0;
+  bottom: 0;
+  z-index: -1;
+
+}
 
 .tableContainer .couponName {
   text-transform: none;
@@ -112,8 +123,9 @@
   .footerImgMobile {
     display: unset;
     padding: 0rem 1rem;
-    position: static;
+    position: fixed;
     padding-bottom: 1rem;
     left: 0;
+    bottom: 0;
   }
 }

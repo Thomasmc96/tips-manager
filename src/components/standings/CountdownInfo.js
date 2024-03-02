@@ -21,13 +21,13 @@ const CountdownInfo = ({ coupons, days, hours, minutes, seconds }) => {
         <div className="sectionsContainer">
           <section>
             <h3>
-              Antal tilmeldinger{' '}
+              Tilmeldinger{' '}
               <span className="detailsIcon">
                 <FontAwesomeIcon icon={faUser} />
               </span>
             </h3>
             <span className="yellowText infoDetails">
-              <span>{coupons.length}</span>
+              <span>{coupons}</span>
             </span>
           </section>
           <section>

@@ -68,6 +68,29 @@ class CouponRepository
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function getTotal()
+    {
+        $databaseService = new DatabaseService();
+        $connection = $databaseService->getConnection();
+
+        $query = "
+            SELECT
+                count(*) as total
+            FROM
+                coupons
+            WHERE
+                paid = :paid
+        ";
+
+        $statement = $connection->prepare($query);
+
+        $paid = 1;
+        $statement->bindParam(":paid", $paid);
+
+        $statement->execute();
+        return $statement->fetch(PDO::FETCH_ASSOC)['total'];
+    }
+
     public function save(Coupon $coupon)
     {
         $databaseService = new DatabaseService();

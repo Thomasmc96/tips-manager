@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { FidgetSpinner } from "react-loader-spinner";
 import environment from "../../environment";
 import Coupon from "./Coupon";
 import AdminMenu from "./AdminMenu";
@@ -8,6 +7,17 @@ import { sortByUpdated } from "../Utils";
 import Loader from "../utils/Loader";
 
 const Overview = () => {
+  return (
+    <div className="overview container">
+      <div>
+        <AdminMenu />
+        <Coupons />
+      </div>
+    </div>
+  );
+};
+
+const Coupons = () => {
   const [coupons, setCoupons] = useState([]);
   const [couponsNotApproved, setCouponsNotApproved] = useState([]);
   const [loading, setLoading] = useState([]);
@@ -84,35 +94,23 @@ const Overview = () => {
     return (
       <div className="flex mx-auto justify-center h-40 items-center">
         <Loader/>
-        {/* <FidgetSpinner
-          visible={true}
-          height="100"
-          width="100"
-          ariaLabel="dna-loading"
-          wrapperStyle={{}}
-          wrapperClass="dna-wrapper"
-          ballColors={["#003e21", "#067242", "#098b54"]}
-          backgroundColor="#f8d098"
-        /> */}
       </div>
     );
   }
 
   return (
-    <div className="overview container">
-      <div>
-        <AdminMenu />
-        <h2 className="apporvedHeadline"><span className="yellowText">Godkendte</span> tilmeldinger</h2>
-        {sortByUpdated(coupons).map((coupon) => {
-          return <Coupon key={coupon.coupons_id} coupon={coupon} removeCoupon={removeCoupon} changeCouponState={changeCouponState} />;
-        })}
-        <h2 className="notApprovedHeadline"><span className="yellowText">Ikke</span> Godkendte tilmeldinger</h2>
-        {sortByUpdated(couponsNotApproved).map((coupon) => {
-          return <Coupon key={coupon.coupons_id} coupon={coupon} removeCoupon={removeCoupon} changeCouponState={changeCouponState}/>;
-        })}
-      </div>
-    </div>
-  );
-};
+    <>
+      <h2 className="apporvedHeadline"><span className="yellowText">Godkendte</span> tilmeldinger</h2>
+      {sortByUpdated(coupons).map((coupon) => {
+        return <Coupon key={coupon.coupons_id} coupon={coupon} removeCoupon={removeCoupon} changeCouponState={changeCouponState} />;
+      })}
+
+      <h2 className="notApprovedHeadline"><span className="yellowText">Ikke</span> Godkendte tilmeldinger</h2>
+      {sortByUpdated(couponsNotApproved).map((coupon) => {
+        return <Coupon key={coupon.coupons_id} coupon={coupon} removeCoupon={removeCoupon} changeCouponState={changeCouponState}/>;
+      })}
+    </>
+  )
+}
 
 export default Overview;

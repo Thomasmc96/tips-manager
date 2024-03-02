@@ -58,16 +58,6 @@ const ShowMatches = ({ matches2 }) => {
     return (
       <div className="flex mx-auto justify-center h-40 items-center">
         <Loader />
-        {/* <FidgetSpinner
-          visible={true}
-          height="100"
-          width="100"
-          ariaLabel="dna-loading"
-          wrapperStyle={{}}
-          wrapperClass="dna-wrapper"
-          ballColors={["#003e21", "#067242", "#098b54"]}
-          backgroundColor="#f8d098"
-        /> */}
       </div>
     );
   }

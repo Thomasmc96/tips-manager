@@ -1,32 +1,50 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import environment from "../../environment";
-import { FidgetSpinner } from "react-loader-spinner";
 import { countryName, getDateString, sortByKickOff } from "../Utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import Loader from "../utils/Loader";
+import { sortByWins } from "../Utils";
 
-const Table = ({ coupons }) => {
+const Table = () => {
   const [zoom, setZoom] = useState(100);
   const [matches2, setMatches2] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [coupons, setCoupons] = useState([]);
+
 
   var isFirefox = navigator.userAgent.toLowerCase().indexOf("firefox") > -1;
 
   useEffect(() => {
+    axios
+    .get(`${environment[0]}/server/endpoints/coupon/getResults.php`)
+    .then((response) => {
+      console.log(response)
+      if (response.data.code === 200) {
+        setCoupons(sortByWins(response.data.coupons));
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+    .finally(() => {
+      setLoading(false);
+    });
+  
     axios
       .get(`${environment[0]}/server/endpoints/matches2/getAll.php`)
       .then((response) => {
         if (response.data.code === 200) {
           setMatches2(sortByKickOff(response.data.matches2));
         } else {
-          setError("Noget gik galt");
+          setError("Noget gik galt! Prøv at reload siden.");
         }
       })
       .catch((error) => {
         console.log(error);
+        setError("Noget gik galt! Prøv at reload siden.");
       })
       .finally(() => {
         setTimeout(() => {
@@ -46,16 +64,14 @@ const Table = ({ coupons }) => {
     return (
       <div className="flex mx-auto justify-center h-40 items-center">
         <Loader/>
-        {/* <FidgetSpinner
-          visible={true}
-          height="100"
-          width="100"
-          ariaLabel="dna-loading"
-          wrapperStyle={{}}
-          wrapperClass="dna-wrapper"
-          ballColors={["#003e21", "#067242", "#098b54"]}
-          backgroundColor="#f8d098"
-        /> */}
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex mx-auto justify-center h-40 items-center">
+        <p className="normal-case">{error}</p>
       </div>
     );
   }
