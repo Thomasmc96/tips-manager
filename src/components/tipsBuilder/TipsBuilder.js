@@ -67,7 +67,6 @@ const Builder = () => {
         subscribeToMails: subscribeToMails,
       })
       .then((response) => {
-        console.log(response)
         if (response.data.code === 200) {
           window.location.replace('/kvittering');
         } else {
@@ -134,7 +133,7 @@ const Builder = () => {
               }}
               className="inputCheckbox"
             />{' '}
-            <span class="checkmark"></span>
+            <span className="checkmark"></span>
             Ja tak, jeg vil gerne modtage mails omkring stillingen!* <br />
             <span>*Stillingen kan også ses her på siden.</span>
           </label>

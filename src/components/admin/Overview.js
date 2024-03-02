@@ -40,7 +40,7 @@ const Coupons = () => {
   }, []);
 
   const removeCoupon = (coupon) => {
-    if (coupon.paid == '1') {
+    if (coupon.paid === 1) {
 
       let copy = coupons;
 

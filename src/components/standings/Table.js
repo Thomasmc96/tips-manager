@@ -22,7 +22,6 @@ const Table = () => {
     axios
     .get(`${environment[0]}/server/endpoints/coupon/getResults.php`)
     .then((response) => {
-      console.log(response)
       if (response.data.code === 200) {
         setCoupons(sortByWins(response.data.coupons));
       }
@@ -154,6 +153,7 @@ const Table = () => {
                         </td>
                       );
                     }
+                    return ''
                   })
                 )}
               </tr>

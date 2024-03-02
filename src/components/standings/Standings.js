@@ -10,7 +10,6 @@ import Loader from "../utils/Loader";
 const Standings = () => {
   const [coupons, setCoupons] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
   const [showTable, setShowTable] = useState(false);
   const [authorized, setAuthorized] = useState();
 
@@ -53,15 +52,15 @@ const Standings = () => {
             />
 
           {authorized && !showTable && (
-                  <button
-                    className="mt-20 mx-auto flex bg-sandBeige p-2 rounded text-black font-semibold z-10"
-                    onClick={(e) => {
-                      setShowTable(true);
-                    }}
-                  >
-                    Vis tips
-                  </button>
-                )}
+            <button
+              className="mt-20 mx-auto flex bg-sandBeige p-2 rounded text-black font-semibold z-10"
+              onClick={(e) => {
+                setShowTable(true);
+              }}
+            >
+              Vis tips
+            </button>
+          )}
           </>
       );
     }
