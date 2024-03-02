@@ -6,8 +6,22 @@ import environment from '../../environment';
 import { sortByKickOff } from '../Utils';
 import './TipsBuilder.css';
 import Loader from '../utils/Loader';
+import Countdown from "react-countdown";
 
 const TipsBuilder = () => {
+  return (
+    <Countdown date={new Date("Jun 13, 2024 21:00:00")} renderer={renderer} />
+  )
+}
+const renderer = ({ completed }) => {
+  if (completed) {
+    return <p className='p-2 text-center normal-case mt-10 text-2xl'>Du kan ikke længere tilføje en kupon</p>
+  } else {
+    return <Builder />
+  }
+}
+
+const Builder = () => {
   const [name, setName] = useState('');
   const [mail, setMail] = useState('');
   const [subscribeToMails, setSubscribeToMails] = useState(false);
@@ -75,16 +89,6 @@ const TipsBuilder = () => {
     return (
       <div className="flex mx-auto justify-center h-40 items-center">
         <Loader />
-        {/* <FidgetSpinner
-          visible={true}
-          height="100"
-          width="100"
-          ariaLabel="dna-loading"
-          wrapperStyle={{}}
-          wrapperClass="dna-wrapper"
-          ballColors={['#003e21', '#067242', '#098b54']}
-          backgroundColor="#f8d098"
-        /> */}
       </div>
     );
   }
