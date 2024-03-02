@@ -25,14 +25,14 @@
   }
   
   .confetti--animation-slow {
-    animation: confetti-slow 3.25s linear 1 forwards;
+    animation: confetti-slow 4.25s linear 1 forwards;
   }
   
   .confetti--animation-medium {
-    animation: confetti-medium 2.75s linear 1 forwards;
+    animation: confetti-medium 3.75s linear 1 forwards;
   }
   
   .confetti--animation-fast {
-    animation: confetti-fast 2.25s linear 1 forwards;
+    animation: confetti-fast 3.25s linear 1 forwards;
   }
   
