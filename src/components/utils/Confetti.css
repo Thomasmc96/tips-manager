@@ -1,0 +1,38 @@
+
+.area {
+    width: 100vw;
+    height: 100vh;
+    background: #f0f0f0;
+    overflow: hidden;
+
+  }
+  
+  .confetti-area {
+    perspective: 700px;
+    position: absolute;
+    overflow: hidden;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+  
+  .confetti {
+    position: absolute;
+    z-index: 1;
+    top: -10px;
+    border-radius: 0%;
+  }
+  
+  .confetti--animation-slow {
+    animation: confetti-slow 3.25s linear 1 forwards;
+  }
+  
+  .confetti--animation-medium {
+    animation: confetti-medium 2.75s linear 1 forwards;
+  }
+  
+  .confetti--animation-fast {
+    animation: confetti-fast 2.25s linear 1 forwards;
+  }
+  

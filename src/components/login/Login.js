@@ -3,6 +3,7 @@ import axios from "axios";
 import { FidgetSpinner } from "react-loader-spinner";
 import environment from "../../environment";
 import { useNavigate } from "react-router-dom";
+import './Login.css';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -51,9 +52,9 @@ const Login = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="container mx-auto mt-10">
+    <form onSubmit={handleSubmit} className="login container mx-auto mt-10">
       <div className="mb-4 w-80 mx-auto">
-        <label htmlFor="mail" className="block font-bold mb-2">
+        <label htmlFor="mail" className="block mb-2">
           Mail
         </label>
         <input
@@ -67,7 +68,7 @@ const Login = () => {
         />
       </div>
       <div className="mb-4 w-80 mx-auto">
-        <label htmlFor="password" className="block font-bold mb-2">
+        <label htmlFor="password" className="block mb-2">
           Password
         </label>
         <input
@@ -86,7 +87,7 @@ const Login = () => {
       <div className="flex items-center justify-between w-80 mx-auto">
         <button
           type="submit"
-          className="bg-sandBeige text-black py-2 px-4 w-full rounded focus:outline-none focus:shadow-outline flex justify-center"
+          className="submitBtn"
         >
           {!loading ? (
             <>Login</>

@@ -1,0 +1,19 @@
+.login .submitBtn {
+    background-color: var(--gold);
+    color: black;
+    border-radius: 10px;
+    height: 3rem;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: bold;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .login label {
+    font-family: OswaldBold;
+    font-size: 1.125rem;
+  }

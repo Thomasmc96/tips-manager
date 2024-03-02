@@ -1,6 +1,7 @@
 import axios from "axios";
 import environment from "../environment";
 
+// eslint-disable-next-line no-extend-native
 Date.prototype.addHours = function (h) {
   this.setTime(this.getTime() + (h * 60 * 60 * 1000));
   return this;
@@ -43,6 +44,8 @@ const getMonthName = (monthNumber) => {
       return "November";
     case 12:
       return "December";
+    default:
+      return '?'
   }
 };
 
@@ -248,6 +251,7 @@ export const countryName = (code) => {
   return countries.find((country) => country.code === code).name
 }
 
+
 export const countries = [
   {
     'code': 'ger',
@@ -394,3 +398,6 @@ export const countries = [
     'name': 'Kasakhstan'
   },
 ]
+
+
+

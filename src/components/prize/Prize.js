@@ -42,10 +42,10 @@ const Prize = () => {
     );
   }
 
-  const renderer = ({ days, hours, minutes, seconds, completed }) => {
+  const renderer = ({completed }) => {
     if (completed || authorized) {
       return (
-        <div className="prize container mx-auto mt-5 flex flex-col items-center min-h-[80vh]">
+        <div className="prize container mx-auto flex flex-col items-center min-h-[80vh]">
           <h1><span className="yellowText">Præmie</span>fordeling</h1>
           <div className="flex flex-col justify-around flex-wrap sm:flex-row w-full mx-auto gap-14 sm:gap-0 mt-10">
             <PodiumPart placement={podium.first} number={"1st"} />

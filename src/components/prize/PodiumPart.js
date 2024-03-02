@@ -1,6 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
+import '../utils/Confetti.css'
+import { Confettiful } from "../utils/Confetti";
 
 const PodiumPart = ({ placement, number }) => {
+
+  useEffect(() => {
+    if (number === '1st') {
+    
+      const confettiContainer = document.querySelector('.js-confetti');
+      window.confettiful = new Confettiful(confettiContainer);
+      
+      return () => {
+        window.confettiful.stop();
+      };
+    }
+  }, [number]); 
+
+
   const textColor =
     number === "1st"
       ? "text-gold"
@@ -8,7 +24,7 @@ const PodiumPart = ({ placement, number }) => {
         ? "text-silver"
         : "text-bronze";
   return (
-    <section className="flex flex-col justify-center items-center my-2 sm:max-w-[30%] w-full mx-auto border rounded-lg p-4">
+    <section className={"flex flex-col justify-center items-center my-2 sm:max-w-[30%] w-full mx-auto border rounded-lg p-4 " + (number === '1st' ? 'js-confetti' : '')}>
       <h1 className={"normal-case mt-1 font-bold text-6xl sm:text-5xl mb-1 " + textColor}>
         {number}
       </h1>
