@@ -1,11 +1,10 @@
 import axios from "axios";
 import environment from "../environment";
 
-// eslint-disable-next-line no-extend-native
-Date.prototype.addHours = function (h) {
-  this.setTime(this.getTime() + (h * 60 * 60 * 1000));
+Date.prototype.addHours = function (h = 2) {
+  this.setTime(this.getTime() + h * 60 * 60 * 1000);
   return this;
-}
+};
 
 const getDate = (timestamp) => {
   let date = new Date(timestamp);
@@ -45,7 +44,7 @@ const getMonthName = (monthNumber) => {
     case 12:
       return "December";
     default:
-      return '?'
+      return "?";
   }
 };
 
@@ -107,8 +106,7 @@ export const sortByUpdated = (coupons) => {
     return 0;
   });
   return couponsSorted;
-}
-
+};
 
 export const verify = async () => {
   let verified = false;
@@ -125,7 +123,7 @@ export const verify = async () => {
       {
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${jwt}`,
+          Authorization: `Bearer ${jwt}`,
         },
       }
     )
@@ -173,9 +171,9 @@ const getPodiumNames = (podium, sortedCoupons) => {
   for (let i = 0; i < sortedCoupons.length; i++) {
     if (
       podium.first.names.length +
-      podium.second.names.length +
-      podium.third.names.length >
-      2 &&
+        podium.second.names.length +
+        podium.third.names.length >
+        2 &&
       sortedCoupons[i].amountCorrect !== lastAmountCorrect
     ) {
       break;
@@ -245,159 +243,155 @@ const getPodiumPrizes = (podium, totalCoupons) => {
 
 const toFixedIfNecessary = (value, dp) => {
   return +parseFloat(value).toFixed(dp);
-}
+};
 
 export const countryName = (code) => {
-  return countries.find((country) => country.code === code).name
-}
-
+  return countries.find((country) => country.code === code).name;
+};
 
 export const countries = [
   {
-    'code': 'ger',
-    'name': 'Tyskland'
+    code: "ger",
+    name: "Tyskland",
   },
   {
-    'code': 'bel',
-    'name': 'Belgien',
+    code: "bel",
+    name: "Belgien",
   },
   {
-    'code': 'fra',
-    'name': 'Frankrig'
+    code: "fra",
+    name: "Frankrig",
   },
   {
-    'code': 'por',
-    'name': 'Portugal'
+    code: "por",
+    name: "Portugal",
   },
   {
-    'code': 'esp',
-    'name': 'Spanien'
+    code: "esp",
+    name: "Spanien",
   },
   {
-    'code': 'sco',
-    'name': 'Skotland'
+    code: "sco",
+    name: "Skotland",
   },
   {
-    'code': 'tur',
-    'name': 'Tyrkiet'
+    code: "tur",
+    name: "Tyrkiet",
   },
   {
-    'code': 'aut',
-    'name': 'Østrig'
+    code: "aut",
+    name: "Østrig",
   },
   {
-    'code': 'eng',
-    'name': 'England'
+    code: "eng",
+    name: "England",
   },
   {
-    'code': 'hun',
-    'name': 'Ungarn'
+    code: "hun",
+    name: "Ungarn",
   },
   {
-    'code': 'svk',
-    'name': 'Slovakiet'
+    code: "svk",
+    name: "Slovakiet",
   },
   {
-    'code': 'alb',
-    'name': 'Albanien'
+    code: "alb",
+    name: "Albanien",
   },
   {
-    'code': 'den',
-    'name': 'Danmark'
+    code: "den",
+    name: "Danmark",
   },
   {
-    'code': 'ned',
-    'name': 'Holland'
+    code: "ned",
+    name: "Holland",
   },
   {
-    'code': 'rom',
-    'name': 'Rumænien'
+    code: "rom",
+    name: "Rumænien",
   },
   {
-    'code': 'sui',
-    'name': 'Schweiz'
+    code: "sui",
+    name: "Schweiz",
   },
   {
-    'code': 'srb',
-    'name': 'Serbien'
+    code: "srb",
+    name: "Serbien",
   },
   {
-    'code': 'slo',
-    'name': 'Slovenien'
+    code: "slo",
+    name: "Slovenien",
   },
   {
-    'code': 'ita',
-    'name': 'Italien'
+    code: "ita",
+    name: "Italien",
   },
   {
-    'code': 'cze',
-    'name': 'Tjekkiet'
+    code: "cze",
+    name: "Tjekkiet",
   },
   {
-    'code': 'cro',
-    'name': 'Kroatien'
+    code: "cro",
+    name: "Kroatien",
   },
   {
-    'code': 'plvinderA',
-    'name': 'Play off vinder A'
+    code: "plvinderA",
+    name: "Play off vinder A",
   },
   {
-    'code': 'plvinderB',
-    'name': 'Play off vinder B'
+    code: "plvinderB",
+    name: "Play off vinder B",
   },
   {
-    'code': 'plvinderC',
-    'name': 'Play off vinder C'
+    code: "plvinderC",
+    name: "Play off vinder C",
   },
   {
-    'code': 'pol',
-    'name': 'Polen'
+    code: "pol",
+    name: "Polen",
   },
   {
-    'code': 'est',
-    'name': 'Estland'
+    code: "est",
+    name: "Estland",
   },
   {
-    'code': 'wal',
-    'name': 'Wales'
+    code: "wal",
+    name: "Wales",
   },
   {
-    'code': 'fin',
-    'name': 'Finland'
+    code: "fin",
+    name: "Finland",
   },
   {
-    'code': 'isr',
-    'name': 'Israel'
+    code: "isr",
+    name: "Israel",
   },
   {
-    'code': 'ice',
-    'name': 'Island'
+    code: "ice",
+    name: "Island",
   },
   {
-    'code': 'bos',
-    'name': 'Bosnien'
+    code: "bos",
+    name: "Bosnien",
   },
   {
-    'code': 'ukr',
-    'name': 'Ukraine'
+    code: "ukr",
+    name: "Ukraine",
   },
   {
-    'code': 'geo',
-    'name': 'Georgien'
+    code: "geo",
+    name: "Georgien",
   },
   {
-    'code': 'lux',
-    'name': 'Luxembourg'
+    code: "lux",
+    name: "Luxembourg",
   },
   {
-    'code': 'gre',
-    'name': 'Grækenland'
+    code: "gre",
+    name: "Grækenland",
   },
   {
-    'code': 'kaz',
-    'name': 'Kasakhstan'
+    code: "kaz",
+    name: "Kasakhstan",
   },
-]
-
-
-
+];

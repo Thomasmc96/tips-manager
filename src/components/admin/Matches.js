@@ -12,9 +12,7 @@ const Matches = () => {
 
   useEffect(() => {
     axios
-      .get(
-        `${environment[0]}/server/endpoints/matches2/getAll.php`
-      )
+      .get(`${environment[0]}/server/endpoints/matches2/getAll.php`)
       .then((response) => {
         if (response.data.code === 200) {
           setMatches2(response.data.matches2);
@@ -26,14 +24,13 @@ const Matches = () => {
         console.log(error);
       })
       .finally(() => {
-        setTimeout(() => {
-        }, 1000);
+        setTimeout(() => {}, 1000);
       });
-  }, [])
+  }, []);
 
   const addNewMatch = (match) => {
-    setMatches2(current => [...current, match]);
-  }
+    setMatches2((current) => [...current, match]);
+  };
 
   return (
     <div className="container matches">
@@ -43,16 +40,15 @@ const Matches = () => {
         <ShowMatches matches2={matches2} />
       </div>
     </div>
-  )
-
-}
+  );
+};
 
 const ShowMatches = ({ matches2 }) => {
   const navigate = useNavigate();
 
   const seeMatch = (id) => {
     navigate("/kampe/" + id);
-  }
+  };
 
   if (matches2.length === 0) {
     return (
@@ -77,7 +73,11 @@ const ShowMatches = ({ matches2 }) => {
         <tbody>
           {matches2.length > 0 &&
             sortByKickOff(matches2).map((match) => (
-              <tr key={match.matches2_id} onClick={() => seeMatch(match.matches2_id)} className="cursor-pointer">
+              <tr
+                key={match.matches2_id}
+                onClick={() => seeMatch(match.matches2_id)}
+                className="cursor-pointer"
+              >
                 <td className="countryCell">
                   <img
                     src={`https://flags.tv2a.dk/tv2football/${match.home_team}.svg`}
@@ -95,40 +95,49 @@ const ShowMatches = ({ matches2 }) => {
                   <span>{countryName(match.away_team)}</span>
                 </td>
 
-                <td className="hidden sm:table-cell">{match.home_team_goals}</td>
-                <td className="hidden sm:table-cell">{match.away_team_goals}</td>
-                <td className="hidden sm:table-cell">{getDateString(match.kickoff_dtm)}</td>
+                <td className="hidden sm:table-cell">
+                  {match.home_team_goals}
+                </td>
+                <td className="hidden sm:table-cell">
+                  {match.away_team_goals}
+                </td>
+                <td className="hidden sm:table-cell">
+                  {getDateString(match.kickoff_dtm)}
+                </td>
               </tr>
             ))}
         </tbody>
       </table>
     </div>
-  )
-}
-
+  );
+};
 
 const CreateMatch = ({ addNewMatch }) => {
-  const [homeTeam, setHomeTeam] = useState('');
-  const [awayTeam, setAwayTeam] = useState('');
-  const [kickOff, setKickOff] = useState('');
+  const [homeTeam, setHomeTeam] = useState("");
+  const [awayTeam, setAwayTeam] = useState("");
+  const [kickOff, setKickOff] = useState("");
   const [loading, setLoading] = useState(false);
 
   const saveMatch = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     setLoading(true);
     axios
       .post(`${environment[0]}/server/endpoints/matches2/save.php`, {
         homeTeam: homeTeam,
         awayTeam: awayTeam,
-        kickOff: new Date(kickOff).addHours(1).toISOString().slice(0, 19).replace('T', ' '),
+        kickOff: new Date(kickOff)
+          .addHours()
+          .toISOString()
+          .slice(0, 19)
+          .replace("T", " "),
         homeTeamGoals: null,
-        awayTeamGoals: null
+        awayTeamGoals: null,
       })
       .then((response) => {
         if (response.data.code === 200) {
-          setHomeTeam('')
-          setAwayTeam('')
-          setKickOff('')
+          setHomeTeam("");
+          setAwayTeam("");
+          setKickOff("");
 
           const newMatch = response.data.data;
 
@@ -138,8 +147,8 @@ const CreateMatch = ({ addNewMatch }) => {
             away_team: newMatch.awayTeam,
             home_team_goals: newMatch.homeTeamGoals,
             away_team_goals: newMatch.awayTeamGoals,
-            kickoff_dtm: newMatch.kickOff
-          })
+            kickoff_dtm: newMatch.kickOff,
+          });
         } else {
           alert("Der skete desværre en fejl. Prøv igen.");
         }
@@ -151,56 +160,85 @@ const CreateMatch = ({ addNewMatch }) => {
       .finally(() => {
         setLoading(false);
       });
-  }
+  };
   return (
     <div className="container createMatch">
-      <h2 className="">Tilføj en <span className="yellowText">kamp</span></h2>
+      <h2 className="">
+        Tilføj en <span className="yellowText">kamp</span>
+      </h2>
       <form className="createMatchForm" onSubmit={saveMatch}>
         <label>Hjemmebanehold</label>
         <div className="countryContainer">
           <select
-            onChange={e => setHomeTeam(e.target.value)}
+            onChange={(e) => setHomeTeam(e.target.value)}
             required
             name="homeTeam"
             value={homeTeam}
           >
-            <option key={'-1'} value={''}>Vælg hold</option>
-            {countries.sort((a, b) => {
-              if (a.name < b.name) { return -1; }
-              if (a.name > b.name) { return 1; }
-              return 0;
-            }).map((country) => {
-              return <option key={country.code} value={country.code}>{country.name}</option>
-            })}cover
+            <option key={"-1"} value={""}>
+              Vælg hold
+            </option>
+            {countries
+              .sort((a, b) => {
+                if (a.name < b.name) {
+                  return -1;
+                }
+                if (a.name > b.name) {
+                  return 1;
+                }
+                return 0;
+              })
+              .map((country) => {
+                return (
+                  <option key={country.code} value={country.code}>
+                    {country.name}
+                  </option>
+                );
+              })}
+            cover
           </select>
-          {homeTeam !== '' && (
+          {homeTeam !== "" && (
             <img
               src={`https://flags.tv2a.dk/tv2football/${homeTeam}.svg`}
               alt={homeTeam}
-            />)}
+            />
+          )}
         </div>
         <label>Udebanehold</label>
         <div className="countryContainer">
           <select
-            onChange={e => setAwayTeam(e.target.value)}
+            onChange={(e) => setAwayTeam(e.target.value)}
             required
             name="awayTeam"
             value={awayTeam}
           >
-            <option key={'-1'} value={''}>Vælg hold</option>
-            {countries.sort((a, b) => {
-              if (a.name < b.name) { return -1; }
-              if (a.name > b.name) { return 1; }
-              return 0;
-            }).map((country) => {
-              return <option key={country.code} value={country.code}>{country.name}</option>
-            })}
+            <option key={"-1"} value={""}>
+              Vælg hold
+            </option>
+            {countries
+              .sort((a, b) => {
+                if (a.name < b.name) {
+                  return -1;
+                }
+                if (a.name > b.name) {
+                  return 1;
+                }
+                return 0;
+              })
+              .map((country) => {
+                return (
+                  <option key={country.code} value={country.code}>
+                    {country.name}
+                  </option>
+                );
+              })}
           </select>
-          {awayTeam !== '' && (
+          {awayTeam !== "" && (
             <img
               src={`https://flags.tv2a.dk/tv2football/${awayTeam}.svg`}
               alt={awayTeam}
-            />)}
+            />
+          )}
         </div>
         <label>Kickoff</label>
         <input
@@ -211,10 +249,7 @@ const CreateMatch = ({ addNewMatch }) => {
           value={kickOff}
           onChange={(e) => setKickOff(e.target.value)}
         />
-        <button
-          type="submit"
-          className="submitBtn"
-        >
+        <button type="submit" className="submitBtn">
           {!loading ? (
             <>Opret kamp</>
           ) : (
@@ -232,7 +267,7 @@ const CreateMatch = ({ addNewMatch }) => {
         </button>
       </form>
     </div>
-  )
-}
+  );
+};
 
 export default Matches;
