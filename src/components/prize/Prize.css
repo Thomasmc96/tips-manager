@@ -52,6 +52,13 @@
     text-transform: none;
 }
 
+.trophyIcon {
+    color: var(--gold);
+}
+.wait-text {
+    font-family: RobotoMedium;
+}
+
 @media only screen and (max-width:640px) {
     .prize .rules {
         max-width: unset;
