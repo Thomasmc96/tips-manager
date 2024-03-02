@@ -43,32 +43,32 @@ const Standings = () => {
       return <Table coupons={coupons} />;
     } else {
       return (
-        <CountdownInfo
-          coupons={coupons}
-          days={days}
-          hours={hours}
-          minutes={minutes}
-          seconds={seconds}
-        />
+        <>
+          <CountdownInfo
+            coupons={coupons}
+            days={days}
+            hours={hours}
+            minutes={minutes}
+            seconds={seconds}
+            />
+
+          {authorized && !showTable && (
+                  <button
+                    className="mt-20 mx-auto flex bg-sandBeige p-2 rounded text-black font-semibold z-10"
+                    onClick={(e) => {
+                      setShowTable(true);
+                    }}
+                  >
+                    Vis tips
+                  </button>
+                )}
+          </>
       );
     }
   };
 
   return (
-    <>
-      <Countdown date={new Date("Jun 14, 2024 21:00:00")} renderer={renderer} />
-      {/* <Countdown date={new Date("Mar 2, 2024 16:9:00")} renderer={renderer} /> */}
-      {authorized && !showTable && (
-        <button
-          className="mt-20 mx-auto flex bg-sandBeige p-2 rounded text-black font-semibold z-10"
-          onClick={(e) => {
-            setShowTable(true);
-          }}
-        >
-          Vis tips
-        </button>
-      )}
-    </>
+    <Countdown date={new Date("Jun 13, 2024 21:00:00")} renderer={renderer} />
   );
 };
 

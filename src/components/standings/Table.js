@@ -11,6 +11,7 @@ const Table = () => {
   const [zoom, setZoom] = useState(100);
   const [matches2, setMatches2] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [matchesLoading, setMatchesLoading] = useState(true);
   const [error, setError] = useState(false);
   const [coupons, setCoupons] = useState([]);
 
@@ -48,7 +49,7 @@ const Table = () => {
       })
       .finally(() => {
         setTimeout(() => {
-          setLoading(false);
+          setMatchesLoading(false);
         }, 1000);
       });
   }, []);
@@ -60,7 +61,7 @@ const Table = () => {
     return false;
   }
 
-  if (loading) {
+  if (loading || matchesLoading) {
     return (
       <div className="flex mx-auto justify-center h-40 items-center">
         <Loader/>
