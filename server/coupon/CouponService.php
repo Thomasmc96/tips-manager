@@ -2,6 +2,7 @@
 include_once __DIR__ . '/CouponRepository.php';
 include_once dirname(__DIR__) . '/matches2/Matches2Repository.php';
 include_once dirname(__DIR__) . '/matches2/Matches2.php';
+include_once dirname(__DIR__) . '/admin/AdminRepository.php';
 
 class CouponService
 {
@@ -273,6 +274,10 @@ class CouponService
 
     public function sendNewParticipantEmail(Coupon $coupon): bool
 {
+
+    $adminRepo = new AdminRepository();
+    $admins = $adminRepo->getAll();
+
     // TODO: Change this mail
     $to = "thomas96mc@gmail.com";
     $subject = 'Ny kupon - EM 2024 Tips';
@@ -298,37 +303,45 @@ class CouponService
     </style>
     ";
 
-    $message = sprintf(
-        "
-        <html>
-            <head>%s</head>
-            <body>
-                <h2>Hej René</h2>
-                <p>En ny kupon er lige blevet udfyldt af %s. Husk at bekræfte tilmeldelsen når der bliver overført 100 kr.</p>
-                <a href='%s' class='actionBtn'>Se dashboard</a>
-            </body>
-        </html>",
-        $style,
-        $coupon->name,
-        "http://" . $_SERVER['HTTP_HOST'] . "/tilmeldinger" 
-    );
+    foreach($admins as $admin) {
 
-    $headers = [];
-    $headers[] = "MIME-Version: 1.0";
-    $headers[] = "Content-type: text/html; charset={$charset}";
-    $headers[] = "From: {$from_name} <{$from_email}>";
-    $headers[] = "Reply-To: {$reply_to_name} <{$reply_to_email}>";
-    $headers[] = "X-Mailer: PHP/" . phpversion();
-    $headers[] = "X-Priority: 3";
-    $headers[] = "X-Assp-ID: " . md5(uniqid(time()));
+        $message = sprintf(
+            "
+            <html>
+                <head>%s</head>
+                <body>
+                    <h2>Hej %s</h2>
+                    <p>En ny kupon er lige blevet udfyldt af %s. Husk at bekræfte tilmeldelsen når der bliver overført 100 kr.</p>
+                    <a href='%s' class='actionBtn'>Se dashboard</a>
+                </body>
+            </html>",
+            $style,
+            $admin['name'],
+            $coupon->name,
+            "http://" . $_SERVER['HTTP_HOST'] . "/tilmeldinger" 
+        );
 
-    $headers_string = implode("\r\n", $headers);
+        $headers = [];
+        $headers[] = "MIME-Version: 1.0";
+        $headers[] = "Content-type: text/html; charset={$charset}";
+        $headers[] = "From: {$from_name} <{$from_email}>";
+        $headers[] = "Reply-To: {$reply_to_name} <{$reply_to_email}>";
+        $headers[] = "X-Mailer: PHP/" . phpversion();
+        $headers[] = "X-Priority: 3";
+        $headers[] = "X-Assp-ID: " . md5(uniqid(time()));
 
-    if ($_SERVER['SERVER_NAME'] === 'localhost') {
-        return true;
+        $headers_string = implode("\r\n", $headers);
+
+        if ($_SERVER['SERVER_NAME'] === 'localhost') {
+            return true;
+        }
+
+        if(!mail($admin['mail'], $subject, $message, $headers_string)) {
+            return false;
+        };
     }
 
-    return mail($to, $subject, $message, $headers_string);
+    return true;
 }
 
 

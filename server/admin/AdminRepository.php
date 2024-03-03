@@ -25,6 +25,24 @@ class AdminRepository
         $statement->execute();
         return $statement->fetch(PDO::FETCH_ASSOC);
     }
+    
+    public function getAll()
+    {
+        $datebaseService = new DatabaseService();
+        $connection = $datebaseService->getConnection();
+
+        $query = "
+                SELECT  
+                    *
+                FROM
+                    admins
+            ";
+
+        $statement = $connection->prepare($query);
+
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
 
     public function getByMail($mail)
     {
