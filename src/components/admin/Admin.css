@@ -1,368 +1,362 @@
 /* Menu ********************************/
-.adminMenu {}
+.adminMenu {
+}
 
 .adminMenu .headline {
-    font-size: 1.5rem;
-    margin-top: 2rem;
-    text-align: center;
-    font-family: OswaldBold;
-    margin-bottom: 2rem;
+  font-size: 1.5rem;
+  margin-top: 2rem;
+  text-align: center;
+  font-family: OswaldBold;
+  margin-bottom: 2rem;
 }
 
 .adminMenu hr {
-    height: 0.15rem;
-    border: none;
-    background-color: white;
+  height: 0.15rem;
+  border: none;
+  background-color: white;
 }
 
 .adminMenu .adminLinks {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5rem;
 }
 
 .adminMenu .adminLink {
-    padding: 0.8rem;
-    font-family: OswaldBold;
+  padding: 0.8rem;
+  font-family: OswaldBold;
 }
 
 .adminMenu .active,
 .adminMenu .adminLink:hover {
-    color: var(--gold);
+  color: var(--gold);
 }
-
 
 /* Overview ********************************/
 
 .overview,
 .matches,
 .email {
-    display: flex;
-    flex-direction: column;
-    margin-left: auto;
-    margin-right: auto;
-    padding-right: .5rem;
-    padding-left: .5rem;
-    flex-wrap: wrap;
-    margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
 }
 
 .overview h2 {
-    /* margin-top: 1rem; */
-    font-size: 1.5rem;
-    font-family: OswaldBold;
-    /* margin-bottom: 1rem; */
+  /* margin-top: 1rem; */
+  font-size: 1.5rem;
+  font-family: OswaldBold;
+  /* margin-bottom: 1rem; */
 }
 
 .overview .notApprovedHeadline,
 .overview .apporvedHeadline {
-    margin-top: 2rem;
+  margin-top: 2rem;
 }
 
 .overview .notApprovedContainer {
-    border-color: var(--red);
+  border-color: var(--red);
 }
 
 .overview .coupon {
-    display: inline-flex;
-    flex-direction: column;
-    border-width: 2px;
-    border-style: solid;
-    border-radius: 10px;
-    margin-top: 1rem;
-    min-width: 14rem;
-    margin-right: 1rem;
+  display: inline-flex;
+  flex-direction: column;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 10px;
+  margin-top: 1rem;
+  min-width: 14rem;
+  margin-right: 1rem;
 }
 
 .overview .coupon .approveBtn {
-    background-color: var(--gold);
-    color: black;
-    font-weight: bold;
+  background-color: var(--gold);
+  color: black;
+  font-weight: bold;
 }
 
 .overview .coupon .approvedBtn {
-    font-weight: bold;
-    color: var(--light-green);
+  font-weight: bold;
+  color: var(--light-green);
 }
 
 .overview .coupon h2 {
-    text-transform: none;
-    font-family: RobotoRegular;
-    font-size: 1rem;
+  text-transform: none;
+  font-family: RobotoRegular;
+  font-size: 1rem;
 }
 
 .overview .coupon .mail {
-    text-transform: none;
-    font-size: 0.875rem;
+  text-transform: none;
+  font-size: 0.875rem;
 }
-
 
 /* Machtes ****************/
 
 .editMatch,
 .createMatch {
-    max-width: 35rem;
-    display: flex;
-    flex-direction: column;
-    margin-left: auto;
-    margin-right: auto;
-    border: 1px solid white;
-    border-radius: 10px;
-    margin-top: 3rem;
-
+  max-width: 35rem;
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid white;
+  border-radius: 10px;
+  margin-top: 3rem;
 }
 
 .editMatch h2,
 .createMatch h2 {
-    text-align: center;
-    font-size: 1.5rem;
-    margin-top: 1rem;
-    font-weight: bold;
+  text-align: center;
+  font-size: 1.5rem;
+  margin-top: 1rem;
+  font-weight: bold;
 }
 
 .editMatch .editMatchForm,
 .createMatch .createMatchForm {
-    display: flex;
-    flex-direction: column;
-    width: 70%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1rem;
 }
 
 .editMatch .editMatchForm label,
 .createMatch .createMatchForm label {
-    width: 100%;
-    border-radius: 10px;
-    margin-top: 1rem;
+  width: 100%;
+  border-radius: 10px;
+  margin-top: 1rem;
 }
 
-.editMatch .editMatchForm input[type=datetime-local],
+.editMatch .editMatchForm input[type="datetime-local"],
 .editMatch .editMatchForm select,
-.createMatch .createMatchForm input[type=datetime-local],
+.createMatch .createMatchForm input[type="datetime-local"],
 .createMatch .createMatchForm select {
-    display: flex;
-    width: 100%;
-    height: 2.25rem;
-    border-radius: 10px;
-    padding: 0.25rem;
-    color: black;
+  display: flex;
+  width: 100%;
+  height: 2.25rem;
+  border-radius: 10px;
+  padding: 0.25rem;
+  color: black;
 }
 
 .editMatch .editMatchForm img,
 .createMatch .createMatchForm img {
-    width: 2.5rem;
-    height: 2.5rem;
-    object-fit: cover;
-    border-radius: 50%;
-    position: absolute;
-    top: 0;
-    left: -3.7rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  object-fit: cover;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: -3.7rem;
 }
 
 .editMatch .editMatchForm .countryContainer,
 .createMatch .createMatchForm .countryContainer {
-    position: relative;
+  position: relative;
 }
 
 .createMatch .createMatchForm .submitBtn {
-    background-color: var(--gold);
-    color: black;
-    border-radius: 10px;
-    width: 60%;
-    height: 3rem;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 2.5rem;
-    margin-top: 2.5rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  background-color: var(--gold);
+  color: black;
+  border-radius: 10px;
+  width: 60%;
+  height: 3rem;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2.5rem;
+  margin-top: 2.5rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.editMatch .editMatchForm input[type=number] {
-    height: 2.5rem;
-    border-radius: 10px;
-    color: black;
-    padding: .5rem;
+.editMatch .editMatchForm input[type="number"] {
+  height: 2.5rem;
+  border-radius: 10px;
+  color: black;
+  padding: 0.5rem;
 }
 
 .editMatch .editMatchForm .actionBtns {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 2.5rem;
-    margin-bottom: 2.5rem;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
 }
 
 .editMatch .editMatchForm .actionBtns .submitBtn {
-    background-color: var(--gold);
-    color: black;
-    border-radius: 10px;
-    height: 3rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    width: 40%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  background-color: var(--gold);
+  color: black;
+  border-radius: 10px;
+  height: 3rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .editMatch .editMatchForm .actionBtns .deleteBtn {
-    background-color: var(--red);
-    color: white;
-    border-radius: 10px;
-    height: 3rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    width: 40%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  background-color: var(--red);
+  color: white;
+  border-radius: 10px;
+  height: 3rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .showMatches {
-    margin-top: 4rem;
+  margin-top: 4rem;
 }
 
 .showMatches table {
-    border-radius: 10px;
-    border: 1px white solid;
-    min-width: 100%;
-    table-layout: fixed;
+  border-radius: 10px;
+  border: 1px white solid;
+  min-width: 100%;
+  table-layout: fixed;
 }
 
-
 .showMatches table tbody tr td.countryCell {
-    text-align: left;
+  text-align: left;
 }
 
 .showMatches table tbody tr td,
 .showMatches table thead tr th {
-    text-align: center;
-    padding: .5rem;
-    border-bottom: 1px white solid;
-    width: 1%;
+  text-align: center;
+  padding: 0.5rem;
+  border-bottom: 1px white solid;
+  width: 1%;
 }
 .showMatches table tbody tr td img {
-    border-radius: 50%;
-    height: 1.7rem;
-    width: 1.7rem;
-    object-fit: cover;
-    margin-left: 30%;
+  border-radius: 50%;
+  height: 1.7rem;
+  width: 1.7rem;
+  object-fit: cover;
+  margin-left: 30%;
 }
 
 .showMatches table thead tr th {
-    color: var(--gold);
-    background-color: var(--darkest-green);
+  color: var(--gold);
+  background-color: var(--darkest-green);
 }
 
 .showMatches table tbody tr:nth-child(odd) {
-    background-color: var(--dark-green);
+  background-color: var(--dark-green);
 }
 
 .showMatches table tbody tr:nth-child(even) {
-    background-color: var(--dark-green);
+  background-color: var(--light-green);
 }
-
 
 /* EMAIL *****************************/
 .emailContainer {
-    max-width: 35rem;
-    display: flex;
-    flex-direction: column;
-    margin-left: auto;
-    margin-right: auto;
-    border: 1px solid white;
-    border-radius: 10px;
-    margin-top: 3rem;
+  max-width: 35rem;
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid white;
+  border-radius: 10px;
+  margin-top: 3rem;
 }
 
 .emailContainer h2 {
-    text-align: center;
-    font-size: 1.5rem;
-    margin-top: 1rem;
-    font-weight: bold;
+  text-align: center;
+  font-size: 1.5rem;
+  margin-top: 1rem;
+  font-weight: bold;
 }
 
 .emailContainer .emailForm {
-    display: flex;
-    flex-direction: column;
-    width: 70%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1rem;
 }
 
 .emailContainer .emailForm .checkboxContainer {
-    display: flex;
-    align-items: center;
-    text-transform: none;
-    margin-bottom: 1rem;
-    margin-top: 1rem;
-    gap: .5rem;
+  display: flex;
+  align-items: center;
+  text-transform: none;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  gap: 0.5rem;
 }
 
 .emailContainer .emailForm .checkboxContainer .checkboxLabel {
-    font-weight: unset;
+  font-weight: unset;
 }
 
 .emailContainer .emailForm label {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .emailContainer .emailForm .emailTextContainer {
-    margin-top: 1rem;
+  margin-top: 1rem;
 }
 
 .emailContainer .emailForm .emailText {
-    background-color: var(--grey);
+  background-color: var(--grey);
 }
 
 .emailContainer .emailForm .submitBtn {
-    background-color: var(--gold);
-    color: black;
-    border-radius: 10px;
-    width: 60%;
-    height: 3rem;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 2.5rem;
-    margin-top: 2.5rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  background-color: var(--gold);
+  color: black;
+  border-radius: 10px;
+  width: 60%;
+  height: 3rem;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2.5rem;
+  margin-top: 2.5rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-
-@media only screen and (max-width:1000px) {
-    .showMatches table tbody tr td img {
-        margin-left: 10%;
-    }
+@media only screen and (max-width: 1000px) {
+  .showMatches table tbody tr td img {
+    margin-left: 10%;
+  }
 }
 
-@media only screen and (max-width:600px) {
-    .adminMenu .adminLinks {
-        gap: unset;
-    }
-    .overview .coupon {
-        width: 100%;
-        margin-right: unset;
-    }
+@media only screen and (max-width: 600px) {
+  .adminMenu .adminLinks {
+    gap: unset;
+  }
+  .overview .coupon {
+    width: 100%;
+    margin-right: unset;
+  }
 
-    .editMatch .editMatchForm img,
-    .createMatch .createMatchForm img {
-        width: 2rem;
-        height: 2rem;
-        left: -2.7rem;
-    }
+  .editMatch .editMatchForm img,
+  .createMatch .createMatchForm img {
+    width: 2rem;
+    height: 2rem;
+    left: -2.7rem;
+  }
 
-    .showMatches table tbody tr td img {
-        margin-left: 2%;
-    }
-
+  .showMatches table tbody tr td img {
+    margin-left: 2%;
+  }
 }
