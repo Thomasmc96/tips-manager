@@ -32,9 +32,7 @@ const Standings = () => {
   }, []);
 
   if (loading) {
-    return (
-      <Loader />
-    );
+    return <Loader />;
   }
 
   const renderer = ({ days, hours, minutes, seconds, completed }) => {
@@ -49,19 +47,21 @@ const Standings = () => {
             hours={hours}
             minutes={minutes}
             seconds={seconds}
-            />
+          />
 
-          {authorized && !showTable && (
-            <button
-              className="mt-20 mx-auto flex bg-sandBeige p-2 rounded text-black font-semibold z-10"
-              onClick={(e) => {
-                setShowTable(true);
-              }}
-            >
-              Vis tips
-            </button>
-          )}
-          </>
+          {authorized &&
+            !showTable &&
+            localStorage.getItem("name") === "Thomas" && (
+              <button
+                className="mt-20 mx-auto flex bg-sandBeige p-2 rounded text-black font-semibold z-10"
+                onClick={(e) => {
+                  setShowTable(true);
+                }}
+              >
+                Vis tips
+              </button>
+            )}
+        </>
       );
     }
   };

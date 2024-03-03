@@ -18,7 +18,10 @@ const Prize = () => {
   }, []);
 
   const renderer = ({ completed }) => {
-    if (completed || authorized) {
+    if (
+      completed ||
+      (authorized && localStorage.getItem("name") === "Thomas")
+    ) {
       return <Podium />;
     } else {
       return (
