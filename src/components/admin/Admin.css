@@ -261,7 +261,7 @@
 }
 
 .showMatches table tbody tr:nth-child(even) {
-  background-color: var(--light-green);
+  background-color: var(--darkest-green);
 }
 
 /* EMAIL *****************************/
