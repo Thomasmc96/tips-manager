@@ -63,11 +63,11 @@ const ShowMatches = ({ matches2 }) => {
       <table>
         <thead>
           <tr>
+            <th className="hidden sm:table-cell">Kickoff</th>
             <th className="">Hjemmebane</th>
             <th className="">Udebane</th>
             <th className="hidden sm:table-cell">HB. Mål</th>
             <th className="hidden sm:table-cell">UB. Mål</th>
-            <th className="hidden sm:table-cell">Kickoff</th>
           </tr>
         </thead>
         <tbody>
@@ -78,10 +78,13 @@ const ShowMatches = ({ matches2 }) => {
                 onClick={() => seeMatch(match.matches2_id)}
                 className="cursor-pointer"
               >
+                <td className="hidden sm:table-cell">
+                  {getDateString(match.kickoff_dtm)}
+                </td>
                 <td className="countryCell">
                   <img
                     src={`https://flags.tv2a.dk/tv2football/${match.home_team}.svg`}
-                    alt={match.home_team}
+                    alt={match.home_team.substring(0, 3)}
                     className="w-8 mr-2 inline"
                   />
                   <span>{countryName(match.home_team)}</span>
@@ -89,20 +92,16 @@ const ShowMatches = ({ matches2 }) => {
                 <td className="countryCell">
                   <img
                     src={`https://flags.tv2a.dk/tv2football/${match.away_team}.svg`}
-                    alt={match.away_team}
+                    alt={match.away_team.substring(0, 3)}
                     className="w-8 mr-2 inline"
                   />
                   <span>{countryName(match.away_team)}</span>
                 </td>
-
                 <td className="hidden sm:table-cell">
                   {match.home_team_goals}
                 </td>
                 <td className="hidden sm:table-cell">
                   {match.away_team_goals}
-                </td>
-                <td className="hidden sm:table-cell">
-                  {getDateString(match.kickoff_dtm)}
                 </td>
               </tr>
             ))}
