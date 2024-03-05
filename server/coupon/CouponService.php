@@ -139,7 +139,7 @@ class CouponService
                 <head>%s</head>
                 <body>
                     <h2>Hej %s</h2>
-                    " . ($custom_message ? $custom_message : " 
+                    " . ($custom_message ? nl2br($custom_message) : " 
                     <p>Her er nuværende stilling for EM 2024 tipskonkurrencen.</p>" ) ."
                     <p>Du kan også se stillingen <a href='%s'>her</a>.</p>
                 </body>
@@ -178,7 +178,7 @@ class CouponService
         $sortedStandings = $this->getSortedByAmountCorrect();
 
         $table = '
-        <table>
+        <table style="color:white">
             <thead>
                 <tr>
                     <th></th>';
@@ -199,17 +199,17 @@ class CouponService
         foreach ($matches as $match) {
             $table .= '
                 <tr>
-                    <td>
+                    <td style="background-color:#1b401a">
                         <div>
-                            <div>' . $this->countryName($match['home_team']) . ' - ' . $this->countryName($match['away_team']) . '</div>
-                            <div>' . ($this->isFinished($match) ? $match['home_team_goals'] . " - " . $match['away_team_goals'] : strftime('%e. %B %H:%M', strtotime($match['kickoff_dtm']))) . '</div>
+                            <div style="color:white">' . $this->countryName($match['home_team']) . ' - ' . $this->countryName($match['away_team']) . '</div>
+                            <div style="color:#FCBC02">' . ($this->isFinished($match) ? $match['home_team_goals'] . " - " . $match['away_team_goals'] : strftime('%e. %B %H:%M', strtotime($match['kickoff_dtm']))) . '</div>
                         </div>
                     </td>';
             foreach ($sortedStandings as $sortedStanding) {
                 foreach ($sortedStanding['predictions'] as $prediction) {
                     if ($prediction->id === $match['matches2_id']) {
                         $table .= '
-                        <td style="' . ($prediction->won && $this->isFinished($match) ? 'background-color:#098b54' : (!$prediction->won && $this->isFinished($match) ? 'background-color:red' : '')) . '">
+                        <td style="' . ($prediction->won && $this->isFinished($match) ? 'background-color:#387236' : (!$prediction->won && $this->isFinished($match) ? 'background-color:#9b1414' : 'background-color:#1b401a')) . '">
                             ' . $prediction->prediction . '
                         </td>';
                     }
@@ -304,6 +304,9 @@ class CouponService
     ";
 
     foreach($admins as $admin) {
+        if($admin['mail'] !== 'thomas96mc@gmail.com') {
+            continue;
+        }
 
         $message = sprintf(
             "
@@ -399,12 +402,12 @@ class CouponService
         th,
         td {
             padding: 8px 8px;
-            border: 1px solid #ddd;
+            border: 1px solid white;
             text-align: center;
         }
         
         th {
-            background-color: #f2f2f2;
+            background-color: #183417;
             font-weight: bold;
         }
         

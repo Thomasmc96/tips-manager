@@ -29,6 +29,7 @@ const EmailStandingsForm = () => {
             })
             .then((response) => {
                 if (response.data.code === 200) {
+                    setEmailText('');
                     alert('Mailen blev sendt!')
                 } else {
                     alert("Der skete desværre en fejl. Prøv igen.");
