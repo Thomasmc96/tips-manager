@@ -30,6 +30,7 @@ const Builder = () => {
   const [loading, setLoading] = useState(true);
   const [loadingSubmit, setLoadingSubmit] = useState(false);
   const [matches2, setMatches2] = useState([]);
+  const [isMissingPredictions, setIsMissingPredictions] = useState(false);
 
   useEffect(() => {
     axios
@@ -52,9 +53,11 @@ const Builder = () => {
   const submitForm = (e) => {
     e.preventDefault();
     let diff = matches2.length - predictions.length;
+    console.log(predictions);
 
     if (diff > 0) {
       setError('Du mangler ' + diff + (diff > 1 ? ' kampe' : ' kamp'));
+      setIsMissingPredictions(true)
       return;
     }
 
@@ -148,6 +151,7 @@ const Builder = () => {
             predictions={predictions}
             setError={setError}
             match={match2}
+            isMissingPredictions={isMissingPredictions}
           />
         ))}
       </section>

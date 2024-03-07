@@ -1,16 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { getDateString, countryName } from "../Utils";
 
 const Match = ({
   setPredictions,
   predictions,
   setError,
-  match
+  match,
+  isMissingPredictions
 }) => {
+
+  const [isMissingPrediction, setIsMissingPrediction] = useState(false);
+
+  useEffect(() => {
+    setIsMissingPrediction(isMissingPredictions && !predictions.find((prediction) => prediction.id === match.matches2_id));
+
+  }, [isMissingPredictions, match.matches2_id, predictions])
+
   const handlePrediction = (e, id) => {
     e.preventDefault();
     setError(false);
-
+    setIsMissingPrediction(false);
 
     let oPrediction = predictions.find((prediction) => prediction.id === id)
 
@@ -26,7 +35,7 @@ const Match = ({
   };
 
   return (
-    <div className="match">
+    <div className={"match " + (isMissingPrediction ? 'missingPrediction ' : '')}>
       <img
         src={`https://flags.tv2a.dk/tv2football/${match.home_team}.svg`}
         alt={match.home_team}

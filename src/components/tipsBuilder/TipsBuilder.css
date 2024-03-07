@@ -195,6 +195,10 @@
   display: none
 }
 
+.match.missingPrediction{
+  border: 2px solid red;
+}
+
 
 @media only screen and (max-width:1050px) {
   .TipsBuilderForm {
