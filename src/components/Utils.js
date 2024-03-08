@@ -94,6 +94,48 @@ export const sortByWins = (coupons) => {
   return couponsSorted;
 };
 
+export const sortByLeastWins = (coupons) => {
+  const couponsSorted = coupons.sort((a, b) => {
+    if (a.amountCorrect > b.amountCorrect) {
+      return 1;
+    }
+    if (a.amountCorrect < b.amountCorrect) {
+      return -1;
+    }
+
+    return 0;
+  });
+  return couponsSorted;
+};
+
+export const sortByNameAsc = (coupons) => {
+  const couponsSorted = coupons.sort((a, b) => {
+    if (a.name > b.name) {
+      return 1;
+    }
+    if (a.name < b.name) {
+      return -1;
+    }
+
+    return 0;
+  });
+  return couponsSorted;
+};
+
+export const sortByNameDesc = (coupons) => {
+  const couponsSorted = coupons.sort((a, b) => {
+    if (a.name < b.name) {
+      return 1;
+    }
+    if (a.name > b.name) {
+      return -1;
+    }
+
+    return 0;
+  });
+  return couponsSorted;
+};
+
 export const sortByUpdated = (coupons) => {
   const couponsSorted = coupons.sort((a, b) => {
     if (a.updated_dtm > b.updated_dtm) {

@@ -5,7 +5,12 @@ import { countryName, getDateString, sortByKickOff } from "../Utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import Loader from "../utils/Loader";
-import { sortByWins } from "../Utils";
+import {
+  sortByWins,
+  sortByLeastWins,
+  sortByNameAsc,
+  sortByNameDesc,
+} from "../Utils";
 
 const Table = () => {
   const [zoom, setZoom] = useState(100);
@@ -75,6 +80,28 @@ const Table = () => {
     setCoupons(couponsCopy);
   };
 
+  const sortCoupons = (e) => {
+    let sorting = e.target.value;
+
+    switch (sorting) {
+      case "mostWins":
+        setCoupons(sortByWins(coupons));
+        break;
+      case "leastWins":
+        setCoupons(sortByLeastWins(coupons));
+        break;
+      case "nameAsc":
+        setCoupons(sortByNameAsc(coupons));
+        break;
+      case "nameDesc":
+        setCoupons(sortByNameDesc(coupons));
+        break;
+      default:
+        setCoupons(sortByWins(coupons));
+        break;
+    }
+  };
+
   if (loading || matchesLoading) {
     return (
       <div className="flex mx-auto justify-center h-40 items-center">
@@ -109,15 +136,27 @@ const Table = () => {
           >
             +
           </button>
-          <input
-            type="text"
-            placeholder="Søg efter navn"
-            className="rounded-sm ml-2 pl-1 text-black"
-            id="filterInput"
-            // onKeyUp={filterCoupons}
-            onChange={filterCoupons}
-            autoComplete="off"
-          />
+          <div className=" block sm:inline sm:ml-2 mt-1 sm:mt-0">
+            <input
+              type="text"
+              placeholder="Søg efter navn"
+              className="rounded-sm pl-1 text-black  w-48"
+              id="filterInput"
+              // onKeyUp={filterCoupons}
+              onChange={filterCoupons}
+              autoComplete="off"
+            />
+            <select
+              onChange={sortCoupons}
+              className="ml-2 p-[0.1rem] text-black rounded-sm bg-white"
+            >
+              <option value="mostWins">Sortér efter</option>
+              <option value="mostWins">Flest rigtige</option>
+              <option value="leastWins">Mindst rigtige</option>
+              <option value="nameAsc">Navn A-Z</option>
+              <option value="nameDesc">Navn Z-A</option>
+            </select>
+          </div>
         </section>
       )}
 
