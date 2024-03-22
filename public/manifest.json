@@ -7,28 +7,28 @@
   "background_color": "#224920",
   "icons": [
     {
-      "src": "",
+      "src": "64.png",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/png"
     },
     {
-      "src": "",
+      "src": "120.png",
       "sizes": "120x120",
       "type": "image/png"
     },
     {
-      "src": "",
+      "src": "180.png",
       "sizes": "180x180",
       "type": "image/png"
     },
     {
-      "src": "",
+      "src": "192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "",
+      "src": "512.png",
       "sizes": "512x512",
       "type": "image/png"
     }

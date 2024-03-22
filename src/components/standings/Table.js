@@ -120,45 +120,47 @@ const Table = () => {
 
   return (
     <div className="tableContainer container mx-auto flex flex-col my-4">
-      {!isFirefox && (
-        <section className="container mx-auto flex">
-          <button
-            type="button"
-            className="bg-darkGreen w-10 rounded-sm mb-1 mr-1 text-lg"
-            onClick={() => setZoom(zoom - 5)}
-          >
-            -
-          </button>
-          <button
-            type="button"
-            className="bg-darkGreen w-10 rounded-sm mb-1 mr-1 text-lg"
-            onClick={() => setZoom(zoom + 5)}
-          >
-            +
-          </button>
-          <div className=" block sm:inline sm:ml-2 mt-1 sm:mt-0">
-            <input
-              type="text"
-              placeholder="Søg efter navn"
-              className="rounded-sm pl-1 text-black  w-48"
-              id="filterInput"
-              // onKeyUp={filterCoupons}
-              onChange={filterCoupons}
-              autoComplete="off"
-            />
-            <select
-              onChange={sortCoupons}
-              className="ml-2 p-[0.1rem] text-black rounded-sm bg-white"
+      <section className="container mx-auto flex">
+        {!isFirefox && (
+          <>
+            <button
+              type="button"
+              className="bg-darkGreen w-10 rounded-sm mb-1 mr-1 text-lg"
+              onClick={() => setZoom(zoom - 5)}
             >
-              <option value="mostWins">Sortér efter</option>
-              <option value="mostWins">Flest rigtige</option>
-              <option value="leastWins">Mindst rigtige</option>
-              <option value="nameAsc">Navn A-Z</option>
-              <option value="nameDesc">Navn Z-A</option>
-            </select>
-          </div>
-        </section>
-      )}
+              -
+            </button>
+            <button
+              type="button"
+              className="bg-darkGreen w-10 rounded-sm mb-1 mr-1 text-lg"
+              onClick={() => setZoom(zoom + 5)}
+            >
+              +
+            </button>
+          </>
+        )}
+        <div className=" block sm:inline sm:ml-2 mt-1 sm:mt-0">
+          <input
+            type="text"
+            placeholder="Søg efter navn"
+            className="rounded-sm pl-1 text-black  w-48"
+            id="filterInput"
+            // onKeyUp={filterCoupons}
+            onChange={filterCoupons}
+            autoComplete="off"
+          />
+          <select
+            onChange={sortCoupons}
+            className="ml-2 p-[0.1rem] text-black rounded-sm bg-white"
+          >
+            <option value="mostWins">Sortér efter</option>
+            <option value="mostWins">Flest rigtige</option>
+            <option value="leastWins">Mindst rigtige</option>
+            <option value="nameAsc">Navn A-Z</option>
+            <option value="nameDesc">Navn Z-A</option>
+          </select>
+        </div>
+      </section>
 
       <div className="mt-1 overflow-x-auto">
         <table
